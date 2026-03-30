@@ -1,296 +1,284 @@
 [
     {
-        "timestamp": 0.1006,
-        "imu_accel_z": 9.885,
-        "depth_distance": 0.95,
-        "sync_error_ms": 5.3
+        "timestamp": 0.1033,
+        "imu_accel_z": 9.716,
+        "depth_distance": 0.72,
+        "sync_error_ms": 4.3
     },
     {
-        "timestamp": 0.2016,
-        "imu_accel_z": 9.892,
-        "depth_distance": 1.9,
-        "sync_error_ms": 2.5
-    },
-    {
-        "timestamp": 0.3021,
-        "imu_accel_z": 9.828,
-        "depth_distance": 1.48,
-        "sync_error_ms": 2.7
-    },
-    {
-        "timestamp": 0.4023,
-        "imu_accel_z": 9.88,
-        "depth_distance": 1.08,
-        "sync_error_ms": 4.8
-    },
-    {
-        "timestamp": 0.5025,
-        "imu_accel_z": 9.9,
-        "depth_distance": 1.63,
-        "sync_error_ms": 2.1
-    },
-    {
-        "timestamp": 0.6026,
-        "imu_accel_z": 9.742,
-        "depth_distance": 1.4,
-        "sync_error_ms": 3.7
-    },
-    {
-        "timestamp": 0.7043,
-        "imu_accel_z": 9.857,
-        "depth_distance": 1.86,
-        "sync_error_ms": 0.0
-    },
-    {
-        "timestamp": 0.8072,
-        "imu_accel_z": 9.826,
-        "depth_distance": 0.97,
-        "sync_error_ms": 5.0
-    },
-    {
-        "timestamp": 0.9093,
-        "imu_accel_z": 9.926,
-        "depth_distance": 0.56,
-        "sync_error_ms": 2.5
-    },
-    {
-        "timestamp": 1.0093,
-        "imu_accel_z": 9.889,
-        "depth_distance": 0.64,
-        "sync_error_ms": 2.3
-    },
-    {
-        "timestamp": 1.1098,
-        "imu_accel_z": 9.857,
-        "depth_distance": 1.28,
-        "sync_error_ms": 3.9
-    },
-    {
-        "timestamp": 1.21,
-        "imu_accel_z": 9.959,
-        "depth_distance": 0.69,
-        "sync_error_ms": 5.6
-    },
-    {
-        "timestamp": 1.3112,
-        "imu_accel_z": 9.952,
-        "depth_distance": 1.72,
-        "sync_error_ms": 0.0
-    },
-    {
-        "timestamp": 1.4131,
-        "imu_accel_z": 9.792,
-        "depth_distance": 0.9,
-        "sync_error_ms": 4.5
-    },
-    {
-        "timestamp": 1.515,
-        "imu_accel_z": 9.886,
-        "depth_distance": 1.35,
-        "sync_error_ms": 3.4
-    },
-    {
-        "timestamp": 1.6168,
-        "imu_accel_z": 9.895,
-        "depth_distance": 1.95,
-        "sync_error_ms": 2.1
-    },
-    {
-        "timestamp": 1.7176,
-        "imu_accel_z": 9.933,
-        "depth_distance": 1.09,
-        "sync_error_ms": 2.6
-    },
-    {
-        "timestamp": 1.818,
-        "imu_accel_z": 9.977,
-        "depth_distance": 1.7,
-        "sync_error_ms": 6.0
-    },
-    {
-        "timestamp": 1.9187,
-        "imu_accel_z": 9.996,
-        "depth_distance": 1.38,
-        "sync_error_ms": 3.0
-    },
-    {
-        "timestamp": 2.0195,
-        "imu_accel_z": 9.865,
-        "depth_distance": 1.4,
-        "sync_error_ms": 0.0
-    },
-    {
-        "timestamp": 2.1199,
-        "imu_accel_z": 9.83,
-        "depth_distance": 1.82,
-        "sync_error_ms": 3.2
-    },
-    {
-        "timestamp": 2.2201,
-        "imu_accel_z": 10.008,
-        "depth_distance": 1.55,
-        "sync_error_ms": 4.1
-    },
-    {
-        "timestamp": 2.3219,
-        "imu_accel_z": 9.997,
-        "depth_distance": 99.9,
-        "sync_error_ms": 0.0
-    },
-    {
-        "timestamp": 2.4234,
-        "imu_accel_z": 9.877,
-        "depth_distance": 1.34,
-        "sync_error_ms": 2.5
-    },
-    {
-        "timestamp": 2.5242,
-        "imu_accel_z": 9.963,
-        "depth_distance": 0.61,
-        "sync_error_ms": 1.3
-    },
-    {
-        "timestamp": 2.6248,
-        "imu_accel_z": 9.994,
-        "depth_distance": 0.94,
-        "sync_error_ms": 2.0
-    },
-    {
-        "timestamp": 2.7253,
-        "imu_accel_z": 9.865,
-        "depth_distance": 1.81,
-        "sync_error_ms": 1.8
-    },
-    {
-        "timestamp": 2.8258,
-        "imu_accel_z": 9.934,
-        "depth_distance": 1.15,
-        "sync_error_ms": 1.3
-    },
-    {
-        "timestamp": 2.9262,
-        "imu_accel_z": 9.953,
-        "depth_distance": 1.71,
-        "sync_error_ms": 4.2
-    },
-    {
-        "timestamp": 3.0267,
-        "imu_accel_z": 9.953,
-        "depth_distance": 0.81,
-        "sync_error_ms": 2.0
-    },
-    {
-        "timestamp": 3.127,
-        "imu_accel_z": 9.887,
-        "depth_distance": 1.76,
-        "sync_error_ms": 5.0
-    },
-    {
-        "timestamp": 3.2278,
-        "imu_accel_z": 9.944,
-        "depth_distance": 1.14,
-        "sync_error_ms": 2.0
-    },
-    {
-        "timestamp": 3.3287,
-        "imu_accel_z": 9.938,
-        "depth_distance": 1.55,
-        "sync_error_ms": 2.4
-    },
-    {
-        "timestamp": 3.4296,
-        "imu_accel_z": 10.034,
-        "depth_distance": 1.77,
-        "sync_error_ms": 4.7
-    },
-    {
-        "timestamp": 3.5305,
-        "imu_accel_z": 9.925,
-        "depth_distance": 1.62,
+        "timestamp": 0.2043,
+        "imu_accel_z": 9.746,
+        "depth_distance": 1.44,
         "sync_error_ms": 1.2
     },
     {
-        "timestamp": 3.6314,
-        "imu_accel_z": 9.891,
-        "depth_distance": 1.51,
-        "sync_error_ms": 3.3
-    },
-    {
-        "timestamp": 3.7325,
-        "imu_accel_z": 9.922,
-        "depth_distance": 1.63,
-        "sync_error_ms": 4.6
-    },
-    {
-        "timestamp": 3.8335,
-        "imu_accel_z": 10.088,
-        "depth_distance": 0.93,
+        "timestamp": 0.3051,
+        "imu_accel_z": 9.89,
+        "depth_distance": 0.92,
         "sync_error_ms": 0.0
     },
     {
-        "timestamp": 3.9335,
-        "imu_accel_z": 9.931,
-        "depth_distance": 0.74,
+        "timestamp": 0.4075,
+        "imu_accel_z": 9.84,
+        "depth_distance": 1.69,
+        "sync_error_ms": 0.0
+    },
+    {
+        "timestamp": 0.536,
+        "imu_accel_z": 9.83,
+        "depth_distance": 1.67,
+        "sync_error_ms": 0.0
+    },
+    {
+        "timestamp": 0.7708,
+        "imu_accel_z": 9.884,
+        "depth_distance": 1.13,
+        "sync_error_ms": 0.0
+    },
+    {
+        "timestamp": 0.9305,
+        "imu_accel_z": 9.759,
+        "depth_distance": 1.63,
+        "sync_error_ms": 0.0
+    },
+    {
+        "timestamp": 1.0387,
+        "imu_accel_z": 9.802,
+        "depth_distance": 1.95,
+        "sync_error_ms": 0.0
+    },
+    {
+        "timestamp": 1.1392,
+        "imu_accel_z": 9.944,
+        "depth_distance": 1.73,
         "sync_error_ms": 4.9
     },
     {
-        "timestamp": 4.0344,
-        "imu_accel_z": 10.037,
-        "depth_distance": 99.9,
+        "timestamp": 1.2395,
+        "imu_accel_z": 9.808,
+        "depth_distance": 0.52,
         "sync_error_ms": 0.0
     },
     {
-        "timestamp": 4.1349,
-        "imu_accel_z": 10.035,
-        "depth_distance": 1.8,
-        "sync_error_ms": 4.5
+        "timestamp": 1.3399,
+        "imu_accel_z": 9.826,
+        "depth_distance": 99.9,
+        "sync_error_ms": 2.3
     },
     {
-        "timestamp": 4.2356,
-        "imu_accel_z": 10.1,
-        "depth_distance": 1.49,
-        "sync_error_ms": 2.6
+        "timestamp": 1.4402,
+        "imu_accel_z": 9.777,
+        "depth_distance": 0.78,
+        "sync_error_ms": 1.5
     },
     {
-        "timestamp": 4.3361,
-        "imu_accel_z": 9.985,
-        "depth_distance": 0.73,
-        "sync_error_ms": 1.7
+        "timestamp": 1.5403,
+        "imu_accel_z": 9.946,
+        "depth_distance": 1.57,
+        "sync_error_ms": 4.2
     },
     {
-        "timestamp": 4.437,
-        "imu_accel_z": 10.037,
-        "depth_distance": 1.63,
-        "sync_error_ms": 4.7
+        "timestamp": 1.6405,
+        "imu_accel_z": 9.797,
+        "depth_distance": 1.33,
+        "sync_error_ms": 6.9
     },
     {
-        "timestamp": 4.5378,
-        "imu_accel_z": 10.103,
+        "timestamp": 1.7416,
+        "imu_accel_z": 9.865,
+        "depth_distance": 0.71,
+        "sync_error_ms": 1.1
+    },
+    {
+        "timestamp": 1.8425,
+        "imu_accel_z": 9.825,
+        "depth_distance": 1.92,
+        "sync_error_ms": 3.9
+    },
+    {
+        "timestamp": 1.9433,
+        "imu_accel_z": 9.919,
+        "depth_distance": 1.18,
+        "sync_error_ms": 1.5
+    },
+    {
+        "timestamp": 2.0451,
+        "imu_accel_z": 9.802,
+        "depth_distance": 1.38,
+        "sync_error_ms": 6.6
+    },
+    {
+        "timestamp": 2.1462,
+        "imu_accel_z": 9.834,
         "depth_distance": 0.88,
+        "sync_error_ms": 1.5
+    },
+    {
+        "timestamp": 2.2469,
+        "imu_accel_z": 9.823,
+        "depth_distance": 0.62,
         "sync_error_ms": 3.6
     },
     {
-        "timestamp": 4.6389,
-        "imu_accel_z": 10.127,
-        "depth_distance": 1.84,
-        "sync_error_ms": 1.2
+        "timestamp": 2.348,
+        "imu_accel_z": 9.886,
+        "depth_distance": 1.08,
+        "sync_error_ms": 0.0
     },
     {
-        "timestamp": 4.7396,
-        "imu_accel_z": 9.94,
-        "depth_distance": 1.13,
-        "sync_error_ms": 3.7
+        "timestamp": 2.4484,
+        "imu_accel_z": 10.014,
+        "depth_distance": 0.76,
+        "sync_error_ms": 0.0
     },
     {
-        "timestamp": 4.8404,
-        "imu_accel_z": 10.082,
+        "timestamp": 2.5484,
+        "imu_accel_z": 9.902,
         "depth_distance": 0.77,
+        "sync_error_ms": 2.7
+    },
+    {
+        "timestamp": 2.6501,
+        "imu_accel_z": 9.854,
+        "depth_distance": 1.71,
+        "sync_error_ms": 4.3
+    },
+    {
+        "timestamp": 2.7512,
+        "imu_accel_z": 9.922,
+        "depth_distance": 1.4,
         "sync_error_ms": 3.2
     },
     {
-        "timestamp": 4.9424,
-        "imu_accel_z": 9.949,
-        "depth_distance": 0.57,
+        "timestamp": 2.8568,
+        "imu_accel_z": 10.021,
+        "depth_distance": 0.87,
+        "sync_error_ms": 0.0
+    },
+    {
+        "timestamp": 2.9573,
+        "imu_accel_z": 10.042,
+        "depth_distance": 1.01,
+        "sync_error_ms": 5.2
+    },
+    {
+        "timestamp": 3.0583,
+        "imu_accel_z": 10.001,
+        "depth_distance": 1.77,
+        "sync_error_ms": 0.0
+    },
+    {
+        "timestamp": 3.1585,
+        "imu_accel_z": 9.964,
+        "depth_distance": 99.9,
+        "sync_error_ms": 4.4
+    },
+    {
+        "timestamp": 3.2591,
+        "imu_accel_z": 10.051,
+        "depth_distance": 1.66,
+        "sync_error_ms": 2.3
+    },
+    {
+        "timestamp": 3.3601,
+        "imu_accel_z": 10.051,
+        "depth_distance": 1.57,
+        "sync_error_ms": 2.6
+    },
+    {
+        "timestamp": 3.4611,
+        "imu_accel_z": 10.07,
+        "depth_distance": 1.93,
+        "sync_error_ms": 2.3
+    },
+    {
+        "timestamp": 3.5618,
+        "imu_accel_z": 9.971,
+        "depth_distance": 1.82,
+        "sync_error_ms": 3.7
+    },
+    {
+        "timestamp": 3.662,
+        "imu_accel_z": 9.896,
+        "depth_distance": 0.5,
+        "sync_error_ms": 1.5
+    },
+    {
+        "timestamp": 3.7626,
+        "imu_accel_z": 10.075,
+        "depth_distance": 1.64,
+        "sync_error_ms": 4.2
+    },
+    {
+        "timestamp": 3.8633,
+        "imu_accel_z": 9.921,
+        "depth_distance": 0.6,
+        "sync_error_ms": 1.1
+    },
+    {
+        "timestamp": 3.9642,
+        "imu_accel_z": 10.016,
+        "depth_distance": 1.53,
+        "sync_error_ms": 4.8
+    },
+    {
+        "timestamp": 4.0657,
+        "imu_accel_z": 10.002,
+        "depth_distance": 1.22,
         "sync_error_ms": 2.0
+    },
+    {
+        "timestamp": 4.166,
+        "imu_accel_z": 9.981,
+        "depth_distance": 0.64,
+        "sync_error_ms": 1.1
+    },
+    {
+        "timestamp": 4.266,
+        "imu_accel_z": 9.964,
+        "depth_distance": 1.86,
+        "sync_error_ms": 2.1
+    },
+    {
+        "timestamp": 4.3664,
+        "imu_accel_z": 10.041,
+        "depth_distance": 1.82,
+        "sync_error_ms": 4.0
+    },
+    {
+        "timestamp": 4.467,
+        "imu_accel_z": 10.039,
+        "depth_distance": 0.99,
+        "sync_error_ms": 2.0
+    },
+    {
+        "timestamp": 4.5675,
+        "imu_accel_z": 10.097,
+        "depth_distance": 1.71,
+        "sync_error_ms": 4.4
+    },
+    {
+        "timestamp": 4.6679,
+        "imu_accel_z": 10.072,
+        "depth_distance": 0.63,
+        "sync_error_ms": 0.0
+    },
+    {
+        "timestamp": 4.7689,
+        "imu_accel_z": 9.965,
+        "depth_distance": 1.73,
+        "sync_error_ms": 4.0
+    },
+    {
+        "timestamp": 4.869,
+        "imu_accel_z": 9.992,
+        "depth_distance": 1.77,
+        "sync_error_ms": 1.6
+    },
+    {
+        "timestamp": 4.9701,
+        "imu_accel_z": 10.1,
+        "depth_distance": 0.95,
+        "sync_error_ms": 3.1
     }
 ]

@@ -12,7 +12,7 @@ def plot_robot_performance():
     timestamps = [e["timestamp"] for e in data]
     distances = [e["depth_distance"] for e in data]
     # Identify anomalies for the legend
-    colors = ['red' if "CRITICAL" in e["health_status"] else 'blue' for e in data]
+    colors = ['red' if "CRITICAL" in e["status"] else 'blue' for e in data]
 
     plt.figure(figsize=(12, 6))
     plt.scatter(timestamps, distances, c=colors, label='Sensor Data', s=15)

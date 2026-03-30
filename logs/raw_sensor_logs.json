@@ -1,3684 +1,527 @@
 [
     {
-        "timestamp": 0.0109,
+        "timestamp": 0.1015,
         "sensor": "IMU",
         "data": {
-            "accel_z": 9.747
+            "accel_z": 9.878
         }
     },
     {
-        "timestamp": 0.021,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.885
-        }
-    },
-    {
-        "timestamp": 0.0324,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.825
-        }
-    },
-    {
-        "timestamp": 0.0433,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.857
-        }
-    },
-    {
-        "timestamp": 0.0533,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.873
-        }
-    },
-    {
-        "timestamp": 0.064,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.766
-        }
-    },
-    {
-        "timestamp": 0.074,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.779
-        }
-    },
-    {
-        "timestamp": 0.0849,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.831
-        }
-    },
-    {
-        "timestamp": 0.0953,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.885
-        }
-    },
-    {
-        "timestamp": 0.1006,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.95
-        }
-    },
-    {
-        "timestamp": 0.1061,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.854
-        }
-    },
-    {
-        "timestamp": 0.1172,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.807
-        }
-    },
-    {
-        "timestamp": 0.1284,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.839
-        }
-    },
-    {
-        "timestamp": 0.1296,
-        "sensor": "CONTACT",
-        "data": {
-            "touch": 1
-        }
-    },
-    {
-        "timestamp": 0.1396,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.868
-        }
-    },
-    {
-        "timestamp": 0.1503,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.721
-        }
-    },
-    {
-        "timestamp": 0.161,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.753
-        }
-    },
-    {
-        "timestamp": 0.1714,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.886
-        }
-    },
-    {
-        "timestamp": 0.1827,
+        "timestamp": 0.202,
         "sensor": "IMU",
         "data": {
             "accel_z": 9.745
         }
     },
     {
-        "timestamp": 0.1935,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.785
-        }
-    },
-    {
-        "timestamp": 0.2016,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.9
-        }
-    },
-    {
-        "timestamp": 0.2041,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.892
-        }
-    },
-    {
-        "timestamp": 0.2142,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.868
-        }
-    },
-    {
-        "timestamp": 0.2248,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.864
-        }
-    },
-    {
-        "timestamp": 0.2348,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.791
-        }
-    },
-    {
-        "timestamp": 0.2449,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.713
-        }
-    },
-    {
-        "timestamp": 0.2563,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.896
-        }
-    },
-    {
-        "timestamp": 0.2673,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.774
-        }
-    },
-    {
-        "timestamp": 0.272,
-        "sensor": "CONTACT",
-        "data": {
-            "touch": 1
-        }
-    },
-    {
-        "timestamp": 0.2784,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.904
-        }
-    },
-    {
-        "timestamp": 0.2891,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.738
-        }
-    },
-    {
-        "timestamp": 0.2994,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.828
-        }
-    },
-    {
         "timestamp": 0.3021,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.48
-        }
-    },
-    {
-        "timestamp": 0.3098,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.912
-        }
-    },
-    {
-        "timestamp": 0.3204,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.881
-        }
-    },
-    {
-        "timestamp": 0.3306,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.83
-        }
-    },
-    {
-        "timestamp": 0.341,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.818
-        }
-    },
-    {
-        "timestamp": 0.3525,
         "sensor": "IMU",
         "data": {
             "accel_z": 9.807
         }
     },
     {
-        "timestamp": 0.3638,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.822
-        }
-    },
-    {
-        "timestamp": 0.3747,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.803
-        }
-    },
-    {
-        "timestamp": 0.3861,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.776
-        }
-    },
-    {
-        "timestamp": 0.3975,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.88
-        }
-    },
-    {
-        "timestamp": 0.4023,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.08
-        }
-    },
-    {
-        "timestamp": 0.4091,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.801
-        }
-    },
-    {
-        "timestamp": 0.421,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.777
-        }
-    },
-    {
-        "timestamp": 0.4311,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.85
-        }
-    },
-    {
-        "timestamp": 0.4421,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.893
-        }
-    },
-    {
-        "timestamp": 0.4527,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.75
-        }
-    },
-    {
-        "timestamp": 0.4638,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.797
-        }
-    },
-    {
-        "timestamp": 0.4741,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.815
-        }
-    },
-    {
-        "timestamp": 0.4843,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.903
-        }
-    },
-    {
-        "timestamp": 0.4944,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.726
-        }
-    },
-    {
-        "timestamp": 0.5025,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.63
-        }
-    },
-    {
-        "timestamp": 0.5046,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.9
-        }
-    },
-    {
-        "timestamp": 0.5155,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.874
-        }
-    },
-    {
-        "timestamp": 0.5259,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.839
-        }
-    },
-    {
-        "timestamp": 0.5368,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.748
-        }
-    },
-    {
-        "timestamp": 0.5477,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.768
-        }
-    },
-    {
-        "timestamp": 0.5626,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.912
-        }
-    },
-    {
-        "timestamp": 0.574,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.815
-        }
-    },
-    {
-        "timestamp": 0.5846,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.779
-        }
-    },
-    {
-        "timestamp": 0.5957,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.734
-        }
-    },
-    {
-        "timestamp": 0.6026,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.4
-        }
-    },
-    {
-        "timestamp": 0.6063,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.742
-        }
-    },
-    {
-        "timestamp": 0.618,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.781
-        }
-    },
-    {
-        "timestamp": 0.6286,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.849
-        }
-    },
-    {
-        "timestamp": 0.6397,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.906
-        }
-    },
-    {
-        "timestamp": 0.6505,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.804
-        }
-    },
-    {
-        "timestamp": 0.6617,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.775
-        }
-    },
-    {
-        "timestamp": 0.6721,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.867
-        }
-    },
-    {
-        "timestamp": 0.6827,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.767
-        }
-    },
-    {
-        "timestamp": 0.6937,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.891
-        }
-    },
-    {
-        "timestamp": 0.7043,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.857
-        }
-    },
-    {
-        "timestamp": 0.7043,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.86
-        }
-    },
-    {
-        "timestamp": 0.7173,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.788
-        }
-    },
-    {
-        "timestamp": 0.7274,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.897
-        }
-    },
-    {
-        "timestamp": 0.7377,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.798
-        }
-    },
-    {
-        "timestamp": 0.7481,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.836
-        }
-    },
-    {
-        "timestamp": 0.7591,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.784
-        }
-    },
-    {
-        "timestamp": 0.7692,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.751
-        }
-    },
-    {
-        "timestamp": 0.7804,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.86
-        }
-    },
-    {
-        "timestamp": 0.7905,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.912
-        }
-    },
-    {
-        "timestamp": 0.8022,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.826
-        }
-    },
-    {
-        "timestamp": 0.8072,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.97
-        }
-    },
-    {
-        "timestamp": 0.813,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.902
-        }
-    },
-    {
-        "timestamp": 0.826,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.818
-        }
-    },
-    {
-        "timestamp": 0.8369,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.92
-        }
-    },
-    {
-        "timestamp": 0.8475,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.791
-        }
-    },
-    {
-        "timestamp": 0.86,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.9
-        }
-    },
-    {
-        "timestamp": 0.8743,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.89
-        }
-    },
-    {
-        "timestamp": 0.8855,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.827
-        }
-    },
-    {
-        "timestamp": 0.8964,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.936
-        }
-    },
-    {
-        "timestamp": 0.9068,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.926
-        }
-    },
-    {
-        "timestamp": 0.9093,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.56
-        }
-    },
-    {
-        "timestamp": 0.9182,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.758
-        }
-    },
-    {
-        "timestamp": 0.929,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.773
-        }
-    },
-    {
-        "timestamp": 0.9398,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.806
-        }
-    },
-    {
-        "timestamp": 0.9505,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.753
-        }
-    },
-    {
-        "timestamp": 0.9612,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.92
-        }
-    },
-    {
-        "timestamp": 0.9742,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.866
-        }
-    },
-    {
-        "timestamp": 0.9844,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.862
-        }
-    },
-    {
-        "timestamp": 0.9946,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.818
-        }
-    },
-    {
-        "timestamp": 1.007,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.889
-        }
-    },
-    {
-        "timestamp": 1.0093,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.64
-        }
-    },
-    {
-        "timestamp": 1.0184,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.758
-        }
-    },
-    {
-        "timestamp": 1.0304,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.851
-        }
-    },
-    {
-        "timestamp": 1.0424,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.767
-        }
-    },
-    {
-        "timestamp": 1.0524,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.881
-        }
-    },
-    {
-        "timestamp": 1.0636,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.918
-        }
-    },
-    {
-        "timestamp": 1.0752,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.798
-        }
-    },
-    {
-        "timestamp": 1.0854,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.91
-        }
-    },
-    {
-        "timestamp": 1.0954,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.802
-        }
-    },
-    {
-        "timestamp": 1.1059,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.857
-        }
-    },
-    {
-        "timestamp": 1.1098,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.28
-        }
-    },
-    {
-        "timestamp": 1.1171,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.82
-        }
-    },
-    {
-        "timestamp": 1.1282,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.936
-        }
-    },
-    {
-        "timestamp": 1.1393,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.765
-        }
-    },
-    {
-        "timestamp": 1.1507,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.876
-        }
-    },
-    {
-        "timestamp": 1.1616,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.777
-        }
-    },
-    {
-        "timestamp": 1.1723,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.958
-        }
-    },
-    {
-        "timestamp": 1.1834,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.813
-        }
-    },
-    {
-        "timestamp": 1.1936,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.768
-        }
-    },
-    {
-        "timestamp": 1.2044,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.959
-        }
-    },
-    {
-        "timestamp": 1.21,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.69
-        }
-    },
-    {
-        "timestamp": 1.2158,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.954
-        }
-    },
-    {
-        "timestamp": 1.2263,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.89
-        }
-    },
-    {
-        "timestamp": 1.2365,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.823
-        }
-    },
-    {
-        "timestamp": 1.2476,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.895
-        }
-    },
-    {
-        "timestamp": 1.2578,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.841
-        }
-    },
-    {
-        "timestamp": 1.2681,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.801
-        }
-    },
-    {
-        "timestamp": 1.2781,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.848
-        }
-    },
-    {
-        "timestamp": 1.2894,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.844
-        }
-    },
-    {
-        "timestamp": 1.2997,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.955
-        }
-    },
-    {
-        "timestamp": 1.3112,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.952
-        }
-    },
-    {
-        "timestamp": 1.3112,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.72
-        }
-    },
-    {
-        "timestamp": 1.3223,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.942
-        }
-    },
-    {
-        "timestamp": 1.3326,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.833
-        }
-    },
-    {
-        "timestamp": 1.3427,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.902
-        }
-    },
-    {
-        "timestamp": 1.3537,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.809
-        }
-    },
-    {
-        "timestamp": 1.364,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.936
-        }
-    },
-    {
-        "timestamp": 1.3748,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.822
-        }
-    },
-    {
-        "timestamp": 1.3852,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.906
-        }
-    },
-    {
-        "timestamp": 1.3962,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.888
-        }
-    },
-    {
-        "timestamp": 1.4072,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.785
-        }
-    },
-    {
-        "timestamp": 1.4131,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.9
-        }
-    },
-    {
-        "timestamp": 1.4176,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.792
-        }
-    },
-    {
-        "timestamp": 1.4277,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.887
-        }
-    },
-    {
-        "timestamp": 1.438,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.911
-        }
-    },
-    {
-        "timestamp": 1.4498,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.848
-        }
-    },
-    {
-        "timestamp": 1.4599,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.805
-        }
-    },
-    {
-        "timestamp": 1.4702,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.965
-        }
-    },
-    {
-        "timestamp": 1.4802,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.914
-        }
-    },
-    {
-        "timestamp": 1.4907,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.856
-        }
-    },
-    {
-        "timestamp": 1.5012,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.915
-        }
-    },
-    {
-        "timestamp": 1.5116,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.886
-        }
-    },
-    {
-        "timestamp": 1.515,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.35
-        }
-    },
-    {
-        "timestamp": 1.523,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.953
-        }
-    },
-    {
-        "timestamp": 1.5334,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.96
-        }
-    },
-    {
-        "timestamp": 1.5436,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.938
-        }
-    },
-    {
-        "timestamp": 1.5547,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.905
-        }
-    },
-    {
-        "timestamp": 1.5651,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.941
-        }
-    },
-    {
-        "timestamp": 1.5759,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.952
-        }
-    },
-    {
-        "timestamp": 1.5863,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.976
-        }
-    },
-    {
-        "timestamp": 1.5969,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.873
-        }
-    },
-    {
-        "timestamp": 1.6077,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.908
-        }
-    },
-    {
-        "timestamp": 1.6168,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.95
-        }
-    },
-    {
-        "timestamp": 1.6168,
+        "timestamp": 0.3154,
         "sensor": "CONTACT",
         "data": {
             "touch": 1
         }
     },
     {
-        "timestamp": 1.6189,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.895
-        }
-    },
-    {
-        "timestamp": 1.6301,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.832
-        }
-    },
-    {
-        "timestamp": 1.6405,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.899
-        }
-    },
-    {
-        "timestamp": 1.6513,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.925
-        }
-    },
-    {
-        "timestamp": 1.6624,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.964
-        }
-    },
-    {
-        "timestamp": 1.6726,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.812
-        }
-    },
-    {
-        "timestamp": 1.6835,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.839
-        }
-    },
-    {
-        "timestamp": 1.6939,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.901
-        }
-    },
-    {
-        "timestamp": 1.7041,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.862
-        }
-    },
-    {
-        "timestamp": 1.715,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.933
-        }
-    },
-    {
-        "timestamp": 1.7176,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.09
-        }
-    },
-    {
-        "timestamp": 1.7257,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.961
-        }
-    },
-    {
-        "timestamp": 1.7372,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.855
-        }
-    },
-    {
-        "timestamp": 1.7474,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.94
-        }
-    },
-    {
-        "timestamp": 1.7575,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.877
-        }
-    },
-    {
-        "timestamp": 1.7688,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.916
-        }
-    },
-    {
-        "timestamp": 1.7803,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.931
-        }
-    },
-    {
-        "timestamp": 1.7905,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.845
-        }
-    },
-    {
-        "timestamp": 1.8009,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.955
-        }
-    },
-    {
-        "timestamp": 1.812,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.977
-        }
-    },
-    {
-        "timestamp": 1.818,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.7
-        }
-    },
-    {
-        "timestamp": 1.8241,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.845
-        }
-    },
-    {
-        "timestamp": 1.8354,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.982
-        }
-    },
-    {
-        "timestamp": 1.847,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.819
-        }
-    },
-    {
-        "timestamp": 1.8575,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.886
-        }
-    },
-    {
-        "timestamp": 1.8691,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.98
-        }
-    },
-    {
-        "timestamp": 1.8798,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.805
-        }
-    },
-    {
-        "timestamp": 1.8905,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.958
-        }
-    },
-    {
-        "timestamp": 1.9011,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.875
-        }
-    },
-    {
-        "timestamp": 1.9113,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.886
-        }
-    },
-    {
-        "timestamp": 1.9187,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.38
-        }
-    },
-    {
-        "timestamp": 1.9217,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.996
-        }
-    },
-    {
-        "timestamp": 1.9299,
+        "timestamp": 0.3888,
         "sensor": "CONTACT",
         "data": {
             "touch": 1
         }
     },
     {
-        "timestamp": 1.933,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.996
-        }
-    },
-    {
-        "timestamp": 1.9441,
+        "timestamp": 0.4022,
         "sensor": "IMU",
         "data": {
             "accel_z": 9.909
         }
     },
     {
-        "timestamp": 1.9544,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.938
-        }
-    },
-    {
-        "timestamp": 1.9653,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.971
-        }
-    },
-    {
-        "timestamp": 1.976,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.937
-        }
-    },
-    {
-        "timestamp": 1.9867,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.976
-        }
-    },
-    {
-        "timestamp": 1.9975,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.969
-        }
-    },
-    {
-        "timestamp": 2.0085,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.964
-        }
-    },
-    {
-        "timestamp": 2.0195,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.865
-        }
-    },
-    {
-        "timestamp": 2.0195,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.4
-        }
-    },
-    {
-        "timestamp": 2.0305,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.84
-        }
-    },
-    {
-        "timestamp": 2.0415,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.902
-        }
-    },
-    {
-        "timestamp": 2.0519,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.81
-        }
-    },
-    {
-        "timestamp": 2.0628,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.95
-        }
-    },
-    {
-        "timestamp": 2.073,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.93
-        }
-    },
-    {
-        "timestamp": 2.0831,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.927
-        }
-    },
-    {
-        "timestamp": 2.0946,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.899
-        }
-    },
-    {
-        "timestamp": 2.1052,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.811
-        }
-    },
-    {
-        "timestamp": 2.1167,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.83
-        }
-    },
-    {
-        "timestamp": 2.1199,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.82
-        }
-    },
-    {
-        "timestamp": 2.1271,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.823
-        }
-    },
-    {
-        "timestamp": 2.1377,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.815
-        }
-    },
-    {
-        "timestamp": 2.1482,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.837
-        }
-    },
-    {
-        "timestamp": 2.1583,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.899
-        }
-    },
-    {
-        "timestamp": 2.1701,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.918
-        }
-    },
-    {
-        "timestamp": 2.1811,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.993
-        }
-    },
-    {
-        "timestamp": 2.1917,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.936
-        }
-    },
-    {
-        "timestamp": 2.2025,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.899
-        }
-    },
-    {
-        "timestamp": 2.2105,
-        "sensor": "CONTACT",
-        "data": {
-            "touch": 1
-        }
-    },
-    {
-        "timestamp": 2.2132,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.872
-        }
-    },
-    {
-        "timestamp": 2.2201,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.55
-        }
-    },
-    {
-        "timestamp": 2.2242,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.008
-        }
-    },
-    {
-        "timestamp": 2.2262,
-        "sensor": "CONTACT",
-        "data": {
-            "touch": 1
-        }
-    },
-    {
-        "timestamp": 2.2351,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.919
-        }
-    },
-    {
-        "timestamp": 2.2457,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.818
-        }
-    },
-    {
-        "timestamp": 2.2562,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.828
-        }
-    },
-    {
-        "timestamp": 2.2663,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.844
-        }
-    },
-    {
-        "timestamp": 2.2772,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.939
-        }
-    },
-    {
-        "timestamp": 2.2892,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.985
-        }
-    },
-    {
-        "timestamp": 2.3001,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.963
-        }
-    },
-    {
-        "timestamp": 2.3106,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.972
-        }
-    },
-    {
-        "timestamp": 2.3219,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.997
-        }
-    },
-    {
-        "timestamp": 2.3219,
+        "timestamp": 0.5007,
         "sensor": "DEPTH",
         "data": {
             "distance": 99.9
         }
     },
     {
-        "timestamp": 2.3321,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.926
-        }
-    },
-    {
-        "timestamp": 2.3422,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.895
-        }
-    },
-    {
-        "timestamp": 2.3527,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.005
-        }
-    },
-    {
-        "timestamp": 2.3629,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.01
-        }
-    },
-    {
-        "timestamp": 2.3734,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.883
-        }
-    },
-    {
-        "timestamp": 2.3842,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.885
-        }
-    },
-    {
-        "timestamp": 2.395,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.006
-        }
-    },
-    {
-        "timestamp": 2.4053,
+        "timestamp": 0.5034,
         "sensor": "IMU",
         "data": {
             "accel_z": 9.823
         }
     },
     {
-        "timestamp": 2.4156,
+        "timestamp": 0.6038,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.001
+            "accel_z": 9.9
         }
     },
     {
-        "timestamp": 2.4234,
+        "timestamp": 0.6785,
+        "sensor": "CONTACT",
+        "data": {
+            "touch": 1
+        }
+    },
+    {
+        "timestamp": 0.7057,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.854
+        }
+    },
+    {
+        "timestamp": 0.8068,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.907
+        }
+    },
+    {
+        "timestamp": 0.8162,
+        "sensor": "CONTACT",
+        "data": {
+            "touch": 1
+        }
+    },
+    {
+        "timestamp": 0.9083,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.878
+        }
+    },
+    {
+        "timestamp": 1.008,
         "sensor": "DEPTH",
         "data": {
-            "distance": 1.34
+            "distance": 99.9
         }
     },
     {
-        "timestamp": 2.4259,
+        "timestamp": 1.0213,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.852
+        }
+    },
+    {
+        "timestamp": 1.1205,
+        "sensor": "CONTACT",
+        "data": {
+            "touch": 1
+        }
+    },
+    {
+        "timestamp": 1.1216,
         "sensor": "IMU",
         "data": {
             "accel_z": 9.877
         }
     },
     {
-        "timestamp": 2.4367,
+        "timestamp": 1.2227,
         "sensor": "IMU",
         "data": {
-            "accel_z": 9.872
+            "accel_z": 9.791
         }
     },
     {
-        "timestamp": 2.4487,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.958
-        }
-    },
-    {
-        "timestamp": 2.46,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.018
-        }
-    },
-    {
-        "timestamp": 2.4704,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.833
-        }
-    },
-    {
-        "timestamp": 2.4806,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.955
-        }
-    },
-    {
-        "timestamp": 2.4922,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.929
-        }
-    },
-    {
-        "timestamp": 2.5042,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.876
-        }
-    },
-    {
-        "timestamp": 2.5143,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.88
-        }
-    },
-    {
-        "timestamp": 2.5242,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.61
-        }
-    },
-    {
-        "timestamp": 2.5255,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.963
-        }
-    },
-    {
-        "timestamp": 2.5362,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.916
-        }
-    },
-    {
-        "timestamp": 2.5473,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.018
-        }
-    },
-    {
-        "timestamp": 2.5577,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.838
-        }
-    },
-    {
-        "timestamp": 2.5685,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.943
-        }
-    },
-    {
-        "timestamp": 2.5791,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.84
-        }
-    },
-    {
-        "timestamp": 2.5899,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.844
-        }
-    },
-    {
-        "timestamp": 2.6009,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.858
-        }
-    },
-    {
-        "timestamp": 2.612,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.003
-        }
-    },
-    {
-        "timestamp": 2.6228,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.994
-        }
-    },
-    {
-        "timestamp": 2.6248,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.94
-        }
-    },
-    {
-        "timestamp": 2.6337,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.965
-        }
-    },
-    {
-        "timestamp": 2.6442,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.948
-        }
-    },
-    {
-        "timestamp": 2.6545,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.94
-        }
-    },
-    {
-        "timestamp": 2.665,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.977
-        }
-    },
-    {
-        "timestamp": 2.6753,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.887
-        }
-    },
-    {
-        "timestamp": 2.6858,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.994
-        }
-    },
-    {
-        "timestamp": 2.6958,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.028
-        }
-    },
-    {
-        "timestamp": 2.7063,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.978
-        }
-    },
-    {
-        "timestamp": 2.7167,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.861
-        }
-    },
-    {
-        "timestamp": 2.7253,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.81
-        }
-    },
-    {
-        "timestamp": 2.7271,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.865
-        }
-    },
-    {
-        "timestamp": 2.7377,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.967
-        }
-    },
-    {
-        "timestamp": 2.7493,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.928
-        }
-    },
-    {
-        "timestamp": 2.7594,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.883
-        }
-    },
-    {
-        "timestamp": 2.7706,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.871
-        }
-    },
-    {
-        "timestamp": 2.7824,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.011
-        }
-    },
-    {
-        "timestamp": 2.7925,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.858
-        }
-    },
-    {
-        "timestamp": 2.8034,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.033
-        }
-    },
-    {
-        "timestamp": 2.8141,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.923
-        }
-    },
-    {
-        "timestamp": 2.8245,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.934
-        }
-    },
-    {
-        "timestamp": 2.8258,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.15
-        }
-    },
-    {
-        "timestamp": 2.8351,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.86
-        }
-    },
-    {
-        "timestamp": 2.8452,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.917
-        }
-    },
-    {
-        "timestamp": 2.8561,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.005
-        }
-    },
-    {
-        "timestamp": 2.8669,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.896
-        }
-    },
-    {
-        "timestamp": 2.8772,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.956
-        }
-    },
-    {
-        "timestamp": 2.8878,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.979
-        }
-    },
-    {
-        "timestamp": 2.8981,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.006
-        }
-    },
-    {
-        "timestamp": 2.9059,
-        "sensor": "CONTACT",
-        "data": {
-            "touch": 1
-        }
-    },
-    {
-        "timestamp": 2.9095,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.947
-        }
-    },
-    {
-        "timestamp": 2.9204,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.995
-        }
-    },
-    {
-        "timestamp": 2.9262,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.71
-        }
-    },
-    {
-        "timestamp": 2.9304,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.953
-        }
-    },
-    {
-        "timestamp": 2.9404,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.899
-        }
-    },
-    {
-        "timestamp": 2.9501,
-        "sensor": "CONTACT",
-        "data": {
-            "touch": 1
-        }
-    },
-    {
-        "timestamp": 2.9514,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.927
-        }
-    },
-    {
-        "timestamp": 2.9619,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.039
-        }
-    },
-    {
-        "timestamp": 2.9722,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.029
-        }
-    },
-    {
-        "timestamp": 2.9829,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.039
-        }
-    },
-    {
-        "timestamp": 2.9938,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.934
-        }
-    },
-    {
-        "timestamp": 3.0039,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.96
-        }
-    },
-    {
-        "timestamp": 3.0141,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.023
-        }
-    },
-    {
-        "timestamp": 3.0247,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.953
-        }
-    },
-    {
-        "timestamp": 3.0267,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.81
-        }
-    },
-    {
-        "timestamp": 3.0358,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.043
-        }
-    },
-    {
-        "timestamp": 3.0462,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.991
-        }
-    },
-    {
-        "timestamp": 3.058,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.032
-        }
-    },
-    {
-        "timestamp": 3.0688,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.956
-        }
-    },
-    {
-        "timestamp": 3.0795,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.977
-        }
-    },
-    {
-        "timestamp": 3.0897,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.923
-        }
-    },
-    {
-        "timestamp": 3.1007,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.89
-        }
-    },
-    {
-        "timestamp": 3.1114,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.903
-        }
-    },
-    {
-        "timestamp": 3.1217,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.94
-        }
-    },
-    {
-        "timestamp": 3.127,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.76
-        }
-    },
-    {
-        "timestamp": 3.132,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.887
-        }
-    },
-    {
-        "timestamp": 3.1428,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.976
-        }
-    },
-    {
-        "timestamp": 3.1543,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.888
-        }
-    },
-    {
-        "timestamp": 3.1605,
-        "sensor": "CONTACT",
-        "data": {
-            "touch": 1
-        }
-    },
-    {
-        "timestamp": 3.1651,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.945
-        }
-    },
-    {
-        "timestamp": 3.1761,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.911
-        }
-    },
-    {
-        "timestamp": 3.1862,
+        "timestamp": 1.3229,
         "sensor": "IMU",
         "data": {
             "accel_z": 9.915
         }
     },
     {
-        "timestamp": 3.1962,
+        "timestamp": 1.4232,
         "sensor": "IMU",
         "data": {
-            "accel_z": 9.994
+            "accel_z": 9.962
         }
     },
     {
-        "timestamp": 3.2071,
-        "sensor": "IMU",
+        "timestamp": 1.5215,
+        "sensor": "DEPTH",
         "data": {
-            "accel_z": 9.948
+            "distance": 1.26
         }
     },
     {
-        "timestamp": 3.2179,
+        "timestamp": 1.5445,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.02
+            "accel_z": 9.973
         }
     },
     {
-        "timestamp": 3.2179,
+        "timestamp": 1.6452,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.805
+        }
+    },
+    {
+        "timestamp": 1.7322,
         "sensor": "CONTACT",
         "data": {
             "touch": 1
         }
     },
     {
-        "timestamp": 3.2278,
+        "timestamp": 1.7459,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.824
+        }
+    },
+    {
+        "timestamp": 1.8467,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.951
+        }
+    },
+    {
+        "timestamp": 1.947,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.888
+        }
+    },
+    {
+        "timestamp": 2.0466,
         "sensor": "DEPTH",
         "data": {
-            "distance": 1.14
+            "distance": 1.02
         }
     },
     {
-        "timestamp": 3.2298,
+        "timestamp": 2.0828,
         "sensor": "IMU",
         "data": {
-            "accel_z": 9.944
+            "accel_z": 9.862
         }
     },
     {
-        "timestamp": 3.241,
+        "timestamp": 2.1836,
         "sensor": "IMU",
         "data": {
-            "accel_z": 9.945
+            "accel_z": 9.98
         }
     },
     {
-        "timestamp": 3.2519,
+        "timestamp": 2.2846,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.019
+            "accel_z": 9.911
         }
     },
     {
-        "timestamp": 3.2631,
+        "timestamp": 2.3858,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.042
+            "accel_z": 9.851
         }
     },
     {
-        "timestamp": 3.2733,
+        "timestamp": 2.4866,
         "sensor": "IMU",
         "data": {
-            "accel_z": 9.917
+            "accel_z": 10.021
         }
     },
     {
-        "timestamp": 3.2835,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.867
-        }
-    },
-    {
-        "timestamp": 3.2937,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.872
-        }
-    },
-    {
-        "timestamp": 3.305,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.991
-        }
-    },
-    {
-        "timestamp": 3.3103,
+        "timestamp": 2.5226,
         "sensor": "CONTACT",
         "data": {
             "touch": 1
         }
     },
     {
-        "timestamp": 3.3159,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.955
-        }
-    },
-    {
-        "timestamp": 3.3263,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.938
-        }
-    },
-    {
-        "timestamp": 3.3287,
+        "timestamp": 2.5467,
         "sensor": "DEPTH",
         "data": {
-            "distance": 1.55
+            "distance": 1.76
         }
     },
     {
-        "timestamp": 3.3364,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.064
-        }
-    },
-    {
-        "timestamp": 3.3466,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.927
-        }
-    },
-    {
-        "timestamp": 3.3572,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.942
-        }
-    },
-    {
-        "timestamp": 3.3688,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.043
-        }
-    },
-    {
-        "timestamp": 3.3795,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.925
-        }
-    },
-    {
-        "timestamp": 3.3902,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.88
-        }
-    },
-    {
-        "timestamp": 3.3925,
+        "timestamp": 2.5492,
         "sensor": "CONTACT",
         "data": {
             "touch": 1
         }
     },
     {
-        "timestamp": 3.401,
+        "timestamp": 2.5873,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.061
+            "accel_z": 9.909
         }
     },
     {
-        "timestamp": 3.4116,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.91
-        }
-    },
-    {
-        "timestamp": 3.4226,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.881
-        }
-    },
-    {
-        "timestamp": 3.4296,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.77
-        }
-    },
-    {
-        "timestamp": 3.4343,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.034
-        }
-    },
-    {
-        "timestamp": 3.4448,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.063
-        }
-    },
-    {
-        "timestamp": 3.4558,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.045
-        }
-    },
-    {
-        "timestamp": 3.4658,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.89
-        }
-    },
-    {
-        "timestamp": 3.4765,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.965
-        }
-    },
-    {
-        "timestamp": 3.4839,
-        "sensor": "CONTACT",
-        "data": {
-            "touch": 1
-        }
-    },
-    {
-        "timestamp": 3.4868,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.022
-        }
-    },
-    {
-        "timestamp": 3.4975,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.061
-        }
-    },
-    {
-        "timestamp": 3.5081,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.917
-        }
-    },
-    {
-        "timestamp": 3.519,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.049
-        }
-    },
-    {
-        "timestamp": 3.5293,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.925
-        }
-    },
-    {
-        "timestamp": 3.5305,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.62
-        }
-    },
-    {
-        "timestamp": 3.5405,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.041
-        }
-    },
-    {
-        "timestamp": 3.562,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.968
-        }
-    },
-    {
-        "timestamp": 3.5742,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.914
-        }
-    },
-    {
-        "timestamp": 3.5848,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.883
-        }
-    },
-    {
-        "timestamp": 3.5964,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.97
-        }
-    },
-    {
-        "timestamp": 3.6072,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.995
-        }
-    },
-    {
-        "timestamp": 3.6083,
-        "sensor": "CONTACT",
-        "data": {
-            "touch": 1
-        }
-    },
-    {
-        "timestamp": 3.6179,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.894
-        }
-    },
-    {
-        "timestamp": 3.6281,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.891
-        }
-    },
-    {
-        "timestamp": 3.6314,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.51
-        }
-    },
-    {
-        "timestamp": 3.641,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.998
-        }
-    },
-    {
-        "timestamp": 3.6527,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.939
-        }
-    },
-    {
-        "timestamp": 3.6639,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.036
-        }
-    },
-    {
-        "timestamp": 3.6747,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.983
-        }
-    },
-    {
-        "timestamp": 3.6857,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.938
-        }
-    },
-    {
-        "timestamp": 3.6995,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.917
-        }
-    },
-    {
-        "timestamp": 3.7104,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.944
-        }
-    },
-    {
-        "timestamp": 3.7279,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.922
-        }
-    },
-    {
-        "timestamp": 3.7325,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.63
-        }
-    },
-    {
-        "timestamp": 3.7434,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.899
-        }
-    },
-    {
-        "timestamp": 3.7578,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.036
-        }
-    },
-    {
-        "timestamp": 3.7686,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.92
-        }
-    },
-    {
-        "timestamp": 3.7789,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.966
-        }
-    },
-    {
-        "timestamp": 3.7901,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.076
-        }
-    },
-    {
-        "timestamp": 3.8019,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.941
-        }
-    },
-    {
-        "timestamp": 3.8127,
+        "timestamp": 2.688,
         "sensor": "IMU",
         "data": {
             "accel_z": 10.005
         }
     },
     {
-        "timestamp": 3.823,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.047
-        }
-    },
-    {
-        "timestamp": 3.8335,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.088
-        }
-    },
-    {
-        "timestamp": 3.8335,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.93
-        }
-    },
-    {
-        "timestamp": 3.8441,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.983
-        }
-    },
-    {
-        "timestamp": 3.8547,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.066
-        }
-    },
-    {
-        "timestamp": 3.8647,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.957
-        }
-    },
-    {
-        "timestamp": 3.8759,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.005
-        }
-    },
-    {
-        "timestamp": 3.886,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.963
-        }
-    },
-    {
-        "timestamp": 3.8961,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.977
-        }
-    },
-    {
-        "timestamp": 3.9064,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.988
-        }
-    },
-    {
-        "timestamp": 3.9166,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.995
-        }
-    },
-    {
-        "timestamp": 3.9278,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.047
-        }
-    },
-    {
-        "timestamp": 3.9335,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.74
-        }
-    },
-    {
-        "timestamp": 3.9384,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.931
-        }
-    },
-    {
-        "timestamp": 3.9488,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.047
-        }
-    },
-    {
-        "timestamp": 3.9596,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.929
-        }
-    },
-    {
-        "timestamp": 3.9699,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.069
-        }
-    },
-    {
-        "timestamp": 3.9804,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.974
-        }
-    },
-    {
-        "timestamp": 3.991,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.071
-        }
-    },
-    {
-        "timestamp": 4.0019,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.057
-        }
-    },
-    {
-        "timestamp": 4.0128,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.045
-        }
-    },
-    {
-        "timestamp": 4.0238,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.965
-        }
-    },
-    {
-        "timestamp": 4.0344,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.037
-        }
-    },
-    {
-        "timestamp": 4.0344,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 99.9
-        }
-    },
-    {
-        "timestamp": 4.0454,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.047
-        }
-    },
-    {
-        "timestamp": 4.0558,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.0
-        }
-    },
-    {
-        "timestamp": 4.0662,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.952
-        }
-    },
-    {
-        "timestamp": 4.0766,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.005
-        }
-    },
-    {
-        "timestamp": 4.0867,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.011
-        }
-    },
-    {
-        "timestamp": 4.098,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.947
-        }
-    },
-    {
-        "timestamp": 4.1087,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.964
-        }
-    },
-    {
-        "timestamp": 4.1199,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.989
-        }
-    },
-    {
-        "timestamp": 4.1304,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.035
-        }
-    },
-    {
-        "timestamp": 4.1349,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.8
-        }
-    },
-    {
-        "timestamp": 4.1416,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.084
-        }
-    },
-    {
-        "timestamp": 4.1532,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.966
-        }
-    },
-    {
-        "timestamp": 4.1633,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.08
-        }
-    },
-    {
-        "timestamp": 4.1736,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.996
-        }
-    },
-    {
-        "timestamp": 4.1837,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.918
-        }
-    },
-    {
-        "timestamp": 4.195,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.987
-        }
-    },
-    {
-        "timestamp": 4.2063,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.038
-        }
-    },
-    {
-        "timestamp": 4.2171,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.998
-        }
-    },
-    {
-        "timestamp": 4.2279,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.936
-        }
-    },
-    {
-        "timestamp": 4.2356,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.49
-        }
-    },
-    {
-        "timestamp": 4.2382,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.1
-        }
-    },
-    {
-        "timestamp": 4.2498,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.045
-        }
-    },
-    {
-        "timestamp": 4.2609,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.942
-        }
-    },
-    {
-        "timestamp": 4.2726,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.094
-        }
-    },
-    {
-        "timestamp": 4.2778,
+        "timestamp": 2.7591,
         "sensor": "CONTACT",
         "data": {
             "touch": 1
         }
     },
     {
-        "timestamp": 4.2836,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.937
-        }
-    },
-    {
-        "timestamp": 4.2943,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.072
-        }
-    },
-    {
-        "timestamp": 4.3049,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.972
-        }
-    },
-    {
-        "timestamp": 4.3151,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.093
-        }
-    },
-    {
-        "timestamp": 4.3262,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.028
-        }
-    },
-    {
-        "timestamp": 4.3361,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.73
-        }
-    },
-    {
-        "timestamp": 4.3378,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.985
-        }
-    },
-    {
-        "timestamp": 4.348,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.03
-        }
-    },
-    {
-        "timestamp": 4.3586,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.1
-        }
-    },
-    {
-        "timestamp": 4.3689,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.117
-        }
-    },
-    {
-        "timestamp": 4.3791,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.959
-        }
-    },
-    {
-        "timestamp": 4.3903,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.931
-        }
-    },
-    {
-        "timestamp": 4.4004,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.091
-        }
-    },
-    {
-        "timestamp": 4.4113,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.003
-        }
-    },
-    {
-        "timestamp": 4.4222,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.053
-        }
-    },
-    {
-        "timestamp": 4.4323,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.037
-        }
-    },
-    {
-        "timestamp": 4.4358,
+        "timestamp": 2.7638,
         "sensor": "CONTACT",
         "data": {
             "touch": 1
         }
     },
     {
-        "timestamp": 4.437,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 1.63
-        }
-    },
-    {
-        "timestamp": 4.4428,
+        "timestamp": 2.7891,
         "sensor": "IMU",
         "data": {
-            "accel_z": 9.968
+            "accel_z": 9.893
         }
     },
     {
-        "timestamp": 4.4534,
+        "timestamp": 2.8899,
         "sensor": "IMU",
         "data": {
-            "accel_z": 9.928
+            "accel_z": 9.856
         }
     },
     {
-        "timestamp": 4.4648,
+        "timestamp": 2.9904,
         "sensor": "IMU",
         "data": {
-            "accel_z": 9.955
+            "accel_z": 9.869
         }
     },
     {
-        "timestamp": 4.4766,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.99
-        }
-    },
-    {
-        "timestamp": 4.4882,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.048
-        }
-    },
-    {
-        "timestamp": 4.4986,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.011
-        }
-    },
-    {
-        "timestamp": 4.5087,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.089
-        }
-    },
-    {
-        "timestamp": 4.5193,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.036
-        }
-    },
-    {
-        "timestamp": 4.5303,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.029
-        }
-    },
-    {
-        "timestamp": 4.5378,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.88
-        }
-    },
-    {
-        "timestamp": 4.5414,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.103
-        }
-    },
-    {
-        "timestamp": 4.5527,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.929
-        }
-    },
-    {
-        "timestamp": 4.5647,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.04
-        }
-    },
-    {
-        "timestamp": 4.5697,
+        "timestamp": 3.0059,
         "sensor": "CONTACT",
         "data": {
             "touch": 1
         }
     },
     {
-        "timestamp": 4.5759,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.088
-        }
-    },
-    {
-        "timestamp": 4.5866,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.093
-        }
-    },
-    {
-        "timestamp": 4.5969,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.129
-        }
-    },
-    {
-        "timestamp": 4.6072,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.941
-        }
-    },
-    {
-        "timestamp": 4.6191,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.103
-        }
-    },
-    {
-        "timestamp": 4.6297,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.042
-        }
-    },
-    {
-        "timestamp": 4.6389,
+        "timestamp": 3.0485,
         "sensor": "DEPTH",
         "data": {
-            "distance": 1.84
+            "distance": 1.4
         }
     },
     {
-        "timestamp": 4.6401,
+        "timestamp": 3.0905,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.127
+            "accel_z": 9.971
         }
     },
     {
-        "timestamp": 4.651,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.936
-        }
-    },
-    {
-        "timestamp": 4.6611,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.107
-        }
-    },
-    {
-        "timestamp": 4.6719,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.992
-        }
-    },
-    {
-        "timestamp": 4.6833,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.084
-        }
-    },
-    {
-        "timestamp": 4.6939,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.016
-        }
-    },
-    {
-        "timestamp": 4.7046,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.961
-        }
-    },
-    {
-        "timestamp": 4.7146,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.959
-        }
-    },
-    {
-        "timestamp": 4.725,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.128
-        }
-    },
-    {
-        "timestamp": 4.7359,
+        "timestamp": 3.1918,
         "sensor": "IMU",
         "data": {
             "accel_z": 9.94
         }
     },
     {
-        "timestamp": 4.7396,
+        "timestamp": 3.293,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.961
+        }
+    },
+    {
+        "timestamp": 3.3948,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.897
+        }
+    },
+    {
+        "timestamp": 3.4963,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.994
+        }
+    },
+    {
+        "timestamp": 3.5026,
+        "sensor": "CONTACT",
+        "data": {
+            "touch": 1
+        }
+    },
+    {
+        "timestamp": 3.5487,
         "sensor": "DEPTH",
         "data": {
-            "distance": 1.13
+            "distance": 0.99
         }
     },
     {
-        "timestamp": 4.747,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.028
-        }
-    },
-    {
-        "timestamp": 4.7573,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.943
-        }
-    },
-    {
-        "timestamp": 4.7683,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.992
-        }
-    },
-    {
-        "timestamp": 4.7794,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.956
-        }
-    },
-    {
-        "timestamp": 4.7901,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.032
-        }
-    },
-    {
-        "timestamp": 4.8006,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.102
-        }
-    },
-    {
-        "timestamp": 4.8118,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.969
-        }
-    },
-    {
-        "timestamp": 4.8222,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.137
-        }
-    },
-    {
-        "timestamp": 4.8336,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.079
-        }
-    },
-    {
-        "timestamp": 4.8404,
-        "sensor": "DEPTH",
-        "data": {
-            "distance": 0.77
-        }
-    },
-    {
-        "timestamp": 4.8436,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.082
-        }
-    },
-    {
-        "timestamp": 4.8545,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 9.998
-        }
-    },
-    {
-        "timestamp": 4.8658,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.008
-        }
-    },
-    {
-        "timestamp": 4.8765,
-        "sensor": "IMU",
-        "data": {
-            "accel_z": 10.016
-        }
-    },
-    {
-        "timestamp": 4.8871,
+        "timestamp": 3.5966,
         "sensor": "IMU",
         "data": {
             "accel_z": 9.983
         }
     },
     {
-        "timestamp": 4.8981,
-        "sensor": "IMU",
+        "timestamp": 3.668,
+        "sensor": "CONTACT",
         "data": {
-            "accel_z": 10.032
+            "touch": 1
         }
     },
     {
-        "timestamp": 4.9083,
+        "timestamp": 3.6967,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.105
+            "accel_z": 10.064
         }
     },
     {
-        "timestamp": 4.9183,
-        "sensor": "IMU",
+        "timestamp": 3.7837,
+        "sensor": "CONTACT",
         "data": {
-            "accel_z": 9.985
+            "touch": 1
         }
     },
     {
-        "timestamp": 4.9297,
+        "timestamp": 3.7979,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.068
+            "accel_z": 9.917
         }
     },
     {
-        "timestamp": 4.9404,
+        "timestamp": 3.8997,
         "sensor": "IMU",
         "data": {
-            "accel_z": 9.949
+            "accel_z": 10.002
         }
     },
     {
-        "timestamp": 4.9424,
+        "timestamp": 3.9997,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 10.036
+        }
+    },
+    {
+        "timestamp": 4.028,
+        "sensor": "CONTACT",
+        "data": {
+            "touch": 1
+        }
+    },
+    {
+        "timestamp": 4.0499,
         "sensor": "DEPTH",
         "data": {
-            "distance": 0.57
+            "distance": 0.96
         }
     },
     {
-        "timestamp": 4.952,
+        "timestamp": 4.1011,
         "sensor": "IMU",
         "data": {
-            "accel_z": 9.975
+            "accel_z": 9.982
         }
     },
     {
-        "timestamp": 4.9622,
+        "timestamp": 4.2029,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.089
+            "accel_z": 9.959
         }
     },
     {
-        "timestamp": 4.9728,
+        "timestamp": 4.3038,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.044
+            "accel_z": 9.965
         }
     },
     {
-        "timestamp": 4.983,
+        "timestamp": 4.4047,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.138
+            "accel_z": 10.118
         }
     },
     {
-        "timestamp": 4.9943,
+        "timestamp": 4.4196,
+        "sensor": "CONTACT",
+        "data": {
+            "touch": 1
+        }
+    },
+    {
+        "timestamp": 4.4457,
+        "sensor": "CONTACT",
+        "data": {
+            "touch": 1
+        }
+    },
+    {
+        "timestamp": 4.5056,
         "sensor": "IMU",
         "data": {
-            "accel_z": 10.046
+            "accel_z": 9.952
+        }
+    },
+    {
+        "timestamp": 4.5515,
+        "sensor": "DEPTH",
+        "data": {
+            "distance": 1.09
+        }
+    },
+    {
+        "timestamp": 4.5548,
+        "sensor": "CONTACT",
+        "data": {
+            "touch": 1
+        }
+    },
+    {
+        "timestamp": 4.6062,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 9.937
+        }
+    },
+    {
+        "timestamp": 4.7064,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 10.03
+        }
+    },
+    {
+        "timestamp": 4.8077,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 10.107
+        }
+    },
+    {
+        "timestamp": 4.9082,
+        "sensor": "IMU",
+        "data": {
+            "accel_z": 10.094
         }
     }
 ]

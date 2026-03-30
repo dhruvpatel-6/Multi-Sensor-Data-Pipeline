@@ -12,16 +12,16 @@ def run_diagnostics(input_file="processed_synced_logs.json"):
     for entry in data:
         # 1. Check for Depth Spikes (The 99.9 error)
         if entry["depth_distance"] > 10.0:
-            entry["health_status"] = "CRITICAL: SENSOR_SPIKE"
+            entry["status"] = "CRITICAL: SENSOR_SPIKE"
             anomaly_count += 1
         
         # 2. Check for High Latency (Sync Error > 50ms)
         elif entry["sync_error_ms"] > 50:
-            entry["health_status"] = "WARNING: HIGH_LATENCY"
+            entry["status"] = "WARNING: HIGH_LATENCY"
             anomaly_count += 1
             
         else:
-            entry["health_status"] = "HEALTHY"
+            entry["status"] = "HEALTHY"
         
         clean_data.append(entry)
 
