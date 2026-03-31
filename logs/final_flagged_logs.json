@@ -1,0 +1,331 @@
+[
+    {
+        "timestamp": 0.1033,
+        "imu_accel_z": 9.716,
+        "depth_distance": 0.72,
+        "sync_error_ms": 4.3,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 0.2043,
+        "imu_accel_z": 9.746,
+        "depth_distance": 1.44,
+        "sync_error_ms": 1.2,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 0.3051,
+        "imu_accel_z": 9.89,
+        "depth_distance": 0.92,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 0.4075,
+        "imu_accel_z": 9.84,
+        "depth_distance": 1.69,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 0.536,
+        "imu_accel_z": 9.83,
+        "depth_distance": 1.67,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 0.7708,
+        "imu_accel_z": 9.884,
+        "depth_distance": 1.13,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 0.9305,
+        "imu_accel_z": 9.759,
+        "depth_distance": 1.63,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 1.0387,
+        "imu_accel_z": 9.802,
+        "depth_distance": 1.95,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 1.1392,
+        "imu_accel_z": 9.944,
+        "depth_distance": 1.73,
+        "sync_error_ms": 4.9,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 1.2395,
+        "imu_accel_z": 9.808,
+        "depth_distance": 0.52,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 1.3399,
+        "imu_accel_z": 9.826,
+        "depth_distance": 99.9,
+        "sync_error_ms": 2.3,
+        "status": "CRITICAL: SENSOR_SPIKE"
+    },
+    {
+        "timestamp": 1.4402,
+        "imu_accel_z": 9.777,
+        "depth_distance": 0.78,
+        "sync_error_ms": 1.5,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 1.5403,
+        "imu_accel_z": 9.946,
+        "depth_distance": 1.57,
+        "sync_error_ms": 4.2,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 1.6405,
+        "imu_accel_z": 9.797,
+        "depth_distance": 1.33,
+        "sync_error_ms": 6.9,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 1.7416,
+        "imu_accel_z": 9.865,
+        "depth_distance": 0.71,
+        "sync_error_ms": 1.1,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 1.8425,
+        "imu_accel_z": 9.825,
+        "depth_distance": 1.92,
+        "sync_error_ms": 3.9,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 1.9433,
+        "imu_accel_z": 9.919,
+        "depth_distance": 1.18,
+        "sync_error_ms": 1.5,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 2.0451,
+        "imu_accel_z": 9.802,
+        "depth_distance": 1.38,
+        "sync_error_ms": 6.6,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 2.1462,
+        "imu_accel_z": 9.834,
+        "depth_distance": 0.88,
+        "sync_error_ms": 1.5,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 2.2469,
+        "imu_accel_z": 9.823,
+        "depth_distance": 0.62,
+        "sync_error_ms": 3.6,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 2.348,
+        "imu_accel_z": 9.886,
+        "depth_distance": 1.08,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 2.4484,
+        "imu_accel_z": 10.014,
+        "depth_distance": 0.76,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 2.5484,
+        "imu_accel_z": 9.902,
+        "depth_distance": 0.77,
+        "sync_error_ms": 2.7,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 2.6501,
+        "imu_accel_z": 9.854,
+        "depth_distance": 1.71,
+        "sync_error_ms": 4.3,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 2.7512,
+        "imu_accel_z": 9.922,
+        "depth_distance": 1.4,
+        "sync_error_ms": 3.2,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 2.8568,
+        "imu_accel_z": 10.021,
+        "depth_distance": 0.87,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 2.9573,
+        "imu_accel_z": 10.042,
+        "depth_distance": 1.01,
+        "sync_error_ms": 5.2,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 3.0583,
+        "imu_accel_z": 10.001,
+        "depth_distance": 1.77,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 3.1585,
+        "imu_accel_z": 9.964,
+        "depth_distance": 99.9,
+        "sync_error_ms": 4.4,
+        "status": "CRITICAL: SENSOR_SPIKE"
+    },
+    {
+        "timestamp": 3.2591,
+        "imu_accel_z": 10.051,
+        "depth_distance": 1.66,
+        "sync_error_ms": 2.3,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 3.3601,
+        "imu_accel_z": 10.051,
+        "depth_distance": 1.57,
+        "sync_error_ms": 2.6,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 3.4611,
+        "imu_accel_z": 10.07,
+        "depth_distance": 1.93,
+        "sync_error_ms": 2.3,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 3.5618,
+        "imu_accel_z": 9.971,
+        "depth_distance": 1.82,
+        "sync_error_ms": 3.7,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 3.662,
+        "imu_accel_z": 9.896,
+        "depth_distance": 0.5,
+        "sync_error_ms": 1.5,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 3.7626,
+        "imu_accel_z": 10.075,
+        "depth_distance": 1.64,
+        "sync_error_ms": 4.2,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 3.8633,
+        "imu_accel_z": 9.921,
+        "depth_distance": 0.6,
+        "sync_error_ms": 1.1,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 3.9642,
+        "imu_accel_z": 10.016,
+        "depth_distance": 1.53,
+        "sync_error_ms": 4.8,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 4.0657,
+        "imu_accel_z": 10.002,
+        "depth_distance": 1.22,
+        "sync_error_ms": 2.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 4.166,
+        "imu_accel_z": 9.981,
+        "depth_distance": 0.64,
+        "sync_error_ms": 1.1,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 4.266,
+        "imu_accel_z": 9.964,
+        "depth_distance": 1.86,
+        "sync_error_ms": 2.1,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 4.3664,
+        "imu_accel_z": 10.041,
+        "depth_distance": 1.82,
+        "sync_error_ms": 4.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 4.467,
+        "imu_accel_z": 10.039,
+        "depth_distance": 0.99,
+        "sync_error_ms": 2.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 4.5675,
+        "imu_accel_z": 10.097,
+        "depth_distance": 1.71,
+        "sync_error_ms": 4.4,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 4.6679,
+        "imu_accel_z": 10.072,
+        "depth_distance": 0.63,
+        "sync_error_ms": 0.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 4.7689,
+        "imu_accel_z": 9.965,
+        "depth_distance": 1.73,
+        "sync_error_ms": 4.0,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 4.869,
+        "imu_accel_z": 9.992,
+        "depth_distance": 1.77,
+        "sync_error_ms": 1.6,
+        "status": "HEALTHY"
+    },
+    {
+        "timestamp": 4.9701,
+        "imu_accel_z": 10.1,
+        "depth_distance": 0.95,
+        "sync_error_ms": 3.1,
+        "status": "HEALTHY"
+    }
+]
