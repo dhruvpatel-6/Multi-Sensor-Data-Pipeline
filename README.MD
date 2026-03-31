@@ -71,14 +71,14 @@ The system is built as a modular, 4-layer stack designed for high-reliability ro
 
 🚀 Key Features 
 
-### 1. Failure Intelligence (Phase 3 & 4)
+ 1. Failure Intelligence(Phase 3 & 4)
 - **Trend Detection:** Uses a moving window to calculate IMU Z-axis variance, distinguishing between steady-state and dynamic movement.
 - **Robustness Layer:** Specifically designed to handle "Stale Data" (via 500ms timeouts) and "Missing Data" (via null-value guards).
 
-### 2. Multi-Rate Sensor Logic
+ 2. Multi-Rate Sensor Logic
 - **IMU (10 Hz):** High-frequency processing for rapid stability detection.
 - **Depth (2 Hz):** Medium-frequency terrain awareness to validate IMU trends.
 - **Validation Logic:** Logic-gate check (e.g., IMU Stable + Depth Change = Sensor Issue).
 
-### 3. Structured Telemetry (Phase 5)
+ 3. Structured Telemetry(Phase 5)
 - Standardized output using a formal `robot_state` dictionary with ISO-8601 timestamps for real-time monitoring and database compatibility.
