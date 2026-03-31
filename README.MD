@@ -1,6 +1,6 @@
 🤖 Multi-Sensor Robotic Data Pipeline 
 |
-Dhruv Patel | Robotics Systems – Test 1
+Dhruv Patel | Robotics Systems – Test 1 
 
 📌 Project Purpose :
 
@@ -77,5 +77,3 @@ The system is built as a modular, 4-layer stack designed for high-reliability ro
 
 ### 3. Structured Telemetry (Phase 5)
 - Standardized output using a formal `robot_state` dictionary with ISO-8601 timestamps for real-time monitoring and database compatibility.
-
----
