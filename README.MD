@@ -53,7 +53,7 @@ The system processes data through a logical sequence to ensure "Clarity of Archi
 • Signal Smoothing: Implementing filters like a Kalman Filter or Moving Average to replace hard-coded thresholds.
 
 
-# Quadruped Multi-Sensor Data Pipeline (Task 2) 
+Quadruped Multi-Sensor Data Pipeline (Task-2)
 
 ## 🏗️ System Architecture
 The system is built as a modular, 4-layer stack designed for high-reliability robotic platforms. It follows the **Separation of Concerns** principle by decoupling raw data acquisition from failure intelligence.
