@@ -53,19 +53,24 @@ The system processes data through a logical sequence to ensure "Clarity of Archi
 • Signal Smoothing: Implementing filters like a Kalman Filter or Moving Average to replace hard-coded thresholds.
 
 
+
+
 Quadruped Multi-Sensor Data Pipeline (Task-2)
 
-## 🏗️ System Architecture
+🏗️ System Architecture 
+
 The system is built as a modular, 4-layer stack designed for high-reliability robotic platforms. It follows the **Separation of Concerns** principle by decoupling raw data acquisition from failure intelligence.
 
-### 📁 Modular Structure
+📁 Modular Structure 
+
 - **Core/**: Contains `fid.py` (Failure Intelligence Discovery). This is the hardware-agnostic brain that processes variance and validates sensor states.
 - **Drivers/**: Contains `pipeline_sim.py` and `sensors.py`. This layer manages data generation and simulates raw hardware feeds.
 - **Logs/**: Stores JSON-formatted telemetry for post-mission audit and anomaly tracking.
 
 ---
 
-## 🚀 Key Features
+🚀 Key Features 
+
 ### 1. Failure Intelligence (Phase 3 & 4)
 - **Trend Detection:** Uses a moving window to calculate IMU Z-axis variance, distinguishing between steady-state and dynamic movement.
 - **Robustness Layer:** Specifically designed to handle "Stale Data" (via 500ms timeouts) and "Missing Data" (via null-value guards).
