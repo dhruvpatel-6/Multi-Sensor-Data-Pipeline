@@ -54,4 +54,3 @@ def run_telemetry_system():
 
 if __name__ == "__main__":
     run_telemetry_system()
-    # task 3 Completed
