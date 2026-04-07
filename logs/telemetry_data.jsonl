@@ -20,3 +20,10 @@
 {"timestamp": 1775551117.6154613, "orientation_accel": [0, 0, 0], "terrain_distance": 3.62, "contact_state": "IN_AIR", "health_status": "NOMINAL", "failure_reason": "NONE"}
 {"timestamp": 1775551117.8165185, "orientation_accel": [0, 0, 0], "terrain_distance": 3.02, "contact_state": "GROUNDED", "health_status": "NOMINAL", "failure_reason": "NONE"}
 {"timestamp": 1775551118.0176332, "orientation_accel": [0, 0, 0], "terrain_distance": 0.76, "contact_state": "GROUNDED", "health_status": "NOMINAL", "failure_reason": "NONE"}
+{"timestamp": 1775571020.167808, "orientation_accel": [0, 0, 0], "terrain_distance": 2.9, "contact_state": "GROUNDED", "health_status": "NOMINAL", "failure_reason": "NONE"}
+{"timestamp": 1775571025.263452, "orientation_accel": [0, 0, 0], "terrain_distance": 3.48, "contact_state": "IN_AIR", "health_status": "NOMINAL", "failure_reason": "NONE"}
+{"timestamp": 1775571025.4640455, "orientation_accel": [0, 0, 0], "terrain_distance": 2.02, "contact_state": "IN_AIR", "health_status": "NOMINAL", "failure_reason": "NONE"}
+{"timestamp": 1775571025.6818268, "orientation_accel": [0, 0, 0], "terrain_distance": 2.86, "contact_state": "GROUNDED", "health_status": "NOMINAL", "failure_reason": "NONE"}
+{"timestamp": 1775571025.8825228, "orientation_accel": [0, 0, 0], "terrain_distance": 1.14, "contact_state": "GROUNDED", "health_status": "NOMINAL", "failure_reason": "NONE"}
+{"timestamp": 1775571026.0970874, "orientation_accel": [0, 0, 0], "terrain_distance": 3.5, "contact_state": "GROUNDED", "health_status": "NOMINAL", "failure_reason": "NONE"}
+{"timestamp": 1775571026.2975104, "orientation_accel": [0, 0, 0], "terrain_distance": 2.39, "contact_state": "GROUNDED", "health_status": "NOMINAL", "failure_reason": "NONE"}
