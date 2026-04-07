@@ -110,6 +110,31 @@ This defines the strict data agreement required by the robot's control brain:
 
  Summary: Logging records the mission; Replay recreates it for debugging. Both are mandatory for a control-ready system.
 
+
+ 🧠 Explanation Notes: Control Loop Connection 🔄
+
+ 1. The Feedback Role 📡
+
+• Perception Layer: Your telemetry system acts as the "eyes and ears" (Sensor/Perception layer) in the
+
+Sensor → Think → Act cycle.
+
+• Ground Truth: It provides the "Ground Truth" data (robot_state) that the controller needs to make its next move.
+
+2. How the "Brain" Uses Data 🤖
+
+• Stability: The controller reads accel_z to adjust motor torque and keep the robot upright.
+
+• Navigation: It uses terrain_distance to decide when to extend or retract legs/wheels.
+
+• Safety Trigger: If your system sends a CRITICAL health status, the controller immediately triggers a "Safe-Stop" to prevent a crash.
+
+3. Real-Time Importance ⏱️
+
+• 10Hz Synchronization: The system must run at $\ge10Hz$ because the control loop needs fresh data every 100ms to stay stable.
+
+• Latency Safety: Low latency ensures the robot reacts to what is happening now, not what happened a second ago.
+
 🧪 Verification & Stress Testing (Phase 8 Results)
 
 The pipeline was subjected to High-Stress Asynchronous Data Injection:
