@@ -90,7 +90,7 @@ This defines the strict data agreement required by the robot's control brain:
 • Reliability: The contract ensures the system will not crash and will always output a safe state, even during sensor spikes or missing data.
 
 
-📼 6. Logging + Replay System 🔄
+📼 Logging + Replay System 🔄
 
 1. Logging (The Flight Recorder) 📝
    
