@@ -90,6 +90,26 @@ This defines the strict data agreement required by the robot's control brain:
 • Reliability: The contract ensures the system will not crash and will always output a safe state, even during sensor spikes or missing data.
 
 
+📼 6. Logging + Replay System 🔄
+
+1. Logging (The Flight Recorder) 📝
+   
+• What: Automatically saves every robot_state into a .jsonl file in the /logs folder.
+
+• Why: Acts as a "Black Box" to analyze what the robot "felt" during a crash or anomaly.
+
+• Status: Captures timestamps, sensor data, and health states in an append-only format.
+
+2. Replay (The Time Machine) ⏪
+
+• What: A standalone script (replay_telemetry.py) that reads saved logs instead of live sensors.
+
+• Why: Allows you to reproduce errors (like "Ghost Dives") safely on your laptop at the original 10Hz speed.
+
+• Status: Essential for debugging and tuning Failure Intelligence (FID) without needing the physical robot.
+
+ Summary: Logging records the mission; Replay recreates it for debugging. Both are mandatory for a control-ready system.
+
 🧪 Verification & Stress Testing (Phase 8 Results)
 
 The pipeline was subjected to High-Stress Asynchronous Data Injection:
