@@ -23,6 +23,8 @@ Fault-Tolerant Orchestration: Integrated high-level exception handling to manage
 
 Decoupled Logic: Hardware abstraction (Drivers) is strictly separated from the Intelligence Layer (Core).
 
+For a detailed node-based visualization of the system architecture, please refer to: NODE_DIAGRAM.md
+
 
 🛡️ Task 3: Resiliency & Failure Recovery
 
