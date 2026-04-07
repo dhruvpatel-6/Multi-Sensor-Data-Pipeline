@@ -135,6 +135,12 @@ Sensor → Think → Act cycle.
 
 • Latency Safety: Low latency ensures the robot reacts to what is happening now, not what happened a second ago.
 
+***
+SAFE_MODE or DEGRADED is for minor issues (like low clearance).
+
+STOP is for critical emergencies (like imminent collision).
+***
+
 🧪 Verification & Stress Testing (Phase 8 Results)
 
 The pipeline was subjected to High-Stress Asynchronous Data Injection:
