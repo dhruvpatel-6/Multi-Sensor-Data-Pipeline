@@ -17,11 +17,11 @@ The system has been finalized as a Modular Node-Based Telemetry Orchestrator. In
 
 Key Architectural Advancements:
 
-Deterministic Heartbeat: Enforced 10Hz control loop (100ms precision) for real-time responsiveness.
+• Deterministic Heartbeat: Enforced 10Hz control loop (100ms precision) for real-time responsiveness.
 
-Fault-Tolerant Orchestration: Integrated high-level exception handling to manage asynchronous packet loss.
+• Fault-Tolerant Orchestration: Integrated high-level exception handling to manage asynchronous packet loss.
 
-Decoupled Logic: Hardware abstraction (Drivers) is strictly separated from the Intelligence Layer (Core).
+• Decoupled Logic: Hardware abstraction (Drivers) is strictly separated from the Intelligence Layer (Core).
 
 For a detailed node-based visualization of the system architecture, please refer to: NODE_DIAGRAM.md & SYSTEM ARCHITECTURE NOTES
 
@@ -30,30 +30,72 @@ For a detailed node-based visualization of the system architecture, please refer
 
 The core focus of this final phase was System Robustness. The pipeline was upgraded with a Non-Blocking Recovery Pattern to handle the NoneType and corrupt packet scenarios common in real-world wireless telecommunications.
 
-Null-Packet Guard (Phase 7): Implemented a Stage-1 Safety Guard that detects NoneType sensor returns. Instead of a stack-overflow crash, the system utilizes a continue recovery flow to maintain loop stability.
+• Null-Packet Guard (Phase 7): Implemented a Stage-1 Safety Guard that detects NoneType sensor returns. Instead of a stack-overflow crash, the system utilizes a continue recovery flow to maintain loop stability.
 
-Attribute Error Shielding: Wrapped the data extraction logic in specialized try-except blocks to prevent malformed JSON packets from interrupting the telemetry stream.
+• Attribute Error Shielding: Wrapped the data extraction logic in specialized try-except blocks to prevent malformed JSON packets from interrupting the telemetry stream.
 
-Graceful Shutdown: Implemented clean exit protocols to ensure all telemetry logs are flushed and saved even during manual system interrupts (KeyboardInterrupt).
+• Graceful Shutdown: Implemented clean exit protocols to ensure all telemetry logs are flushed and saved even during manual system interrupts (KeyboardInterrupt).
 
 
 🧠 Failure Intelligence Logic (FID) - Enhanced
 
 The FID now serves as the Active Orchestrator decision-making engine:
 
-Packet Resiliency: Cross-references the last known good state with current inputs to bridge gaps caused by transient sensor drops.
+• Packet Resiliency: Cross-references the last known good state with current inputs to bridge gaps caused by transient sensor drops.
 
-Deterministic Recovery: Even when sensors fail, the FID maintains the 10Hz heartbeat, providing a "Missing Data" status to control hooks rather than a null response.
+• Deterministic Recovery: Even when sensors fail, the FID maintains the 10Hz heartbeat, providing a "Missing Data" status to control hooks rather than a null response.
 
-State-Aware Safety: Automatically transitions the robot to SAFE_MODE or STOP based on cross-sensor validation (e.g., Cross-referencing Z-accel variance with terrain depth consistency).
+• State-Aware Safety: Automatically transitions the robot to SAFE_MODE or STOP based on cross-sensor validation (e.g., Cross-referencing Z-accel variance with terrain depth consistency).
+
+
+📡 Interface Definition
+
+Full Robot State Schema (The Output)
+
+This schema serves as the standardized output that directly influences actuator decisions and robot stability. Every cycle, the system broadcasts this JSON object:
+
+• Timestamp: A floating-point UNIX Epoch representing the exact synchronization point.
+
+• Orientation/Acceleration: High-precision accel_z data from the IMU to monitor balance.
+
+• Terrain Distance: Real-time depth readings to detect ground proximity.
+
+• Contact State: A confirmed status (e.g., GROUNDED) to validate physical interaction.
+
+• Health Status: A system-wide flag indicating NOMINAL, DEGRADED, or CRITICAL states.
+
+• Failure Reason: A clear description of any detected sensor anomalies or conflicts.
+
+
+Input Contracts (Sensor Requirements)
+
+The system is built on a "Pub → Process → Publish" architecture that requires three specific inputs:
+
+• IMU: Must provide linear acceleration and orientation packets.
+
+• Depth: Must provide distance data for terrain mapping.
+
+• Contact: Must provide binary feedback to confirm surface contact.
+
+Output Contracts (The Control Guarantee)
+
+This defines the strict data agreement required by the robot's control brain:
+
+• Update Frequency: The system maintains a deterministic heartbeat of 10Hz or higher.
+
+• Latency Tolerance: All processing must complete within a strict window to ensure control-loop stability.
+
+• Actionable Response: The interface triggers SAFE_MODE or STOP signals based on real-time health analysis.
+
+• Reliability: The contract ensures the system will not crash and will always output a safe state, even during sensor spikes or missing data.
 
 
 🧪 Verification & Stress Testing (Phase 8 Results)
 
 The pipeline was subjected to High-Stress Asynchronous Data Injection:
 
-Result: The system handled multiple consecutive None packets without crashing.
+• Result: The system handled multiple consecutive None packets without crashing.
 
-Output: Terminal correctly identified recoveries: [STRESS TEST PASSED] System handled packet loss.
+• Output: Terminal correctly identified recoveries: [STRESS TEST PASSED] System handled packet loss.
 
-Stability: The 10Hz loop timing remained consistent despite injected latencies, proving the system is ready for real-time deployment on hardware.
+• Stability: The 10Hz loop timing remained consistent despite injected latencies, proving the system is ready for real-time deployment on hardware.
