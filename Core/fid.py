@@ -1,28 +1,39 @@
-import time
+# Core/fid.py - Phase 3: Decision Logic Upgrade
 
-def process_failure_intelligence(sensors):
-    """
-    Intelligence Node: Upgraded from Detection to Actionable Response.
-    Solves Task 3 Phase 4 requirements.
-    """
-    # Extraction: Safely getting values to avoid comparison errors
-    depth_data = sensors.get('depth', {})
-    distance = depth_data.get('dist', 0.0) 
-    contact = depth_data.get('contact', False)
-    
-    # --- PHASE 4: RESPONSE-DRIVEN LOGIC ---
-    
-    # 1. CRITICAL: Imminent Collision (Response: STOP)
-    if distance < 0.2:
-        return "STOP", "IMMINENT_COLLISION"
+class FailureIntelligence:
+    def __init__(self):
+        # Thresholds for decision making
+        self.TILT_THRESHOLD = 15.0  # Degrees
+        self.CRITICAL_TILT = 45.0    # Degrees
+        self.MAX_LATENCY = 0.12     # 120ms (slightly over our 10Hz target)
 
-    # 2. DEGRADED: Unstable Terrain (Response: Lower Speed)
-    if distance > 0.3 and not contact:
-        return "DEGRADED_MODE", "UNSTABLE_FOOTING"
+    def evaluate_system(self, telemetry, latency):
+        """
+        Analyzes synced data and returns a Control State.
+        """
+        pitch = abs(telemetry.get('pitch', 0))
+        roll = abs(telemetry.get('roll', 0))
+        
+        # 1. Check for Critical Failures (The "Stop" Reflex)
+        if telemetry.get('status') == "GHOST_DIVE" or pitch > self.CRITICAL_TILT:
+            return "STOP"
 
-    # 3. SAFE_MODE: Low Clearance (Response: Caution)
-    if distance < 0.5:
-        return "SAFE_MODE", "LOW_CLEARANCE"
+        # 2. Check for Timing Issues (The "Safe Mode" Reflex)
+        if latency > self.MAX_LATENCY:
+            return "SAFE_MODE"
 
-    # 4. NOMINAL: Clear path
-    return "NOMINAL", "NONE"
+        # 3. Check for Physical Instability (The "Correction" Reflex)
+        if pitch > self.TILT_THRESHOLD or roll > self.TILT_THRESHOLD:
+            return "CORRECTIVE_ACTION"
+
+        # 4. All systems clear
+        return "NOMINAL"
+
+    def get_state_description(self, state):
+        descriptions = {
+            "NOMINAL": "System healthy. Proceed with mission.",
+            "SAFE_MODE": "Latency detected. Reducing gait speed.",
+            "CORRECTIVE_ACTION": "Stability compromised. Engaging balance reflexes.",
+            "STOP": "Critical failure. Immediate actuator shutdown."
+        }
+        return descriptions.get(state, "UNKNOWN")
