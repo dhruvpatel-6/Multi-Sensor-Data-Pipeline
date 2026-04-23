@@ -17,3 +17,11 @@ def format_robot_state(imu, depth, contact, health, reason):
         "health_status": health,
         "failure_reason": reason
     }
+class DataSynchronizer:
+    def __init__(self):
+        self.last_state = None
+
+    def bundle(self, raw_data):
+        # Your logic to sync IMU, Depth, etc.
+        # Return a single dictionary (the packet)
+        return raw_data
