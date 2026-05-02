@@ -83,3 +83,5 @@ The 10Hz loop tracks internal latency. If the processing time or data arrival de
 • Tilt Reflex: Upon triggering STIMULATE_TILT, the FID immediately switches to CORRECTIVE_ACTION and scales motor torque to 6.43+ to prevent a fall.
 
 • Emergency Stop: Upon triggering GHOST_DIVE, the system executes an EMERGENCY SHUTDOWN, kills all motor power, and locks in the STOP state with a RED visual indicator.
+
+• The system successfully validated all 12 joints during failure injection.

@@ -1,6 +1,6 @@
 # main_control_loop.py - Phase 4: 10Hz Integrated Loop
 import time
-from Drivers.pipeline_sim import SimulatedRobot  # Assuming your sim class
+from Drivers.pipeline_sim import SimulatedRobot
 from Layers.pipeline_sync import DataSynchronizer
 from Core.fid import FailureIntelligence
 from robot_control_interface import RobotControlInterface
@@ -11,7 +11,7 @@ def start_robot_mission():
     sync_layer = DataSynchronizer()
     brain = FailureIntelligence()
     spinal_cord = RobotControlInterface()
-    
+
     print("--- QUADRUPED CONTROL LOOP STARTING (10Hz) ---")
 
     try:
@@ -23,16 +23,21 @@ def start_robot_mission():
             synced_packet = sync_layer.bundle(raw_data)
 
             # 2. EVALUATE (Think)
-            # We calculate latency to pass to FID
             loop_latency = time.time() - start_time
             current_state = brain.evaluate_system(synced_packet, loop_latency)
 
             # 3. ACTUATE (Act)
-            # Convert decision into motor commands
+            # motor_commands now contains the 12-DOF nested dictionary
             motor_commands = spinal_cord.process_decisions(current_state, synced_packet)
 
-            # 4. MONITOR (Output)
-            print(f"State: {current_state} | Motors: {motor_commands['FL_MOTOR']:.2f} | LED: {motor_commands['LED_STATUS']}")
+            # 4. MONITOR (Output) - Updated for 12-DOF Clarity
+            led = motor_commands['LED_STATUS']
+            
+            # We display the Front Left leg joints as a representative sample in the main log
+            fl_t = motor_commands['FRONT_LEFT']['THIGH']
+            fl_c = motor_commands['FRONT_LEFT']['CALF']
+            
+            print(f"State: {current_state} | FL_Thigh: {fl_t:.2f} | FL_Calf: {fl_c:.2f} | LED: {led}")
 
             # 5. TIMING CONTROL (The 10Hz Metronome)
             elapsed = time.time() - start_time
