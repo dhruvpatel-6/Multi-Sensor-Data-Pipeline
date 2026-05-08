@@ -56,6 +56,14 @@ Scenario: Robot detects a forward pitch imbalance.
 
 • Reflexive Control Interface: A hardware abstraction layer that maps high-level safety decisions to low-level actuator adjustments.
 
+• 12-DOF Symmetrical Coordination: Implemented a per-leg mapping (FL, FR, RL, RR) that ensures synchronized torque distribution across the quadruped chassis.
+
+• Closed-Loop PID Logic: Replaced static triggers with a Proportional Feedback loop to provide sustained stabilization during mechanical tilts.
+
+• Mechanical Guardrails: Integrated torque saturation layers to prevent actuator over-current and respect the physical limits of the BLDC motors.
+
+• Dynamic Gait States: Established clear transitions between Nominal Stance, Active Recovery, and Safety Shutdown phases.
+
 
 5. Failure Cases Handled
 
@@ -74,6 +82,9 @@ The pipeline includes a validation layer that checks for non-numeric, null, or o
 • Computational & Network Overload:
 
 The 10Hz loop tracks internal latency. If the processing time or data arrival delay exceeds 120ms, the system identifies a timing overload and enters SAFE_MODE. This degrades the robot's gait speed and activity to regain synchronization and prevent "running blind" due to lag.
+
+
+“Actuator Saturation Handling: Implemented torque clipping to prevent motor driver over-current during extreme stabilization events.”
 
 
 6. Proof of Execution

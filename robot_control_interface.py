@@ -1,71 +1,71 @@
-# robot_control_interface.py - Phase 2: Control Translation Layer
+# robot_control_interface.py - Mechanical Constraint Integration
 
 class RobotControlInterface:
     def __init__(self):
-        # 12-DOF Mapping: 4 Legs, 3 Joints each
-        # Neutral Position (0.0 = Standing/Stable)
-        self.commands = {
-            "FRONT_LEFT":  {"HIP": 0.0, "THIGH": 0.0, "CALF": 0.0},
-            "FRONT_RIGHT": {"HIP": 0.0, "THIGH": 0.0, "CALF": 0.0},
-            "REAR_LEFT":   {"HIP": 0.0, "THIGH": 0.0, "CALF": 0.0},
-            "REAR_RIGHT":  {"HIP": 0.0, "THIGH": 0.0, "CALF": 0.0},
-            "LED_STATUS": "GREEN"
-        }
+        # 1. PHYSICAL CONSTRAINTS (Units: Nm for Torque)
+        self.MAX_TORQUE = 12.0  # Motor limit
+        self.MIN_TORQUE = -12.0
+        
+        # 2. JOINT LIMITS (Degrees)
+        self.JOINT_LIMITS = {"THIGH": (-45, 90), "CALF": (-90, 0)}
+
+        self.commands = self._get_empty_map()
         self.legs = ["FRONT_LEFT", "FRONT_RIGHT", "REAR_LEFT", "REAR_RIGHT"]
         self.joints = ["HIP", "THIGH", "CALF"]
 
-    def process_decisions(self, fid_state, telemetry):
-        """
-        Translates FID states and Telemetry into specific joint torque values.
-        """
-        # Case 1: Critical Failure - Hard Stop
-        if fid_state == "CRITICAL" or fid_state == "STOP":
+    def _get_empty_map(self):
+        return {leg: {joint: 0.0 for joint in ["HIP", "THIGH", "CALF"]} for leg in ["FRONT_LEFT", "FRONT_RIGHT", "REAR_LEFT", "REAR_RIGHT"]}
+
+    def process_decisions(self, state, telemetry):
+        # Determine base logic
+        if state in ["CRITICAL", "STOP"]:
             self._emergency_shutdown()
             self.commands["LED_STATUS"] = "RED"
-
-        # Case 2: Unstable/Tilt - Corrective Action
-        elif fid_state == "CORRECTIVE_ACTION":
+        elif state == "CORRECTIVE_ACTION":
             self._calculate_balance(telemetry)
             self.commands["LED_STATUS"] = "YELLOW"
-
-        # Case 3: Nominal - Standard Walking
         else:
             self._apply_standard_gait()
             self.commands["LED_STATUS"] = "GREEN"
 
+        # 3. APPLY MECHANICAL CONSTRAINTS (The Physical Layer)
+        self._enforce_physical_limits()
+        
         return self.commands
 
-    def _calculate_balance(self, telemetry):
+    def _enforce_physical_limits(self):
         """
-        Reflex logic for Quadruped Balance using per-joint mapping.
-        If leaning forward (+pitch), increase Thigh and Calf torque to push up.
+        The 'Mechanical Guardrail' layer.
+        Ensures software never commands something hardware cannot do.
         """
-        pitch = telemetry.get('pitch', 0)
-        
-        # P-Control Adjustment factor
-        # Higher torque required for Thigh joints to lift body weight
-        thigh_adj = pitch * 0.05
-        calf_adj = pitch * 0.02
-
-        if pitch > 0:
-            # Adjusting Front Legs to counter forward pitch
-            for leg in ["FRONT_LEFT", "FRONT_RIGHT"]:
-                self.commands[leg]["THIGH"] += thigh_adj
-                self.commands[leg]["CALF"] += calf_adj
-            
-            print(f"[CONTROL] Tilt detected ({pitch} deg). Adjusting Front Thighs by {thigh_adj:.2f}")
-
-    def _emergency_shutdown(self):
-        """Kills power to all 12 joints immediately."""
         for leg in self.legs:
             for joint in self.joints:
-                self.commands[leg][joint] = 0.0
+                val = self.commands[leg][joint]
+                
+                # Constraint A: Torque Saturation (Clipping)
+                # Prevents commanding 100Nm when motor only does 12Nm
+                clipped_val = max(self.MIN_TORQUE, min(self.MAX_TORQUE, val))
+                
+                self.commands[leg][joint] = round(clipped_val, 3)
+
+    def _calculate_balance(self, telemetry):
+        pitch = telemetry.get('pitch', 0)
+        # Proportional adjustment based on tilt
+        adjustment = pitch * 0.08
         
-        print("[CONTROL] EMERGENCY SHUTDOWN ACTIVATED - ALL JOINTS SAFED")
+        # Distribute force to front legs to counter pitch
+        for leg in ["FRONT_LEFT", "FRONT_RIGHT"]:
+            self.commands[leg]["THIGH"] += adjustment
+            self.commands[leg]["CALF"] += (adjustment * 0.5)
+
+    def _emergency_shutdown(self):
+        """Kills power and resets commands safely."""
+        self.commands = self._get_empty_map()
+        self.commands["LED_STATUS"] = "RED"
+        print("[PHYSICAL] TORQUE KILLED - ALL ACTUATORS DISENGAGED")
 
     def _apply_standard_gait(self):
-        """Placeholder for walking/standing logic across all legs."""
+        """Nominal stance torque."""
         for leg in self.legs:
-            # Nominal standing torque to maintain posture
-            self.commands[leg]["THIGH"] = 0.1 
-            self.commands[leg]["CALF"] = 0.1
+            self.commands[leg]["THIGH"] = 0.5
+            self.commands[leg]["CALF"] = 0.3

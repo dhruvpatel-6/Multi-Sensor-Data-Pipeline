@@ -50,3 +50,41 @@ def start_robot_mission():
 
 if __name__ == "__main__":
     start_robot_mission()
+
+    # robot_control_interface.py - Closed-Loop sustained correction
+
+class RobotControlInterface:
+    def __init__(self):
+        self.MAX_TORQUE = 12.0
+        self.KP = 0.15  # Proportional Gain: How "hard" the robot fights back
+        self.TARGET_PITCH = 0.0
+        self.commands = self._get_empty_map()
+
+    def _calculate_balance(self, telemetry):
+        """
+        SUSTAINED CLOSED-LOOP CORRECTION
+        This runs every cycle (10Hz) to 'steer' the robot back to level.
+        """
+        current_pitch = telemetry.get('pitch', 0)
+        
+        # 1. Calculate Error
+        error = current_pitch - self.TARGET_PITCH
+        
+        # 2. Proportional Correction
+        # Torque scales dynamically with the severity of the tilt
+        sustained_torque = error * self.KP
+        
+        # 3. Apply to 12-DOF Mapping
+        # As 'error' approaches 0, torque automatically fades away
+        for leg in ["FRONT_LEFT", "FRONT_RIGHT"]:
+            self.commands[leg]["THIGH"] = sustained_torque
+            self.commands[leg]["CALF"] = sustained_torque * 0.4
+            
+        if abs(error) > 1.0:
+            print(f"[LOOP] Error: {error:.2f}° | Applying Sustained Torque: {sustained_torque:.2f}Nm")
+
+    def _enforce_physical_limits(self):
+        # (Same as previous: clips torque to MAX_TORQUE)
+        for leg in ["FRONT_LEFT", "FRONT_RIGHT", "REAR_LEFT", "REAR_RIGHT"]:
+            for joint in ["HIP", "THIGH", "CALF"]:
+                self.commands[leg][joint] = max(-self.MAX_TORQUE, min(self.MAX_TORQUE, self.commands[leg][joint]))
