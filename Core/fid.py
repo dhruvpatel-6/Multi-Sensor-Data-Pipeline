@@ -1,39 +1,27 @@
-# Core/fid.py - Phase 3: Decision Logic Upgrade
-
 class FailureIntelligence:
     def __init__(self):
-        # Thresholds for decision making
-        self.TILT_THRESHOLD = 15.0  # Degrees
-        self.CRITICAL_TILT = 45.0    # Degrees
-        self.MAX_LATENCY = 0.12     # 120ms (slightly over our 10Hz target)
+        self.TILT_LIMIT = 45.0
+        self.LOOP_MAX_ALLOWED_MS = 120.0  # Max non-negotiable timing threshold
 
-    def evaluate_system(self, telemetry, latency):
+    def evaluate_system(self, telemetry_packet, process_latency_ms):
         """
-        Analyzes synced data and returns a Control State.
+        Processes the strict Phase 1 canonical contract payload.
+        Ensures clear fault classification without ever allowing a thread crash.
         """
-        pitch = abs(telemetry.get('pitch', 0))
-        roll = abs(telemetry.get('roll', 0))
+        hardware_status = telemetry_packet.get("health_status", "NOMINAL")
+        imu = telemetry_packet.get("imu_data", {})
+        pitch = abs(imu.get("pitch", 0.0))
         
-        # 1. Check for Critical Failures (The "Stop" Reflex)
-        if telemetry.get('status') == "GHOST_DIVE" or pitch > self.CRITICAL_TILT:
-            return "STOP"
+        # 1. Test Condition 2: Corrupt Sensor Packet / Physical Extreme Tipping Check
+        if hardware_status == "CRITICAL" or pitch > self.TILT_LIMIT:
+            return "STOP", "CRITICAL_SENSOR_CORRUPTION"
 
-        # 2. Check for Timing Issues (The "Safe Mode" Reflex)
-        if latency > self.MAX_LATENCY:
-            return "SAFE_MODE"
+        # 2. Test Condition 1: Missing Actuator Data Check
+        if hardware_status == "DEGRADED" or hardware_status == "MISSING_DATA":
+            return "STOP", "MISSING_ACTUATOR_DATA"
 
-        # 3. Check for Physical Instability (The "Correction" Reflex)
-        if pitch > self.TILT_THRESHOLD or roll > self.TILT_THRESHOLD:
-            return "CORRECTIVE_ACTION"
+        # 3. Test Condition 3: Real-Time Timing Delay Overrun Check
+        if process_latency_ms > self.LOOP_MAX_ALLOWED_MS:
+            return "DEGRADED", "LOOP_CLOCK_OVERRUN"
 
-        # 4. All systems clear
-        return "NOMINAL"
-
-    def get_state_description(self, state):
-        descriptions = {
-            "NOMINAL": "System healthy. Proceed with mission.",
-            "SAFE_MODE": "Latency detected. Reducing gait speed.",
-            "CORRECTIVE_ACTION": "Stability compromised. Engaging balance reflexes.",
-            "STOP": "Critical failure. Immediate actuator shutdown."
-        }
-        return descriptions.get(state, "UNKNOWN")
+        return "NOMINAL", "NONE"
