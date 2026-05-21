@@ -83,3 +83,31 @@ class RobotControlInterface:
         for leg in self.legs:
             for joint in self.joints:
                 self.commands[leg][joint] = 0.0
+
+                # system_map.py
+
+def get_canonical_schema():
+    """Defines the strict ONE canonical schema for robot_state."""
+    return {
+        "trace_id": "",
+        "timestamp": 0.0,
+        "joint_states": {
+            "FRONT_LEFT": {"HIP": 0.0, "KNEE": 0.0},
+            "FRONT_RIGHT": {"HIP": 0.0, "KNEE": 0.0},
+            "REAR_LEFT": {"HIP": 0.0, "KNEE": 0.0},
+            "REAR_RIGHT": {"HIP": 0.0, "KNEE": 0.0}
+        },
+        "torque_outputs": {
+            "FRONT_LEFT": 0.0, "FRONT_RIGHT": 0.0,
+            "REAR_LEFT": 0.0, "REAR_RIGHT": 0.0
+        },
+        "imu_data": {
+            "pitch": 0.0,
+            "roll": 0.0,
+            "accel_z": 0.0
+        },
+        "contact_state": [False, False, False, False], # FL, FR, RL, RR
+        "health_status": "NOMINAL", # NOMINAL / DEGRADED / CRITICAL
+        "failure_reason": "NONE",
+        "latency_ms": 0.0
+    }
