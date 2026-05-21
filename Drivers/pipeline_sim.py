@@ -1,63 +1,61 @@
-# Drivers/pipeline_sim.py - Updated for Task 4 Control Integration
 import random
-import time
-from datetime import datetime
 
 class SimulatedRobot:
     def __init__(self):
-        self.mode = "NOMINAL"
+        self.current_mode = "NOMINAL"
 
-    def set_simulation_mode(self, mode):
-        """Allows the test script to trigger failures"""
-        self.mode = mode
-        print(f"\n[SIMULATOR] Mode changed to: {self.mode}")
+    def set_simulation_mode(self, mode: str):
+        """Phase 5 Fault Injector Hook - used to simulate upstream failures."""
+        self.current_mode = mode
 
-    def get_telemetry(self):
-        """Provides a 10Hz stream of data based on the current mode"""
-        # Base stable values
-        pitch = random.uniform(-1.0, 1.0)
-        roll = random.uniform(-1.0, 1.0)
-        status = "HEALTHY"
-
-        # Inject Failure Scenarios
-        if self.mode == "STIMULATE_TILT":
-            pitch = random.uniform(20.0, 30.0) # Trigger CORRECTIVE_ACTION
-            
-        elif self.mode == "GHOST_DIVE":
-            status = "GHOST_DIVE" # Trigger EMERGENCY_STOP
-            
-        elif self.mode == "SENSOR_LAG":
-            time.sleep(0.15) # Force latency > 100ms to trigger SAFE_MODE
-
-        packet = {
-            "timestamp": datetime.now().isoformat(),
-            "pitch": round(pitch, 2),
-            "roll": round(roll, 2),
-            "status": status,
-            "depth": {
-                "dist": round(random.uniform(0.1, 4.0), 2),
-                "contact": random.choice(["GROUNDED", "IN_AIR"])
-            }
+    def get_full_hardware_stack(self):
+        """
+        Simulates Rugved's Actuator Control System boundary output.
+        Provides unflattened 12-DOF joint states, torques, and raw IMU feeds.
+        """
+        # Default normal physics readings
+        pitch_val = 0.5 + random.uniform(-0.05, 0.05)
+        status_flag = "NOMINAL"
+        reason_flag = "NONE"
+        
+        # Structure joint states strictly tracking HIP and KNEE per the specification contract
+        joint_states = {
+            "FRONT_LEFT":  {"HIP": 0.12, "KNEE": -0.34},
+            "FRONT_RIGHT": {"HIP": 0.12, "KNEE": -0.34},
+            "REAR_LEFT":   {"HIP": -0.05, "KNEE": 0.18},
+            "REAR_RIGHT":  {"HIP": -0.05, "KNEE": 0.18}
         }
-        return packet
-
-# Keeping your generator for backward compatibility if needed
-def live_sensor_feed():
-    sim = SimulatedRobot()
-    while True:
-        yield sim.get_telemetry()
-        time.sleep(0.1)
         
-def get_telemetry(self):
-    # Standard healthy values
-    pitch, roll, status = 0.5, 0.2, "HEALTHY"
+        torque_outputs = {
+            "FRONT_LEFT": 1.25,
+            "FRONT_RIGHT": 1.25,
+            "REAR_LEFT": 0.85,
+            "REAR_RIGHT": 0.85
+        }
 
-    # Hook for Phase 5: Force a tilt
-    if self.mode == "STIMULATE_TILT":
-        pitch = 25.5  # This should trigger CORRECTIVE_ACTION in FID
-        
-    # Hook for Phase 6: Force a crash
-    elif self.mode == "GHOST_DIVE":
-        status = "GHOST_DIVE" # This should trigger STOP in FID
+        # Fault Injection Triggers (for Phase 5 safety verification boundaries)
+        if self.current_mode == "MISSING_ACTUATOR":
+            # Simulate critical data dropping from communication line
+            joint_states = {}
+            torque_outputs = {}
+            status_flag = "DEGRADED"
+            reason_flag = "ACTUATOR_COMM_DROP"
+            
+        elif self.current_mode == "GHOST_DIVE":
+            # Simulate corrupt sensor packet boundary fault
+            pitch_val = -99.0  
+            status_flag = "CRITICAL"
+            reason_flag = "IMU_SENSOR_CORRUPTION"
 
-    return {"pitch": pitch, "roll": roll, "status": status}
+        return {
+            "joint_states": joint_states,
+            "torque_outputs": torque_outputs,
+            "imu": {
+                "pitch": pitch_val,
+                "roll": 0.08,
+                "accel_z": 9.81
+            },
+            "contact": [True, True, True, True],
+            "status": status_flag,
+            "reason": reason_flag
+        }
