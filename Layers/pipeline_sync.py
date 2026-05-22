@@ -1,72 +1,69 @@
 # Layers/pipeline_sync.py
-# Phase 3 Hardened Trace Propagation Pipeline
+# Phase 1: Contract Lock (Telemetry Schema Hardening)
 
 import json
 import time
 
 class DataSynchronizer:
     def __init__(self):
-        pass
+        # Explicit non-null safe fallback blocks matching structural layout
+        self.DEFAULT_JOINTS = {"hip": 0.0, "knee": 0.0}
+        self.DEFAULT_TORQUES = {"hip": 0.0, "knee": 0.0}
+        self.DEFAULT_IMU = {"pitch": 0.0, "roll": 0.0, "accel_z": 9.81}
+        self.VALID_HEALTH_STATES = {"NOMINAL", "DEGRADED", "CRITICAL"}
 
-    def bundle(self, rugved_hardware, rajaryan_control, upstream_trace_id):
+    def bundle(self, hardware_snapshot, control_input, upstream_trace_id):
         """
-        Phase 3 Core Rule: Accepts a strict upstream trace_id.
-        Propagates the exact token without regeneration or mutation.
+        Ingests real integration streams, enforces structural schema restrictions,
+        and serializes a rigid canonical deterministic JSON output string.
         """
-        # Extract 12-DOF joint structures safely (HIP, KNEE)
-        raw_joints = rugved_hardware.get("joint_states", {}) if isinstance(rugved_hardware, dict) else {}
+        # Validate or populate the non-negotiable trace ID directly
+        trace_id = str(upstream_trace_id) if upstream_trace_id else f"TANTRA-ERR-{int(time.time())}"
+        
+        # Enforce exact key existence and internal mapping boundaries
+        raw_joints = hardware_snapshot.get("joint_states", {}) if hardware_snapshot else {}
+        raw_torques = hardware_snapshot.get("torque_outputs", {}) if hardware_snapshot else {}
+        raw_imu = hardware_snapshot.get("imu_data", {}) if hardware_snapshot else {}
+        
+        # Extract individual mechatronic topology subkeys safely (No Missing Fields)
         joint_states = {
-            "FRONT_LEFT": {
-                "HIP": float(raw_joints.get("FRONT_LEFT", {}).get("HIP", 0.0)),
-                "KNEE": float(raw_joints.get("FRONT_LEFT", {}).get("KNEE", 0.0))
-            },
-            "FRONT_RIGHT": {
-                "HIP": float(raw_joints.get("FRONT_RIGHT", {}).get("HIP", 0.0)),
-                "KNEE": float(raw_joints.get("FRONT_RIGHT", {}).get("KNEE", 0.0))
-            },
-            "REAR_LEFT": {
-                "HIP": float(raw_joints.get("REAR_LEFT", {}).get("HIP", 0.0)),
-                "KNEE": float(raw_joints.get("REAR_LEFT", {}).get("KNEE", 0.0))
-            },
-            "REAR_RIGHT": {
-                "HIP": float(raw_joints.get("REAR_RIGHT", {}).get("HIP", 0.0)),
-                "KNEE": float(raw_joints.get("REAR_RIGHT", {}).get("KNEE", 0.0))
-            }
+            "hip": float(raw_joints.get("hip", self.DEFAULT_JOINTS["hip"])),
+            "knee": float(raw_joints.get("knee", self.DEFAULT_JOINTS["knee"]))
         }
-
-        raw_torques = rugved_hardware.get("torque_outputs", {}) if isinstance(rugved_hardware, dict) else {}
+        
         torque_outputs = {
-            "FRONT_LEFT": float(raw_torques.get("FRONT_LEFT", 0.0)),
-            "FRONT_RIGHT": float(raw_torques.get("FRONT_RIGHT", 0.0)),
-            "REAR_LEFT": float(raw_torques.get("REAR_LEFT", 0.0)),
-            "REAR_RIGHT": float(raw_torques.get("REAR_RIGHT", 0.0))
+            "hip": float(raw_torques.get("hip", self.DEFAULT_TORQUES["hip"])),
+            "knee": float(raw_torques.get("knee", self.DEFAULT_TORQUES["knee"]))
         }
-
-        raw_imu = rugved_hardware.get("imu", {}) if isinstance(rugved_hardware, dict) else {}
+        
         imu_data = {
-            "pitch": float(raw_imu.get("pitch", 0.0)),
-            "roll": float(raw_imu.get("roll", 0.0)),
-            "accel_z": float(raw_imu.get("accel_z", 9.81))
+            "pitch": float(raw_imu.get("pitch", self.DEFAULT_IMU["pitch"])),
+            "roll": float(raw_imu.get("roll", self.DEFAULT_IMU["roll"])),
+            "accel_z": float(raw_imu.get("accel_z", self.DEFAULT_IMU["accel_z"]))
         }
+        
+        contact_state = bool(hardware_snapshot.get("contact_state", True)) if hardware_snapshot else True
+        
+        # Parse state transitions safely
+        health_status = hardware_snapshot.get("health_status", "NOMINAL") if hardware_snapshot else "NOMINAL"
+        if health_status not in self.VALID_HEALTH_STATES:
+            health_status = "DEGRADED"
+            
+        failure_reason = str(hardware_snapshot.get("failure_reason", "NONE")) if hardware_snapshot else "NONE"
+        latency_ms = float(hardware_snapshot.get("latency_ms", 0.0)) if hardware_snapshot else 0.0
 
-        raw_contact = rugved_hardware.get("contact", [False, False, False, False])
-        contact_state = [bool(x) for x in raw_contact[:4]]
-
-        system_mode_str = rajaryan_control.get("system_mode", "STABILIZING") if isinstance(rajaryan_control, dict) else "STABILIZING"
-        latency_val = rajaryan_control.get("latency_ms", 0.0) if isinstance(rajaryan_control, dict) else 0.0
-
-        # Construct payload contract forcing trace_id to preserve incoming token explicitly
-        robot_state = {
-            "trace_id": str(upstream_trace_id),  # Strict pass-through lock
+        # Construct the unified ONE canonical robot_state payload dictionary layout
+        canonical_robot_state = {
+            "trace_id": trace_id,
             "timestamp": float(time.time()),
             "joint_states": joint_states,
             "torque_outputs": torque_outputs,
             "imu_data": imu_data,
             "contact_state": contact_state,
-            "health_status": str(rugved_hardware.get("status", "NOMINAL")), 
-            "failure_reason": str(rugved_hardware.get("reason", "NONE")),
-            "system_mode": str(system_mode_str),
-            "latency_ms": float(latency_val)
+            "health_status": health_status,
+            "failure_reason": failure_reason,
+            "latency_ms": round(latency_ms, 3)
         }
 
-        return json.dumps(robot_state, sort_keys=True)
+        # Force strict deterministic string serialization lock (Alphabetical sort keys)
+        return json.dumps(canonical_robot_state, sort_keys=True)
