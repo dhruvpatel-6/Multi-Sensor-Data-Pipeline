@@ -1,69 +1,76 @@
+# Telemetry/main_control_loop.py
+# Phase 5: Hardened Integration Engine with Explicit Fault Target Checking
+
+import os
+import sys
 import time
 import json
-import uuid  # Explicitly imported to guarantee global file scoping
-import sys
-import os
 
-# Guarantee local workspace visibility
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from Drivers.pipeline_sim import SimulatedRobot
 from Layers.pipeline_sync import DataSynchronizer
-from Core.fid import FailureIntelligence
 
-def run_pipeline_cycle():
-    print("==================================================")
-    print("  TANTRA CORE INTEGRATION: PHASE 3 TRACE TIMELINE ")
-    print("==================================================\n")
+class TantraTelemetryEngine:
+    def __init__(self, output_filepath="Tantra_logs/telemetry_truth.jsonl"):
+        self.output_filepath = output_filepath
+        self.synchronizer = DataSynchronizer()
+        os.makedirs(os.path.dirname(self.output_filepath), exist_ok=True)
 
-    # Initialize all active architectural components
-    robot_hardware = SimulatedRobot()
-    sync_layer = DataSynchronizer()
-    brain = FailureIntelligence()
+    def execute_integration_cycle(self, rugved_actuator_packet, rajaryan_control_packet, upstream_trace_id, execution_latency_ms=0.0):
+        """
+        Consumes integration boundaries, flags mechatronic faults, 
+        and locks the frame against the Phase 1 canonical contract schema.
+        """
+        if rugved_actuator_packet is None:
+            rugved_actuator_packet = {}
 
-    # Simulate Rajaryan's Upstream Core Engine Input
-    rajaryan_stub = {
-        "system_mode": "TANTRA_ALIGN",
-        "latency_ms": 3.2
-    }
+        # Initialize base states
+        health_status = "NOMINAL"
+        failure_reason = "NONE"
 
-    # Sequence of modes to test to verify uninterrupted trace propagation
-    test_sequence = ["NOMINAL", "GHOST_DIVE"]
+        # Extract internal elements safely to audit values directly
+        joints = rugved_actuator_packet.get("joint_states")
+        imu = rugved_actuator_packet.get("imu_data", {})
 
-    for run_mode in test_sequence:
-        print(f"\n--- EXECUTION CONTEXT: {run_mode} ---")
-        robot_hardware.set_simulation_mode(run_mode)
+        # ---------------------------------------------------------
+        # ROBUST FAULT DETECTION WINDOW
+        # ---------------------------------------------------------
+        
+        # Check Failure Mode 1: Missing Actuator Data (Bus Link Dropout or Zeroed State)
+        # Handles cases where joint_states is missing, None, empty, or missing sub-keys
+        if (joints is None or not joints or 
+            (isinstance(joints, dict) and joints.get("hip") == 0.0 and joints.get("knee") == 0.0)):
+            health_status = "DEGRADED"
+            failure_reason = "ACTUATOR_BUS_TIMEOUT"
+        
+        # Check Failure Mode 2: Corrupt Sensor Packet (Ghost Dive Pitch Register Anomaly)
+        elif isinstance(imu, dict) and imu.get("pitch") == -99.0:
+            health_status = "CRITICAL"
+            failure_reason = "GHOST_DIVE_FAULT"
 
-        # Execute continuous cycles per mode to observe trace pass-through stability
-        for cycle in range(2):
-            start_time = time.time()
+        # Check Failure Mode 3: Dynamic Latency Spike / Processing Overtime
+        elif execution_latency_ms > 15.0:
+            health_status = "DEGRADED"
+            failure_reason = "LATENCY_SPIKE_DETECTED"
 
-            # Phase 3 Core Requirement: Generate trace ID at the extreme boundary edge
-            upstream_generated_trace = f"TANTRA-TR-{uuid.uuid4().hex[:6].upper()}"
+        # Enforce down-pipeline overrides on the packet before bundling
+        rugved_actuator_packet["health_status"] = health_status
+        rugved_actuator_packet["failure_reason"] = failure_reason
+        rugved_actuator_packet["latency_ms"] = round(execution_latency_ms, 3)
 
-            # 1. FETCH (Upstream Interface Entry)
-            raw_hardware = robot_hardware.get_full_hardware_stack()
-            
-            # 2. BUNDLE (Enforce Phase 1 contract while anchoring the original trace token)
-            serialized_contract = sync_layer.bundle(raw_hardware, rajaryan_stub, upstream_generated_trace)
-            packet = json.loads(serialized_contract)
+        # Ensure fallback defaults are active if missing data occurred (NO NULLS allowed)
+        if health_status == "DEGRADED" and (joints is None or not joints):
+            rugved_actuator_packet["joint_states"] = {"hip": 0.0, "knee": 0.0}
 
-            # 3. EVALUATE (Pass to Brain without altering metadata tokens)
-            loop_latency = (time.time() - start_time) * 1000
-            safety_state, alert_reason = brain.evaluate_system(packet, loop_latency)
+        # 2. Force the Schema Lock through the Synchronizer Layer
+        serialized_contract = self.synchronizer.bundle(
+            hardware_snapshot=rugved_actuator_packet,
+            control_input=rajaryan_control_packet,
+            upstream_trace_id=upstream_trace_id
+        )
 
-            # Extract data points directly from the locked structural keys
-            current_trace = packet.get("trace_id")
-            packet_status = packet.get("health_status")
-            pitch_val = packet.get("imu_data", {}).get("pitch")
+        # 3. Append to Ledger Log
+        with open(self.output_filepath, "a", encoding="utf-8") as ledger_stream:
+            ledger_stream.write(serialized_contract + "\n")
 
-            # Validate that the token received at the terminal matches the entry token
-            print(f"[{current_trace}] Cycle {cycle} -> Brain Decision: {safety_state} | Hardware State: {packet_status} | Pitch: {pitch_val:.2f}°")
-            
-            if safety_state == "STOP":
-                print(f"    ↳ [SAFETY TRIGGERED] Reason: {alert_reason}")
-
-            time.sleep(0.05)
-
-if __name__ == "__main__":
-    run_pipeline_cycle()
+        return serialized_contract
