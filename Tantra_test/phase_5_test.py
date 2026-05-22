@@ -39,7 +39,7 @@ def run_simulation_hook():
             data = json.loads(synced_json)
             
             # 3. Think: Evaluate live runtime limits via the brain engine
-            state = brain.evaluate_system(data, 5.0)
+            state, reason = brain.evaluate_system(data)
             
             # 4. Act: Translate states into joint profiles
             commands = control.process_decisions(state, data)

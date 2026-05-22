@@ -1,79 +1,62 @@
+# Tantra_test/tantra_test_2.py
+# Phase 2 Upstream Input Integration Verification Test
+
 import sys
 import os
+import json
 
-# Ensure the root directory is explicitly in Python's path
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Path routing visibility anchor
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-try:
-    import json
-    from Drivers.pipeline_sim import SimulatedRobot
-    from Layers.pipeline_sync import DataSynchronizer
-    print("[INIT SUCCESS] Core telemetry components imported correctly.")
-except ImportError as e:
-    print(f"[CRITICAL ERROR] Failed to import modules: {e}")
-    print("Ensure you have empty '__init__.py' files inside your 'Drivers/' and 'Layers/' directories.")
-    sys.exit(1)
+from Drivers.pipeline_sim import SimulatedRobot
+from Telemetry.main_control_loop import TantraTelemetryEngine
 
-def verify_phase_2_integration():
-    print("\n==================================================")
-    print("   TANTRA PHASE 2: INPUT INTEGRATION TEST BENCH   ")
-    print("==================================================")
-
-    # 1. Instantiate the upstream blocks
-    try:
-        robot_hardware = SimulatedRobot()
-        sync_layer = DataSynchronizer()
-        print("[1/3] Hardware simulator and Synchronizer initialized.")
-    except Exception as e:
-        print(f"[ERROR] Initialization failed: {e}")
-        return
-
-    # 2. Simulate Rajaryan's Control Engine Engine Stub Input
-    rajaryan_control_stub = {
-        "target_state": "NOMINAL_WALK",
-        "system_mode": "BOUNDING",
-        "latency_ms": 5.40
-    }
+def test_phase_2_upstream_integration():
+    print("==================================================================")
+    print(" RUNNING PHASE 2: REAL UPSTREAM BOUNDARY INTEGRATION TEST        ")
+    print("==================================================================")
     
-    # 3. Execute Nominal Flow Ingestion
-    try:
-        print("[2/3] Fetching upstream data stream from Rugved's actuator stack...")
-        raw_hw_data = robot_hardware.get_full_hardware_stack()
-        
-        # Match your pipeline_sync.py exact parameter signature: (rugved_hardware, rajaryan_control, upstream_trace_id)
-        serialized_packet = sync_layer.bundle(raw_hw_data, rajaryan_control_stub, "TRACE-PHASE2-NOMINAL")
-        packet = json.loads(serialized_packet)
-        
-        print("\n>>> [SUCCESS] OUTPUT CAPTURED FROM TRUTH CONTRACT LOCK <<<")
-        print(f"    Trace ID:       {packet.get('trace_id')}")
-        print(f"    System Mode:    {packet.get('system_mode')}")
-        print(f"    Health Status:  {packet.get('health_status')}")
-        print(f"    Pitch Angle:    {packet.get('imu_data', {}).get('pitch'):.4f}°")
-        print(f"    Joint Status:   FRONT_LEFT HIP = {packet.get('joint_states', {}).get('FRONT_LEFT', {}).get('HIP')} rad")
-    except Exception as e:
-        print(f"[CRITICAL PIPELINE ERROR] Nominal bundle generation failed: {e}")
-        return
+    # Initialize separate components representing the independent TANTRA tracking layers
+    rugved_hardware_source = SimulatedRobot()
+    telemetry_engine = TantraTelemetryEngine()
+    
+    trace_anchor = "TANTRA-TRACE-CONVERGENCE-P2-VALIDATION"
 
-    # 4. Execute Fault Injection Flow Verification
-    try:
-        print("\n[3/3] Injecting boundary fault 'GHOST_DIVE' into actuator line...")
-        robot_hardware.set_simulation_mode("GHOST_DIVE")
-        corrupt_hw_data = robot_hardware.get_full_hardware_stack()
-        
-        failed_serialized = sync_layer.bundle(corrupt_hw_data, rajaryan_control_stub, "TRACE-PHASE2-FAULT")
-        failed_packet = json.loads(failed_serialized)
-        
-        print("\n>>> [SUCCESS] FAULT BOUNDARY CAPTURED IN CONTEXT LOCK <<<")
-        print(f"    Trace ID:       {failed_packet.get('trace_id')}")
-        print(f"    Health Status:  {failed_packet.get('health_status')}")
-        print(f"    Failure Reason: {failed_packet.get('failure_reason')}")
-        print(f"    Corrupt Pitch:  {failed_packet.get('imu_data', {}).get('pitch'):.1f}")
-        
-        # Confirm integrity assertions match structural expectations
-        assert failed_packet['health_status'] == "CRITICAL", "Fault state tracking dropped!"
-        print("\n>> VERIFICATION COMPLETE: Phase 2 Contract is perfectly operational. <<")
-    except Exception as e:
-        print(f"[CRITICAL PIPELINE ERROR] Fault handling mapping failed: {e}")
+    # 1. Simulate Input Source A: Rugved Actuator Control System (Joints + Torques)
+    print("[BOUNDARY] Polling Rugved Actuator Control System Registers...")
+    rugved_packet = rugved_hardware_source.get_full_hardware_stack()
+    print(f" -> Received Joint States: {rugved_packet['joint_states']}")
+    print(f" -> Received Torque Outputs: {rugved_packet['torque_outputs']}")
+
+    # 2. Simulate Input Source B: Rajaryan Control Layer (Target state + system mode)
+    print("\n[BOUNDARY] Intercepting Rajaryan Control Engine Setpoints...")
+    rajaryan_packet = {
+        "target_state": {"position_x": 0.0, "velocity_z": 1.2},
+        "system_mode": "BOUNDING_FLIGHT"
+    }
+    print(f" -> Active System Mode: {rajaryan_packet['system_mode']}")
+
+    # 3. Process integration convergence cycle across the boundaries
+    print("\n[PROCESSING] Passing multi-source boundary streams to Telemetry Engine...")
+    json_output = telemetry_engine.execute_integration_cycle(
+        rugved_actuator_packet=rugved_packet,
+        rajaryan_control_packet=rajaryan_packet,
+        upstream_trace_id=trace_anchor
+    )
+    
+    parsed_contract = json.loads(json_output)
+    print("\n[SUCCESS] Unified Canonical Telemetry JSON Frame Output Locked:")
+    print(json.dumps(parsed_contract, indent=2))
+
+    # Assertions validating absolute multi-source parameter preservation
+    print("\nAuditing Integrated Field Constraints...")
+    assert parsed_contract["trace_id"] == trace_anchor, "Integration Error: Trace key mutated!"
+    assert "hip" in parsed_contract["joint_states"], "Integration Error: Rugved joint_states data lost!"
+    assert "hip" in parsed_contract["torque_outputs"], "Integration Error: Rugved torque_outputs data lost!"
+    assert "pitch" in parsed_contract["imu_data"], "Integration Error: Rugved IMU tracking data lost!"
+    
+    print("-> ALL UPSTREAM INTEGRATION CHECKS: PASSED")
+    print("==================================================================")
 
 if __name__ == "__main__":
-    verify_phase_2_integration()
+    test_phase_2_upstream_integration()

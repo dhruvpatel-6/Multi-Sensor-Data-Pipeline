@@ -1,71 +1,65 @@
-# test_phase_3.py
-import json
-import uuid  # Safely imported at file scope
 import sys
 import os
+import json
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Ensure parent directory exposure for package resolution
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from Drivers.pipeline_sim import SimulatedRobot
-from Layers.pipeline_sync import DataSynchronizer
-from Core.fid import FailureIntelligence
+from Telemetry.main_control_loop import TantraTelemetryEngine
 
-def verify_phase_3_propagation_proof():
-    print("==================================================")
-    print("  TANTRA VERIFICATION BENCH: PHASE 3 PROPAGATION  ")
-    print("==================================================\n")
-
-    # 1. Instantiate architectural blocks
-    robot_hardware = SimulatedRobot()
-    sync_layer = DataSynchronizer()
-    brain = FailureIntelligence()
-
-    # 2. Simulate external seed trace generated at the extreme control boundary edge
-    upstream_seed_trace = f"TANTRA-TX-BOUND-{uuid.uuid4().hex[:6].upper()}"
-    print(f"[INPUT BOUNDARY ENTRY] Generated Core Trace ID: {upstream_seed_trace}")
-
-    mock_rajaryan_control = {
-        "system_mode": "TROTTING",
-        "latency_ms": 2.80
-    }
-
-    # 3. Step 1: Extract hardware layer inputs
-    print("\n[STEP 1: PROCESSING] Fetching data payload from Rugved simulator stream...")
-    raw_hw = robot_hardware.get_full_hardware_stack()
-
-    # 4. Step 2: Enforce Contract lock boundary (Packaging into Canonical JSON)
-    print("[STEP 2: PROCESSING] Pushing elements through contract lock synchronizer...")
-    serialized_contract = sync_layer.bundle(raw_hw, mock_rajaryan_control, upstream_seed_trace)
-    packet = json.loads(serialized_contract)
+def test_phase_3_trace_propagation():
+    print("==================================================================")
+    print(" RUNNING PHASE 3: NON-NEGOTIABLE TRACE PROPAGATION VALIDATION    ")
+    print("==================================================================")
     
-    extracted_trace = packet.get("trace_id")
-    print(f"     ↳ Extracted Packet trace_id: {extracted_trace}")
-
-    # 5. Step 3: Pass into Decision Safety Brain Engine
-    print("\n[STEP 3: EVALUATION] Transferring canonical packet directly into safety brain...")
-    safety_state, alert_reason = brain.evaluate_system(packet, loop_latency_ms=1.4)
-    print(f"     ↳ Brain Output Context linked to trace token. Evaluation State: {safety_state}")
-
-    # 6. Step 4: Output Logs (Simulating structural file record storage payload)
-    print("\n[STEP 4: LOG OUTPUT] Serializing pipeline records down to system logs stream...")
-    simulated_log_line = json.dumps({"log_timestamp": packet["timestamp"], "trace_id": packet["trace_id"], "system_health": packet["health_status"]})
-    print(f"     ↳ Written Log Line: {simulated_log_line}")
-
-    # --- CRITICAL ABSOLUTE TESTS FOR PHASE 3 VERIFICATION ---
-    print("\n==================================================")
-    print("           TRACE CONTINUITY ASSERTIONS            ")
-    print("==================================================")
+    # 1. Establish the Immutable Target Trace Token Anchor
+    TARGET_TRACE_ID = "TANTRA-PROPAGATION-TOKEN-99X88"
+    print(f"[STEP 1: INPUT BOUNDARY] Originating Trace ID Token: {TARGET_TRACE_ID}")
     
-    print(f"Checking Input  Trace == Processing Trace? ", end="")
-    assert upstream_seed_trace == extracted_trace, "CRITICAL ERROR: Trace mutated during bundling extraction!"
-    print("PASSED")
+    # Initialize component blocks
+    robot = SimulatedRobot()
+    log_file_path = "Tantra_logs/telemetry_truth.jsonl"
+    telemetry_engine = TantraTelemetryEngine(output_filepath=log_file_path)
+    
+    # Extract upstream sensor packets and mock control settings
+    raw_hw = robot.get_full_hardware_stack()
+    mock_control = {"system_mode": "BOUNDING_FLIGHT", "target_state": {}}
+    
+    # 2. Process data frame and write directly into the ledger database
+    print("\n[STEP 2: PROCESSING] Pushing transaction through structural pipeline...")
+    json_contract_output = telemetry_engine.execute_integration_cycle(
+        rugved_actuator_packet=raw_hw,
+        rajaryan_control_packet=mock_control,
+        upstream_trace_id=TARGET_TRACE_ID
+    )
+    
+    parsed_contract = json.loads(json_contract_output)
+    output_contract_trace = parsed_contract.get("trace_id")
+    print(f" -> Output Schema Contract Emitted Trace: {output_contract_trace}")
+    
+    # Validation A: Check inside schema contract serialization layer
+    assert output_contract_trace == TARGET_TRACE_ID, "CRITICAL ERROR: Trace ID mutated inside contract synchronization block!"
+    print("[SUCCESS] Contract Layer Verification: Match Confirmed.")
 
-    print(f"Checking Process Trace == Log Record Trace? ", end="")
-    log_data = json.loads(simulated_log_line)
-    assert extracted_trace == log_data["trace_id"], "CRITICAL ERROR: Trace mutated during log writing file commit!"
-    print("PASSED")
-
-    print("\n>>> SUCCESS: Phase 3 Continuity Lock Verified. Trace is 100% unmutated across the chain. <<<")
+    # 3. Replay and audit the written log entry line
+    print("\n[STEP 3: TRUTH LAYER LOGS] Reading last appended line from ledger registry...")
+    with open(log_file_path, "r", encoding="utf-8") as ledger:
+        lines = ledger.readlines()
+        last_recorded_line = lines[-1].strip()
+        
+    parsed_log_entry = json.loads(last_recorded_line)
+    persisted_log_trace = parsed_log_entry.get("trace_id")
+    print(f" -> Persisted Ledger File Written Trace:  {persisted_log_trace}")
+    
+    # Validation B: Check inside cold storage persistent logging layer
+    assert persisted_log_trace == TARGET_TRACE_ID, "CRITICAL ERROR: Trace ID mutated inside append-only file writer!"
+    print("[SUCCESS] Ledger Database Verification: Match Confirmed.")
+    
+    print("\n==================================================================")
+    print(" VERIFICATION CONCLUSION: PASSED                                  ")
+    print(f" Single trace [{TARGET_TRACE_ID}] successfully propagated across full flow!")
+    print("==================================================================")
 
 if __name__ == "__main__":
-    verify_phase_3_propagation_proof()
+    test_phase_3_trace_propagation()

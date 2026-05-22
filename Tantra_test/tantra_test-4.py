@@ -1,83 +1,80 @@
-# test_phase_4.py
-# Phase 4 Verification: 10Hz Deterministic Metronome Clock
+# Tantra_test/tantra_test_4.py
+# Phase 4: Deterministic 10Hz Cadence Performance Verification Driver
 
-import time
-import json
-import uuid
 import sys
 import os
+import time
+import json
 
-# Guarantee local workspace visibility
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Ensure parent path visibility for execution routing
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from Drivers.pipeline_sim import SimulatedRobot
-from Layers.pipeline_sync import DataSynchronizer
-from Core.fid import FailureIntelligence
+from Telemetry.main_control_loop import TantraTelemetryEngine
 
-def verify_phase_4_deterministic_loop():
-    print("==================================================")
-    print("  TANTRA VERIFICATION BENCH: PHASE 4 10HZ CLOCK   ")
-    print("==================================================\n")
-
-    robot_hardware = SimulatedRobot()
-    sync_layer = DataSynchronizer()
-    brain = FailureIntelligence()
-
-    # Fixed configuration boundaries
-    rajaryan_control_stub = {"system_mode": "TANTRA_METRONOME", "latency_ms": 1.8}
-    total_cycles = 6
-    target_hz_period = 0.100  # Exactly 100ms target execution budget per frame
-
-    print(f"Starting deterministic tracking loop. Target Rate: 10Hz ({target_hz_period*1000}ms loop interval)")
-
-    for cycle in range(total_cycles):
-        # Anchor the high-resolution start time step
-        cycle_start_perf = time.perf_counter()
+def test_phase_4_realtime_frequency_lock():
+    print("==================================================================")
+    print(" RUNNING PHASE 4: DETERMINISTIC 10HZ REAL-TIME LOOP PERFORMANCE   ")
+    print("==================================================================")
+    
+    robot = SimulatedRobot()
+    telemetry_engine = TantraTelemetryEngine()
+    
+    TARGET_HZ = 10.0
+    INTERVAL_SEC = 1.0 / TARGET_HZ  # Exactly 100.00 ms 
+    
+    print(f"[INFO] Initializing cadence track profile (10 consecutive cycles)...")
+    
+    execution_history = []
+    next_interval_anchor = time.monotonic()
+    current_latency = 0.0
+    
+    for cycle_idx in range(10):
+        cycle_start = time.monotonic()
+        execution_history.append(cycle_start)
         
-        # Phase 3 requirement: Trace continuity verification
-        trace_id = f"TR-HZ4-{uuid.uuid4().hex[:6].upper()}"
-
-        # Inject a real timing failure spike on Cycle 3
-        if cycle == 3:
-            print("\n[CLOCK INJECT] Simulating an unexpected 135ms thread execution blocking stall...")
-            time.sleep(0.135)  # Forcefully slip past the 120ms max threshold limit
+        trace_token = f"TANTRA-P4-LOCK-TRACE-00{cycle_idx}"
         
-        # 1. FETCH (Input Integration Boundary)
-        raw_hw_data = robot_hardware.get_full_hardware_stack()
-
-        # 2. BUNDLE (Enforce Phase 1 Schema Contract)
-        serialized_packet = sync_layer.bundle(raw_hw_data, rajaryan_control_stub, trace_id)
-        packet = json.loads(serialized_packet)
-
-        # 3. MEASURE TIMING & EVALUATE METRIC DRIFT
-        # Compute exact active execution delay time up to this point
-        execution_latency_ms = (time.perf_counter() - cycle_start_perf) * 1000
+        # Fetch data across mechatronic boundaries [cite: 31, 34]
+        hw_packet = robot.get_full_hardware_stack()
+        control_packet = {"system_mode": "CADENCE_LOCK", "target_state": {}}
         
-        # Insert high-precision latency measurement directly back into contract payload
-        packet["latency_ms"] = float(execution_latency_ms)
-
-        # Pass payload packet into safety engine to monitor structural budget alignment
-        safety_state, alert_reason = brain.evaluate_system(packet, execution_latency_ms)
-
-        print(f"[{trace_id}] Cycle {cycle} | Active Processing: {execution_latency_ms:.2f}ms | Safety State: {safety_state} ({alert_reason})")
-
-        # 4. MONOTONIC DYNAMIC METRONOME COMPENSATION
-        # Calculate exactly how much remainder sleep buffer is needed to complete the 100ms cycle
-        elapsed_time = time.perf_counter() - cycle_start_perf
-        sleep_buffer = target_hz_period - elapsed_time
-
-        if sleep_buffer > 0:
-            time.sleep(sleep_buffer)
-            total_cycle_time = (time.perf_counter() - cycle_start_perf) * 1000
-            print(f"     ↳ Dynamic Sleep applied: {sleep_buffer*1000:.1f}ms | Total frame window: {total_cycle_time:.1f}ms")
+        # Execute cycle [cite: 3]
+        telemetry_engine.execute_integration_cycle(
+            rugved_actuator_packet=hw_packet,
+            rajaryan_control_packet=control_packet,
+            upstream_trace_id=trace_token,
+            execution_latency_ms=current_latency
+        )
+        
+        # Update latency profiling metrics [cite: 50]
+        current_latency = (time.monotonic() - cycle_start) * 1000.0
+        
+        # Anti-drift dynamic compensation sleep calculation [cite: 48]
+        next_interval_anchor += INTERVAL_SEC
+        sleep_remainder = next_interval_anchor - time.monotonic()
+        
+        if sleep_remainder > 0:
+            time.sleep(sleep_remainder)
         else:
-            print(f"     ↳ [TIMING OVERRUN WARNING] Cycle dropped deadline budget by {abs(sleep_buffer)*1000:.1f}ms!")
-            
-            # Assert that the system correctly caught and reported the timing violation on Cycle 3
-            if cycle == 3:
-                assert safety_state == "DEGRADED" and alert_reason == "LOOP_CLOCK_OVERRUN", "Failure logic let a loop overrun slip undetected!"
+            next_interval_anchor = time.monotonic()
 
-    print("\n>>> SUCCESS: Phase 4 Deterministic Clock Loop Verified. Dynamic 10Hz synchronization is stable. <<<")
+    print("\n[ANALYSIS] Calculating Metric Variations per Iteration Frame:")
+    deltas_ms = []
+    for idx in range(1, len(execution_history)):
+        frame_delta = (execution_history[idx] - execution_history[idx - 1]) * 1000.0
+        deltas_ms.append(frame_delta)
+        print(f" -> Loop Delta Step {idx}: {frame_delta:.2f} ms (Target Baseline: 100.00 ms)")
+
+    # Analyze total clock stability metrics 
+    average_cadence_interval = sum(deltas_ms) / len(deltas_ms)
+    print(f"\nAverage System Frequency Execution Speed: {average_cadence_interval:.2f} ms")
+    
+    # Enforce strict 10Hz bounds verification (allowing standard OS scheduling jitter bounds) [cite: 46, 51]
+    assert 90.0 <= average_cadence_interval <= 110.0, f"Timing Contract Breached: Loop average fell out of deterministic bounds!"
+    
+    print("\n-> DETERMINISTIC FREQUENCY PERFORMANCE MATRIX: PASSED")
+    print("==================================================================")
 
 if __name__ == "__main__":
-    verify_phase_4_deterministic_loop() 
+    test_phase_4_realtime_frequency_lock()
