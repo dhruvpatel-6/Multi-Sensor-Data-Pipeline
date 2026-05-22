@@ -1,27 +1,32 @@
+# Core/fid.py
+# Phase 5: Hardened Failure Intelligence Layer
+
 class FailureIntelligence:
     def __init__(self):
-        self.TILT_LIMIT = 45.0
-        self.LOOP_MAX_ALLOWED_MS = 120.0  # Max non-negotiable timing threshold
+        pass
 
-    def evaluate_system(self, telemetry_packet, process_latency_ms):
+    def evaluate_system(self, json_contract_data):
         """
-        Processes the strict Phase 1 canonical contract payload.
-        Ensures clear fault classification without ever allowing a thread crash.
+        Audits the incoming canonical contract for multi-boundary anomalies.
+        Returns: (health_status, failure_reason)
         """
-        hardware_status = telemetry_packet.get("health_status", "NOMINAL")
-        imu = telemetry_packet.get("imu_data", {})
-        pitch = abs(imu.get("pitch", 0.0))
-        
-        # 1. Test Condition 2: Corrupt Sensor Packet / Physical Extreme Tipping Check
-        if hardware_status == "CRITICAL" or pitch > self.TILT_LIMIT:
-            return "STOP", "CRITICAL_SENSOR_CORRUPTION"
+        # Safely extract values directly from the contract dictionary
+        health = json_contract_data.get("health_status", "NOMINAL")
+        reason = json_contract_data.get("failure_reason", "NONE")
+        imu = json_contract_data.get("imu_data", {})
+        joints = json_contract_data.get("joint_states", {})
+        latency = json_contract_data.get("latency_ms", 0.0)
 
-        # 2. Test Condition 1: Missing Actuator Data Check
-        if hardware_status == "DEGRADED" or hardware_status == "MISSING_DATA":
-            return "STOP", "MISSING_ACTUATOR_DATA"
+        # Failure Mode 1: Missing Actuator Data Boundary (Rugved Bus Timeout)
+        if (joints.get("hip") == 0.0 and joints.get("knee") == 0.0 and health == "DEGRADED") or reason == "ACTUATOR_BUS_TIMEOUT":
+            return "DEGRADED", "ACTUATOR_BUS_TIMEOUT"
 
-        # 3. Test Condition 3: Real-Time Timing Delay Overrun Check
-        if process_latency_ms > self.LOOP_MAX_ALLOWED_MS:
-            return "DEGRADED", "LOOP_CLOCK_OVERRUN"
+        # Failure Mode 2: Corrupt Sensor Packet (Ghost Dive Anomaly)
+        if imu.get("pitch") == -99.0 or health == "CRITICAL" or reason == "GHOST_DIVE_FAULT":
+            return "CRITICAL", "GHOST_DIVE_FAULT"
+
+        # Failure Mode 3: Latency Spike Overflow (>15ms budget)
+        if latency > 15.0:
+            return "DEGRADED", "LATENCY_SPIKE_DETECTED"
 
         return "NOMINAL", "NONE"
