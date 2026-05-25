@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QuadrupedUnifiedTelemetrySchema",
+  "type": "object",
+  "required": [
+    "trace_id",
+    "timestamp",
+    "subsystem_source",
+    "state_machine",
+    "locomotion_layer",
+    "mechanical_structural_layer",
+    "stability_metrics",
+    "thermal_electrical_layer"
+  ],
+  "properties": {
+    "trace_id": { "type": "string" },
+    "timestamp": { "type": "number" },
+    "subsystem_source": { "type": "string" },
+    "state_machine": {
+      "type": "object",
+      "required": ["current_state", "previous_state", "state_transition", "severity_level", "failure_state"],
+      "properties": {
+        "current_state": { "type": "string" },
+        "previous_state": { "type": "string" },
+        "state_transition": { "type": "string" },
+        "severity_level": { "type": "string" },
+        "failure_state": {
+          "type": "object",
+          "required": ["is_fault_active", "failure_reason", "error_code"]
+        }
+      }
+    },
+    "locomotion_layer": {
+      "type": "object",
+      "required": ["gait_phase", "terrain_type", "support_polygon"]
+    },
+    "mechanical_structural_layer": {
+      "type": "object",
+      "required": ["actuator_load", "torque_requirements", "structural_stress_zones"]
+    },
+    "stability_metrics": {
+      "type": "object",
+      "required": ["com_position", "tilt_state", "slip_state", "stability_score"]
+    },
+    "thermal_electrical_layer": {
+      "type": "object",
+      "required": ["motor_saturation", "thermal_state"]
+    }
+  }
+}
