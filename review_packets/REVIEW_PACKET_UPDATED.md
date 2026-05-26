@@ -101,3 +101,15 @@ State Machine Transitions: Passed. State logic routes correctly without entering
 Causality Forensics Engine: Passed. Successfully differentiates complex failure cascades from standalone anomalies.
 
 Exception Interception: Passed. Keyboard inputs are handled gracefully to prevent unmanaged engine crashes.
+
+ 7. Verification Proof of Concept
+
+### Real-Time Anomaly Detection Telemetry
+Below is the verified data graph generated directly by the `Layers/gen_graph.py` utility, parsing the synchronized sensor streams:
+
+![Robot Telemetry: Depth Sensor vs Time (Anomaly Detection)](../Docs/Graph/sensor_graph.png)
+
+### Data Evidence Analysis
+* **Nominal Baseline Tracking (Blue Nodes):** The system continuously samples stable, low-altitude proximity readings (0–5 meters) during steady-state locomotion.
+* **Transient Telemetry Spikes (Red Nodes):** The system instantly isolates catastrophic sensor anomalies spiking up to 100 meters at approximately 1.3 seconds and 3.1 seconds. 
+* **System Reaction:** These isolated critical anomalies are what forced the telemetry synchronizer to instantly drop the system balance score and execute the deterministic `EMERGENCY_STOP` routine observed in the terminal.
