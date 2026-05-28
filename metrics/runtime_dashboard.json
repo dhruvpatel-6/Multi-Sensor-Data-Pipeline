@@ -1,0 +1,25 @@
+{
+  "dashboard_timestamp": "2026-05-28T08:12:44.301952Z",
+  "pipeline_identity": "Quadruped-Observability-Backbone-v2",
+  "runtime_performance_metrics": {
+    "average_loop_latency_ms": 4.15,
+    "maximum_loop_latency_ms": 12.84,
+    "target_deadline_ms": 4.0,
+    "deadline_compliance_percentage": 93.6
+  },
+  "stream_integrity_metrics": {
+    "total_frames_ingested": 342,
+    "dropped_frames_count": 3,
+    "frame_loss_rate_percentage": 0.87,
+    "schema_validation_violations": 0
+  },
+  "chronological_replay_drift": {
+    "accumulated_replay_drift_ms": 14.281,
+    "average_drift_per_frame_ms": 0.0418
+  },
+  "behavioral_anomaly_metrics": {
+    "isolated_anomaly_frequency": 14,
+    "state_health_transitions": 2,
+    "terminal_health_state": "EMERGENCY_STOP"
+  }
+}

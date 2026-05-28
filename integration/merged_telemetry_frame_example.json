@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-05-28T07:54:21.102941Z",
+  "trace_id": "TRC-2026-DEMO94EC",
+  "health_status": "NOMINAL",
+  "failure_reason": "NONE",
+  "loop_latency_ms": 4.12,
+  "control_state": {
+    "gait_mode": "TROTTING",
+    "target_velocity": [1.2, 0.0, 0.1],
+    "control_mode": "POSITION",
+    "recovery_state": "INACTIVE"
+  },
+  "locomotion_state": {
+    "hip_angles": [0.12, -0.11, 0.13, -0.12],
+    "knee_angles": [0.65, 0.64, 0.66, 0.65],
+    "foot_positions": [
+      [0.18, 0.15, -0.31],
+      [0.18, -0.15, -0.30],
+      [-0.22, 0.15, -0.31],
+      [-0.22, -0.15, -0.30]
+    ],
+    "support_polygon_state": "DYNAMIC_TRI",
+    "stability_margin": 84.5
+  },
+  "terrain_state": {
+    "terrain_type": "CONCRETE_DRY",
+    "slip_probability": 0.04,
+    "traction_state": "OPTIMAL",
+    "incline_estimate": 0.015
+  },
+  "actuation_state": {
+    "joint_torque": [14.2, 12.8, 15.1, 13.9],
+    "driver_status": "OPERATIONAL",
+    "bus_health": "HEALTHY",
+    "thermal_state": [42.5, 41.0, 43.8, 42.1]
+  },
+  "system_health": {
+    "watchdog_status": "HEARTBEAT_OK",
+    "timing_status": "DETERMINISTIC",
+    "schema_status": "VALIDATED",
+    "replay_status": "LIVE_STREAM"
+  }
+}

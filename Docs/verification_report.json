@@ -1,0 +1,41 @@
+{
+  "verification_timestamp": "2026-05-28T07:56:02.194821Z",
+  "engine_version": "v3.0-Hardened",
+  "replay_session_source": "logs/processed_synced_logs.json",
+  "summary": {
+    "total_processed_frames": 4,
+    "expected_frames": 5,
+    "status": "CRITICAL_CORRUPTED_STREAM_ABORT",
+    "error_detected": "MULTI_VECTOR_INJECTION_COMPROMISE"
+  },
+  "checks": {
+    "schema_version_lock": "FAILED",
+    "frame_count_validation": "FAILED",
+    "payload_alteration_check": "FAILED",
+    "sequence_continuity": "FAILED"
+  },
+  "failures_isolated": [
+    {
+      "type": "MISSING_OR_DUPLICATED_FRAMES",
+      "reason": "Frame count mismatch. Expected 5, found 4."
+    },
+    {
+      "type": "SCHEMA_MISMATCH",
+      "frame_index": 1,
+      "reason": "Expected version 2.0.0, got 1.4.2"
+    },
+    {
+      "type": "ALTERED_PAYLOAD_CHECKSUM_MISMATCH",
+      "frame_index": 3,
+      "trace_id": "TRC-2026-DEMO94EC",
+      "expected_hash": "a1b2c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890",
+      "received_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "type": "SEQUENCE_GAP_OR_JUMP",
+      "expected": 4,
+      "actual": 5,
+      "frame_index": 3
+    }
+  ]
+}

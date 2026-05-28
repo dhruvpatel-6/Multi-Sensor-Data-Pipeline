@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CanonicalTelemetryContractV2",
+  "description": "Unified robotics observability contract layout for cross-builder integration.",
+  "type": "object",
+  "required": [
+    "timestamp",
+    "trace_id",
+    "health_status",
+    "failure_reason",
+    "loop_latency_ms",
+    "control_state",
+    "locomotion_state",
+    "terrain_state",
+    "actuation_state",
+    "system_health"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "description": "ISO 8601 UTC timestamp format tracking microsecond execution time."
+    },
+    "trace_id": {
+      "type": "string",
+      "pattern": "^TRC-[0-9]{4}-DEMO[0-9A-Z]{4}$",
+      "description": "Unique identifier tracking the transaction lifetime context."
+    },
+    "health_status": {
+      "type": "string",
+      "enum": ["NOMINAL", "UNSTABLE", "DEGRADED", "EMERGENCY_STOP"]
+    },
+    "failure_reason": {
+      "type": "string",
+      "description": "Root cause failure logging string context; empty or NONE if nominal."
+    },
+    "loop_latency_ms": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Real-time processing cycle execution timeline cost."
+    },
+    "control_state": {
+      "type": "object",
+      "required": ["gait_mode", "target_velocity", "control_mode", "recovery_state"],
+      "additionalProperties": false,
+      "properties": {
+        "gait_mode": {
+          "type": "string",
+          "enum": ["STAND", "TROTTING", "BOUNDING_FLIGHT", "RECOVERY_PULSE"]
+        },
+        "target_velocity": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": { "type": "number" },
+          "description": "Linear and angular velocity command inputs [x, y, yaw]."
+        },
+        "control_mode": {
+          "type": "string",
+          "enum": ["POSITION", "FORCE_TORQUE", "IMPEDANCE", "SAFE_FALLBACK"]
+        },
+        "recovery_state": {
+          "type": "string",
+          "enum": ["INACTIVE", "ACTIVE_BALANCING", "SELF_RIGHTING"]
+        }
+      }
+    },
+    "locomotion_state": {
+      "type": "object",
+      "required": [
+        "hip_angles",
+        "knee_angles",
+        "foot_positions",
+        "support_polygon_state",
+        "stability_margin"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "hip_angles": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "number" },
+          "description": "Instantaneous hip angles across [FL, FR, RL, RR]."
+        },
+        "knee_angles": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "number" },
+          "description": "Instantaneous knee angles across [FL, FR, RL, RR]."
+        },
+        "foot_positions": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": { "type": "number" }
+          },
+          "description": "Spatial coordinate geometry arrays [x, y, z] for each foot."
+        },
+        "support_polygon_state": {
+          "type": "string",
+          "enum": ["STABLE_QUAD", "DYNAMIC_TRI", "UNSTABLE_DIAG", "COLLAPSED"]
+        },
+        "stability_margin": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0,
+          "description": "Calculated structural balance score percentage."
+        }
+      }
+    },
+    "terrain_state": {
+      "type": "object",
+      "required": ["terrain_type", "slip_probability", "traction_state", "incline_estimate"],
+      "additionalProperties": false,
+      "properties": {
+        "terrain_type": {
+          "type": "string",
+          "enum": ["FLOWERBED_NOMINAL", "CONCRETE_DRY", "SLIPPERY_ICE", "MUD_DEEP"]
+        },
+        "slip_probability": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Calculated friction transition vulnerability score."
+        },
+        "traction_state": {
+          "type": "string",
+          "enum": ["OPTIMAL", "SLIPPING", "TOTAL_LOSS"]
+        },
+        "incline_estimate": {
+          "type": "number",
+          "description": "Pitch/Roll gradient incline angle estimate in radians."
+        }
+      }
+    },
+    "actuation_state": {
+      "type": "object",
+      "required": ["joint_torque", "driver_status", "bus_health", "thermal_state"],
+      "additionalProperties": false,
+      "properties": {
+        "joint_torque": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "number" },
+          "description": "Measured feedback torques in Nm across [FL, FR, RL, RR]."
+        },
+        "driver_status": {
+          "type": "string",
+          "enum": ["OPERATIONAL", "CURRENT_LIMITED", "THERMAL_FAULT"]
+        },
+        "bus_health": {
+          "type": "string",
+          "enum": ["HEALTHY", "DEGRADED", "TIMEOUT_CRITICAL"]
+        },
+        "thermal_state": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "number" },
+          "description": "Actuator driver Temperatures in Celsius across [FL, FR, RL, RR]."
+        }
+      }
+    },
+    "system_health": {
+      "type": "object",
+      "required": ["watchdog_status", "timing_status", "schema_status", "replay_status"],
+      "additionalProperties": false,
+      "properties": {
+        "watchdog_status": {
+          "type": "string",
+          "enum": ["HEARTBEAT_OK", "MISSING_NODE", "PANIC"]
+        },
+        "timing_status": {
+          "type": "string",
+          "enum": ["DETERMINISTIC", "JITTER_WARNING", "DEADLINE_BREACH"]
+        },
+        "schema_status": {
+          "type": "string",
+          "enum": ["VALIDATED", "MISMATCH_WARNING", "INVALID_STRUCTURE"]
+        },
+        "replay_status": {
+          "type": "string",
+          "enum": ["LIVE_STREAM", "REPLAY_ACTIVE", "INTEGRITY_COMPROMISED"]
+        }
+      }
+    }
+  }
+}
