@@ -1,91 +1,82 @@
 import json
+import random
 from datetime import datetime
 
-class FaultPropagationEngine:
+class AdvancedFaultPropagator:
     def __init__(self):
-        # Master propagation matrix definition mapping trigger to consequences
-        self.matrix = {
-            "ACTUATOR_BUS_TIMEOUT": {
-                "severity": "DEGRADED",
-                "telemetry_state": "DEGRADED",
-                "control_state": "SAFE_FALLBACK",
-                "gait_mode": "RECOVERY_PULSE",
-                "actuator_action": "CURRENT_LIMITED",
-                "replay_tag": "FAULT_BUS_TIMEOUT_DEGRADED_PERFORMANCE"
-            },
-            "GHOST_DIVE_FAULT": {
-                "severity": "EMERGENCY_STOP",
-                "telemetry_state": "INVALID_STRUCTURE",
-                "control_state": "SAFE_FALLBACK",
-                "gait_mode": "STAND",
-                "actuator_action": "THERMAL_FAULT",
-                "replay_tag": "CRITICAL_GHOST_DIVE_COMMAND_HALT"
-            },
-            "NOMINAL_CLEAR": {
-                "severity": "NOMINAL",
-                "telemetry_state": "VALIDATED",
-                "control_state": "POSITION",
-                "gait_mode": "TROTTING",
-                "actuator_action": "OPERATIONAL",
-                "replay_tag": "LIVE_STREAM"
-            }
-        }
+        self.active_faults = {}
 
-    def propagate_fault(self, active_fault, base_telemetry_frame):
-        """Mutates a unified telemetry frame based on active fault rules."""
-        if active_fault not in self.matrix:
-            return base_telemetry_frame
+    def inject_fault(self, fault_type):
+        """Registers an active fault signature into the execution loop."""
+        self.active_faults[fault_type] = datetime.utcnow().isoformat() + "Z"
 
-        rules = self.matrix[active_fault]
-        mutated_frame = base_telemetry_frame.copy()
+    def clear_fault(self, fault_type):
+        if fault_type in self.active_faults:
+            del self.active_faults[fault_type]
 
-        # Update root state properties
-        mutated_frame["health_status"] = rules["severity"]
-        mutated_frame["failure_reason"] = active_fault
-        mutated_frame["timestamp"] = datetime.utcnow().isoformat() + "Z"
-
-        # Propagate to Rajaryan's Control Layer
-        mutated_frame["control_state"] = base_telemetry_frame["control_state"].copy()
-        mutated_frame["control_state"]["control_mode"] = rules["control_state"]
-        mutated_frame["control_state"]["gait_mode"] = rules["gait_mode"]
-        if rules["severity"] == "EMERGENCY_STOP":
-            mutated_frame["control_state"]["recovery_state"] = "SELF_RIGHTING"
-            mutated_frame["control_state"]["target_velocity"] = [0.0, 0.0, 0.0]
-
-        # Propagate to Rugved's Actuator Hardware Layer
-        mutated_frame["actuation_state"] = base_telemetry_frame["actuation_state"].copy()
-        mutated_frame["actuation_state"]["driver_status"] = rules["actuator_action"]
-        if active_fault == "ACTUATOR_BUS_TIMEOUT":
-            mutated_frame["actuation_state"]["bus_health"] = "TIMEOUT_CRITICAL"
-
-        # Propagate to Observability Layer & System Health
-        mutated_frame["system_health"] = base_telemetry_frame["system_health"].copy()
-        mutated_frame["system_health"]["schema_status"] = rules["telemetry_state"]
-        mutated_frame["system_health"]["replay_status"] = "REPLAY_ACTIVE"
+    def process_frame(self, base_frame):
+        """Applies active fault modifications directly to the telemetry data frame."""
+        mutated_frame = json.loads(json.dumps(base_frame))
         
-        # Inject Replay Annotation/Tag
-        mutated_frame["meta"] = {
-            "replay_status_annotation": rules["replay_tag"],
-            "propagation_timestamp": datetime.utcnow().isoformat() + "Z"
-        }
-
+        for fault in self.active_faults.keys():
+            if fault == "SENSOR_CORRUPTION":
+                mutated_frame["locomotion_state"]["hip_angles"] = [999.9, -999.9, 0.0, 0.0]
+                mutated_frame["system_health"]["schema_status"] = "MISMATCH_WARNING"
+                
+            elif fault == "IMU_DRIFT":
+                mutated_frame["terrain_state"]["incline_estimate"] += 0.85  # Accumulated drift error
+                mutated_frame["system_health"]["timing_status"] = "JITTER_WARNING"
+                
+            elif fault == "PACKET_LOSS":
+                mutated_frame["system_health"]["watchdog_status"] = "MISSING_NODE"
+                mutated_frame["health_status"] = "DEGRADED"
+                
+            elif fault == "BUS_TIMEOUT":
+                mutated_frame["actuation_state"]["bus_health"] = "TIMEOUT_CRITICAL"
+                mutated_frame["control_state"]["control_mode"] = "SAFE_FALLBACK"
+                
+            elif fault == "STALE_DATA":
+                mutated_frame["timestamp"] = "2026-01-01T00:00:00.000000Z"  # Frozen clock artifact
+                mutated_frame["system_health"]["timing_status"] = "DEADLINE_BREACH"
+                
+            elif fault == "ACTUATOR_SATURATION":
+                mutated_frame["actuation_state"]["joint_torque"] = [45.0, 45.0, 45.0, 45.0]  # Max ceiling
+                mutated_frame["actuation_state"]["driver_status"] = "CURRENT_LIMITED"
+                
+            elif fault == "THERMAL_ESCALATION":
+                mutated_frame["actuation_state"]["thermal_state"] = [95.5, 96.2, 94.8, 95.1]
+                mutated_frame["actuation_state"]["driver_status"] = "THERMAL_FAULT"
+                mutated_frame["health_status"] = "EMERGENCY_STOP"
+                
+            elif fault == "LIMB_DEGRADATION":
+                mutated_frame["locomotion_state"]["support_polygon_state"] = "UNSTABLE_DIAG"
+                mutated_frame["control_state"]["gait_mode"] = "RECOVERY_PULSE"
+                
+            elif fault == "CONTACT_SENSOR_FAULTS":
+                mutated_frame["locomotion_state"]["stability_margin"] = 0.0
+                mutated_frame["health_status"] = "UNSTABLE"
+                
+            elif fault == "TIMING_JITTER":
+                mutated_frame["loop_latency_ms"] = 18.75
+                mutated_frame["system_health"]["timing_status"] = "JITTER_WARNING"
+                
+            elif fault == "CLOCK_SKEW":
+                mutated_frame["trace_id"] = "TRC-9999-SKEWED_CLOCK"
+                mutated_frame["system_health"]["timing_status"] = "DEADLINE_BREACH"
+                
+            elif fault == "TERRAIN_MISCLASSIFICATION":
+                mutated_frame["terrain_state"]["terrain_type"] = "FLOWERBED_NOMINAL"
+                mutated_frame["terrain_state"]["slip_probability"] = 0.95  # Severe logical mismatch
+                
+            elif fault == "SCHEMA_CORRUPTION":
+                mutated_frame.pop("system_health")  # Destructive mutation breaking schema structure
+                
+            elif fault == "REPLAY_CORRUPTION":
+                mutated_frame["system_health"]["replay_status"] = "INTEGRITY_COMPROMISED"
+                mutated_frame["health_status"] = "DEGRADED"
+                
+            elif fault == "CONTROL_INSTABILITY":
+                mutated_frame["control_state"]["recovery_state"] = "ACTIVE_BALANCING"
+                mutated_frame["health_status"] = "UNSTABLE"
+                
         return mutated_frame
-
-if __name__ == "__main__":
-    propagator = FaultPropagationEngine()
-    
-    # Base nominal convergent frame layout from Phase 2
-    sample_frame = {
-        "timestamp": "2026-05-28T07:54:21.102941Z", "trace_id": "TRC-2026-DEMO94EC",
-        "health_status": "NOMINAL", "failure_reason": "NONE", "loop_latency_ms": 4.12,
-        "control_state": {"gait_mode": "TROTTING", "target_velocity": [1.2, 0.0, 0.1], "control_mode": "POSITION", "recovery_state": "INACTIVE"},
-        "locomotion_state": {"hip_angles": [0.12, -0.11, 0.13, -0.12], "knee_angles": [0.65, 0.64, 0.66, 0.65], "foot_positions": [[0.18, 0.15, -0.31], [0.18, -0.15, -0.30], [-0.22, 0.15, -0.31], [-0.22, -0.15, -0.30]], "support_polygon_state": "DYNAMIC_TRI", "stability_margin": 84.5},
-        "terrain_state": {"terrain_type": "CONCRETE_DRY", "slip_probability": 0.04, "traction_state": "OPTIMAL", "incline_estimate": 0.015},
-        "actuation_state": {"joint_torque": [14.2, 12.8, 15.1, 13.9], "driver_status": "OPERATIONAL", "bus_health": "HEALTHY", "thermal_state": [42.5, 41.0, 43.8, 42.1]},
-        "system_health": {"watchdog_status": "HEARTBEAT_OK", "timing_status": "DETERMINISTIC", "schema_status": "VALIDATED", "replay_status": "LIVE_STREAM"}
-    }
-
-    # Execute propagation sequence for timeout injection
-    degraded_result = propagator.propagate_fault("ACTUATOR_BUS_TIMEOUT", sample_frame)
-    print("=== PROPAGATION OUTPUT: ACTUATOR_BUS_TIMEOUT ===")
-    print(json.dumps(degraded_result, indent=2))    

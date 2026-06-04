@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QuadrupedAutonomousBackboneCanonicalContract",
+  "description": "Authoritative consolidated telemetry schema for the Quadruped Real-Time Convergence Loop.",
+  "type": "object",
+  "required": [
+    "timestamp",
+    "trace_id",
+    "health_status",
+    "loop_latency_ms",
+    "control_state",
+    "locomotion_state",
+    "terrain_state",
+    "actuation_state",
+    "system_health"
+  ],
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp generated at the start of the control loop step."
+    },
+    "trace_id": {
+      "type": "string",
+      "pattern": "^TRC-[0-9]{4}-[A-Z0-9]{8}$",
+      "description": "Unique deterministic execution trace token used for log replay chaining."
+    },
+    "health_status": {
+      "type": "string",
+      "enum": ["NOMINAL", "DEGRADED", "UNSTABLE", "SAFE_FALLBACK", "EMERGENCY_STOP"],
+      "description": "Global operational posture designation of the quadruped platform."
+    },
+    "loop_latency_ms": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Observed execution turnaround time for the current routing frame."
+    },
+    "control_state": {
+      "type": "object",
+      "required": ["gait_mode", "target_velocity", "control_mode", "recovery_state"],
+      "properties": {
+        "gait_mode": { "type": "string", "enum": ["STAND", "TROTTING", "BOUNDING_FLIGHT", "RECOVERY_PULSE"] },
+        "target_velocity": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": { "type": "number" },
+          "description": "[x, y, yaw] commanded velocity vector profiles."
+        },
+        "control_mode": { "type": "string", "enum": ["POSITION", "FORCE", "ADAPTIVE_IMPEDANCE", "SAFE_FALLBACK"] },
+        "recovery_state": { "type": "string", "enum": ["INACTIVE", "ACTIVE_BALANCING", "COLLAPSE_PROTECTION"] }
+      }
+    },
+    "locomotion_state": {
+      "type": "object",
+      "required": ["hip_angles", "knee_angles", "foot_positions", "support_polygon_state", "stability_margin"],
+      "properties": {
+        "hip_angles": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number" } },
+        "knee_angles": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number" } },
+        "foot_positions": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number" } }
+        },
+        "support_polygon_state": { "type": "string", "enum": ["STABLE_QUAD", "TRIPOD_DYNAMIC", "UNSTABLE_DIAG"] },
+        "stability_margin": { "type": "number", "minimum": 0.0, "maximum": 100.0 }
+      }
+    },
+    "terrain_state": {
+      "type": "object",
+      "required": ["terrain_type", "slip_probability", "traction_state", "incline_estimate"],
+      "properties": {
+        "terrain_type": { "type": "string" },
+        "slip_probability": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "traction_state": { "type": "string", "enum": ["OPTIMAL", "SLIPPED_RECOVERING", "CRITICAL_LOSS"] },
+        "incline_estimate": { "type": "number", "description": "Estimated surface incline vector in degrees." }
+      }
+    },
+    "actuation_state": {
+      "type": "object",
+      "required": ["joint_torque", "driver_status", "bus_health", "thermal_state"],
+      "properties": {
+        "joint_torque": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number" } },
+        "driver_status": { "type": "string", "enum": ["OPERATIONAL", "CURRENT_LIMITED", "THERMAL_FAULT"] },
+        "bus_health": { "type": "string", "enum": ["HEALTHY", "DEGRADED_RETRY", "TIMEOUT_CRITICAL"] },
+        "thermal_state": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "number" },
+          "description": "Real-time operating temperatures of leg motor blocks in Celsius."
+        }
+      }
+    },
+    "system_health": {
+      "type": "object",
+      "required": ["watchdog_status", "timing_status", "schema_status", "replay_status"],
+      "properties": {
+        "watchdog_status": { "type": "string", "enum": ["HEARTBEAT_OK", "MISSING_NODE", "SYSTEM_CRASH"] },
+        "timing_status": { "type": "string", "enum": ["DETERMINISTIC", "JITTER_WARNING", "DEADLINE_BREACH"] },
+        "schema_status": { "type": "string", "enum": ["VALIDATED", "MISMATCH_WARNING", "INVALID_STRUCTURE"] },
+        "replay_status": { "type": "string", "enum": ["LIVE_STREAM", "INTEGRITY_COMPROMISED", "REPLAY_ACTIVE"] }
+      }
+    }
+  },
+  "additionalProperties": false
+}
