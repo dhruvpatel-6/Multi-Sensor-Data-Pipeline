@@ -1,139 +1,125 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import socket
 import json
-from datetime import datetime
 
-st.set_page_config(
-    page_title="Enterprise Distributed Telemetry Core",
-    layout="wide"
-)
+st.set_page_config(page_title="Convergence Telemetry Platform", layout="wide")
 
-# Custom styling sheets
+# Custom UI styling injection sheets
 st.markdown("""
 <style>
-    .metric-box {
-        background-color: #111827;
-        padding: 22px;
-        border-radius: 8px;
-        border-left: 6px solid #10b981;
-    }
-    .metric-box-anomaly {
-        background-color: #111827;
-        padding: 22px;
-        border-radius: 8px;
-        border-left: 6px solid #ef4444;
-        animation: pulse 2s infinite;
-    }
+    .metric-card { background-color: #0f172a; padding: 20px; border-radius: 8px; border-left: 5px solid #3b82f6; }
+    .fault-active { background-color: #451a03; padding: 20px; border-radius: 8px; border-left: 5px solid #f97316; }
 </style>
 """, unsafe_allow_html=True)
 
-# Instantiating persistent session caching parameters
 MAX_UI_HISTORY = 40
-if "time_history" not in st.session_state: st.session_state.time_history = []
-if "temp_history" not in st.session_state: st.session_state.temp_history = []
-if "latency_history" not in st.session_state: st.session_state.latency_history = []
-if "sock" not in st.session_state: st.session_state.sock = None
-if "latest_payload" not in st.session_state: st.session_state.latest_payload = None
+if "time_hist" not in st.session_state: st.session_state.time_hist = []
+if "latency_hist" not in st.session_state: st.session_state.latency_hist = []
+if "stability_hist" not in st.session_state: st.session_state.stability_hist = []
+if "sock_conn" not in st.session_state: st.session_state.sock_conn = None
+if "payload" not in st.session_state: st.session_state.payload = None
 
-# Establish UI pipeline handshake connection
-if st.session_state.sock is None:
+if st.session_state.sock_conn is None:
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect(('127.0.0.1', 5556))
-        s.setblocking(False) # Non-blocking operations layout
-        st.session_state.sock = s
-        st.success("🔌 Telemetry Pipeline Stream Connected Successfully!")
+        s.setblocking(False)
+        st.session_state.sock_conn = s
+        st.success("🔌 Convergence Stream Link Socket Verified.")
     except Exception:
-        st.warning("⏳ Pipeline processing engine offline. Verify background worker terminals are running.")
+        st.error("⏳ Telemetry Stream Disconnected. Start backend worker architectures.")
         st.stop()
 
-# Consume incoming buffer frames from backend socket
-s = st.session_state.sock
-raw_buffer = ""
+# Stream buffer pipeline processing
+s = st.session_state.sock_conn
+raw_data = ""
 try:
     while True:
         chunk = s.recv(4096).decode('utf-8')
         if not chunk: break
-        raw_buffer += chunk
+        raw_data += chunk
 except BlockingIOError:
-    pass 
+    pass
 
-# Update visualization state arrays when data is available
-if raw_buffer:
-    lines = raw_buffer.strip().split("\n")
+if raw_data:
+    lines = raw_data.strip().split("\n")
     if lines:
         try:
-            latest_frame = json.loads(lines[-1]) # Read latest state update frame
-            st.session_state.latest_payload = latest_frame
+            frame = json.loads(lines[-1])
+            st.session_state.payload = frame
             
-            st.session_state.time_history.append(latest_frame["timestamp"])
-            st.session_state.temp_history.append(latest_frame["temperatures"])
-            st.session_state.latency_history.append(latest_frame["latency_ms"])
+            st.session_state.time_hist.append(frame["timestamp"])
+            st.session_state.latency_hist.append(frame["observed_latency_ms"])
+            st.session_state.stability_hist.append(frame["analytics"]["stability_score"])
             
-            if len(st.session_state.time_history) > MAX_UI_HISTORY:
-                st.session_state.time_history.pop(0)
-                st.session_state.temp_history.pop(0)
-                st.session_state.latency_history.pop(0)
+            if len(st.session_state.time_hist) > MAX_UI_HISTORY:
+                st.session_state.time_hist.pop(0)
+                st.session_state.latency_hist.pop(0)
+                st.session_state.stability_hist.pop(0)
         except Exception:
             pass
 
-# Fallback block for buffering state initialization
-if st.session_state.latest_payload is None:
-    st.info("🔄 Synchronizing array matrices with core engine. Awaiting next live frame transmission tick...")
-    st.button("Force Interface Refresh")
+if st.session_state.payload is None:
+    st.info("🔄 Re-aligning schema contracts. Synchronizing state arrays...")
+    st.button("Force Global Refresh")
     st.stop()
 
-frame = st.session_state.latest_payload
+frame = st.session_state.payload
+analytics = frame["analytics"]
+fault = frame["fault_injection_state"]
 
-# Render advanced notification alerts dynamically based on worker processing state
-if frame.get("is_anomaly", False):
-    st.error(f"🚨 INDUSTRIAL ALARM: Statistical Jitter Detected by Analytics Engine! (Calculated Z-Score: {frame['calculated_z']})")
+# Real-time state flags
+if fault != "NOMINAL":
+    st.error(f"🚨 ACTIVE INJECTED FAULT propagation: {fault} | System response: {analytics['control_response']}")
 else:
-    st.success("🟢 PIPELINE ARCHITECTURE METRICS STATUS: HEALTHY STRUCTURE")
+    st.success("🟢 REALITY CONVERGENCE PIPELINE METRICS CRITERIA: NOMINAL")
 
-st.title("🦿 Quadruped Telemetry Distributed Engine")
-st.markdown(f"**Live Processing Sync Target:** `v3 Canonical Truth Architecture` | **Active Frame Tracking ID:** `{frame['frame_idx']}`")
+st.title("🐕 Quadruped Convergence Telemetry Core")
+st.markdown(f"**Canonical Schema Model ID:** `{frame['contract_version']}` | **Current Framework Iteration ID:** `{frame['frame_idx']}`")
 st.markdown("---")
 
-# Main Dashboard KPI blocks
-k1, k2, k3, k4 = st.columns(4)
-with k1:
-    box_class = "metric-box-anomaly" if frame.get("is_anomaly", False) else "metric-box"
-    status_text = "ANOMALOUS SPIKE" if frame.get("is_anomaly", False) else frame["computed_status"]
-    st.markdown(f"<div class='{box_class}'>🔒 Pipeline Health Status<br><h3>{status_text}</h3></div>", unsafe_allow_html=True)
-with k2:
-    st.markdown(f"<div class='metric-box'>⏱️ Processing Loop Latency<br><h3>{frame['latency_ms']} ms</h3></div>", unsafe_allow_html=True)
-with k3:
-    st.markdown(f"<div class='metric-box'>🚌 Embedded CAN-FD Bus State<br><h3>{frame['bus_status']}</h3></div>", unsafe_allow_html=True)
-with k4:
-    st.markdown(f"<div class='metric-box'>🔥 High-Limit Actinide Thermal Tracker<br><h3>{max(frame['temperatures'])} °C</h3></div>", unsafe_allow_html=True)
+# Main Metric Row Panels
+m1, m2, m3, m4 = st.columns(4)
+with m1:
+    f_class = "fault-active" if fault != "NOMINAL" else "metric-card"
+    st.markdown(f"<div class='{f_class}'>⚠️ Failure Model Layer<br><h3>{fault}</h3></div>", unsafe_allow_html=True)
+with m2:
+    st.markdown(f"<div class='metric-card'>🌍 Target Terrain Domain Context<br><h3>{frame['terrain_context']['terrain_id']}</h3></div>", unsafe_allow_html=True)
+with m3:
+    st.markdown(f"<div class='metric-card'>🎯 Deterministic Deadline Compliance<br><h3>{analytics['compliance_metrics']['cumulative_compliance_pct']}%</h3></div>", unsafe_allow_html=True)
+with m4:
+    st.markdown(f"<div class='metric-card'>⚖️ Locomotion Stability Score<br><h3>{analytics['stability_score']} / 100</h3></div>", unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# High-Frequency Data Charts Layer
-c1, c2 = st.columns(2)
-with c1:
-    st.subheader("Dynamic Actuator Temperature Curves Profile History")
-    df_temp = pd.DataFrame(st.session_state.temp_history, columns=["FL", "FR", "RL", "RR"])
-    df_temp.index = st.session_state.time_history
-    st.line_chart(df_temp)
-with c2:
-    st.subheader("Calculated Core Loop Latency Over Time (ms)")
-    df_lat = pd.DataFrame(st.session_state.latency_history, columns=["Latency"])
-    df_lat.index = st.session_state.time_history
+# Performance Plots Layer
+p1, p2 = st.columns(2)
+with p1:
+    st.subheader("Dynamic Locomotion Stability Score History Tracking")
+    df_stab = pd.DataFrame(st.session_state.stability_hist, columns=["Stability Metric"], index=st.session_state.time_hist)
+    st.line_chart(df_stab)
+with p2:
+    st.subheader("Observed Processing Loop Latency Profile vs Target Deadline (5.0ms)")
+    df_lat = pd.DataFrame(st.session_state.latency_hist, columns=["Observed Latency"], index=st.session_state.time_hist)
     st.area_chart(df_lat)
 
-# Detailed Vector Matrix Grid
-st.subheader("Isolated Multi-Channel Actuator Structural Array Metrics")
-cols = st.columns(4)
-labels = ["Front-Left Module (FL)", "Front-Right Module (FR)", "Rear-Left Module (RL)", "Rear-Right Module (RR)"]
-for idx, col in enumerate(cols):
-    with col:
-        st.info(f"**{labels[idx]}**")
-        st.metric(label="Module Thermal State", value=f"{frame['temperatures'][idx]} °C")
-        st.metric(label="Applied Shaft Torque", value=f"{frame['torques'][idx]} Nm")
+# Detailed Status Monitoring Panel
+st.subheader("Authoritative Contract Observability Breakdown Matrix")
+d1, d2, d3 = st.columns(3)
+with d1:
+    st.info("🗺️ Active Terrain Boundaries")
+    st.write(f"**Gait Command Selection:** `{frame['terrain_context']['recommended_gait']}`")
+    st.write(f"**Energy Cost Coefficient:** `{frame['terrain_context']['energy_cost_estimate']} W`")
+    st.write(f"**Calculated Slip Signature:** `{analytics['slip_signature']}`")
+with d2:
+    st.info("🦾 Joint Actuator Thermal/Torque State Vectors")
+    st.write(f"**Max Actuator Peak Temp:** `{max(frame['sensor_matrices']['temperatures_c'])} °C`")
+    st.write(f"**Active Torque Strain Index:** `{frame['sensor_matrices']['torques_nm']}`")
+with d3:
+    st.info("⏱️ Honest Real-time Performance Tracking")
+    st.write(f"**Observed Process Latency:** `{frame['observed_latency_ms']} ms`")
+    st.write(f"**Accumulated Clock Deadlines Breached:** `{analytics['compliance_metrics']['total_violations']} frames`")
+    st.write(f"**Calculated Run Jitter ($\sigma$):** `{analytics['compliance_metrics']['running_mean_jitter_ms']} ms`")
 
-# Automated High-Frequency UI Rerun script hook
 st.rerun()
