@@ -1,0 +1,46 @@
+{
+    "TR-001_GRAVEL": {
+        "terrain_id": "TR-001_GRAVEL",
+        "traction_score": 0.72,
+        "failure_probability": 0.05,
+        "slip_signature": "CONTACT_SENSOR_DISCONNECT",
+        "control_response": "FALLBACK_KINEMATIC_ESTIMATION",
+        "recommended_gait": "TROT",
+        "energy_cost_estimate": 45.2,
+        "thermal_impact_c": 40.1,
+        "recovery_success_rate_pct": 32.68
+    },
+    "TR-002_MUD": {
+        "terrain_id": "TR-002_MUD",
+        "traction_score": 0.34,
+        "failure_probability": 0.28,
+        "slip_signature": "HIGH_LATERAL_DRIFT_DETECTION",
+        "control_response": "ENGAGE_IMU_RESET_INTEGRATOR",
+        "recommended_gait": "CRAWL_STABLE",
+        "energy_cost_estimate": 88.5,
+        "thermal_impact_c": 40.1,
+        "recovery_success_rate_pct": 39.23
+    },
+    "TR-003_SAND": {
+        "terrain_id": "TR-003_SAND",
+        "traction_score": 0.51,
+        "failure_probability": 0.15,
+        "slip_signature": "NOMINAL_TRACKING",
+        "control_response": "MAINTAIN_GAIT_VELOCITY",
+        "recommended_gait": "AMBLE",
+        "energy_cost_estimate": 62.1,
+        "thermal_impact_c": 40.1,
+        "recovery_success_rate_pct": 85.69
+    },
+    "TR-004_STAIRS": {
+        "terrain_id": "TR-004_STAIRS",
+        "traction_score": 0.85,
+        "failure_probability": 0.22,
+        "slip_signature": "NOMINAL_TRACKING",
+        "control_response": "MAINTAIN_GAIT_VELOCITY",
+        "recommended_gait": "STEP_PACE",
+        "energy_cost_estimate": 74.3,
+        "thermal_impact_c": 40.1,
+        "recovery_success_rate_pct": 92.15
+    }
+}

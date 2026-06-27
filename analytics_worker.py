@@ -1,9 +1,30 @@
 import socket
 import json
 import time
-import os
 import numpy as np
 from analytics.anomaly_detector import PredictiveAnomalyDetector
+
+EXPECTED_CONTRACT = "v3.0.0-Truth"
+
+def validate_schema_contract(payload):
+    """Performs absolute architectural artifact verification on the incoming packet."""
+    required_top_keys = ["contract_version", "frame_idx", "target_deadline_ms", "observed_latency_ms", "terrain_context", "sensor_matrices"]
+    
+    # 1. Verify existence of top level structures
+    if not all(key in payload for key in required_top_keys):
+        return False
+        
+    # 2. Strict governance verification against contract duplication/inflation
+    if payload["contract_version"] != EXPECTED_CONTRACT:
+        print(f"⚠️ [SCHEMA EXCLUSION] Packet dropped. Invalid Version Contract: Reference mismatch.")
+        return False
+        
+    # 3. Structural matrix check
+    matrix_keys = ["temperatures_c", "torques_nm", "imu_orientation", "contact_sensor_vector"]
+    if not all(key in payload["sensor_matrices"] for key in matrix_keys):
+        return False
+        
+    return True
 
 def run_analytics_worker(input_port=5555, output_port=5556):
     detector = PredictiveAnomalyDetector(window_size=30, z_threshold=2.2)
@@ -13,7 +34,8 @@ def run_analytics_worker(input_port=5555, output_port=5556):
     out_server.bind(('127.0.0.1', output_port))
     out_server.listen(1)
     
-    print(f"⚙️ [ANALYTICS ENGINE] Listening for dashboard pipelines on port {output_port}...")
+    print(f"⚙️ [ANALYTICS ENGINE] Active Enforcement Contract: {EXPECTED_CONTRACT}")
+    print(f"⚙️ Listening for dashboard pipelines on port {output_port}...")
     
     in_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     while True:
@@ -27,12 +49,11 @@ def run_analytics_worker(input_port=5555, output_port=5556):
 
     dash_conn, dash_addr = out_server.accept()
     
-    # Execution metrics cache for honest deadline tracking
     latency_history = []
     deadline_violations = 0
     terrain_intelligence_agg = {}
-
     buffer = ""
+
     try:
         while True:
             data = in_client.recv(4096).decode('utf-8')
@@ -44,7 +65,11 @@ def run_analytics_worker(input_port=5555, output_port=5556):
                 
                 frame = json.loads(line)
                 
-                # Extract parameters for evaluation
+                # Run the newly added programmatic schema compliance guard layer
+                if not validate_schema_contract(frame):
+                    print("❌ [GUARD REJECTION] Dropped structurally non-compliant payload frame.")
+                    continue
+                
                 latency = frame["observed_latency_ms"]
                 deadline = frame["target_deadline_ms"]
                 fault_state = frame["fault_injection_state"]
@@ -54,13 +79,9 @@ def run_analytics_worker(input_port=5555, output_port=5556):
                 if latency > deadline:
                     deadline_violations += 1
                 
-                # Dynamic Z-Score evaluation
                 is_anomaly, z_score = detector.observe_and_predict(latency)
-                
-                # Calculate real-time performance bounds
                 compliance_rate = round(((len(latency_history) - deadline_violations) / len(latency_history)) * 100, 2)
                 
-                # --- TELEMETRY SIGNATURE MAPPING & PROPAGATION LOGIC ---
                 stability_score = 100.0
                 slip_signature = "NOMINAL_TRACKING"
                 control_response = "MAINTAIN_GAIT_VELOCITY"
@@ -78,11 +99,9 @@ def run_analytics_worker(input_port=5555, output_port=5556):
                     slip_signature = "CONTACT_SENSOR_DISCONNECT"
                     control_response = "FALLBACK_KINEMATIC_ESTIMATION"
                 
-                # Apply terrain reduction modifiers
                 stability_score -= (1.0 - frame["terrain_context"]["traction_score"]) * 20
                 stability_score = max(5.0, round(stability_score, 2))
                 
-                # Enrich payloads mapping data fields across boundaries
                 frame["analytics"] = {
                     "is_anomaly": is_anomaly,
                     "calculated_z": z_score,
@@ -96,7 +115,6 @@ def run_analytics_worker(input_port=5555, output_port=5556):
                     }
                 }
                 
-                # --- ASYNC EXPORT: TERRAIN INTELLIGENCE DATASET GENERATION ---
                 terrain_intelligence_agg[terrain] = {
                     "terrain_id": terrain,
                     "traction_score": frame["terrain_context"]["traction_score"],
@@ -113,9 +131,7 @@ def run_analytics_worker(input_port=5555, output_port=5556):
                     with open("terrain_profile.json", "w") as json_file:
                         json.dump(terrain_intelligence_agg, json_file, indent=4)
 
-                # Output to processing terminal
-                print(f"📦 Frame #{frame['frame_idx']} processed [Terrain: {terrain}] | Status: {fault_state} | Compliance: {compliance_rate}%")
-                
+                print(f"📦 Validated Frame #{frame['frame_idx']} [Terrain: {terrain}] | Compliance: {compliance_rate}%")
                 dash_conn.sendall((json.dumps(frame) + "\n").encode('utf-8'))
                 
     except Exception as e:

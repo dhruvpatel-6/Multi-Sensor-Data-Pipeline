@@ -5,7 +5,6 @@ import json
 
 st.set_page_config(page_title="Convergence Telemetry Platform", layout="wide")
 
-# Custom UI styling injection sheets
 st.markdown("""
 <style>
     .metric-card { background-color: #0f172a; padding: 20px; border-radius: 8px; border-left: 5px solid #3b82f6; }
@@ -26,12 +25,11 @@ if st.session_state.sock_conn is None:
         s.connect(('127.0.0.1', 5556))
         s.setblocking(False)
         st.session_state.sock_conn = s
-        st.success("🔌 Convergence Stream Link Socket Verified.")
+        st.success("🔌 Stream Link Socket Verified.")
     except Exception:
         st.error("⏳ Telemetry Stream Disconnected. Start backend worker architectures.")
         st.stop()
 
-# Stream buffer pipeline processing
 s = st.session_state.sock_conn
 raw_data = ""
 try:
@@ -69,7 +67,6 @@ frame = st.session_state.payload
 analytics = frame["analytics"]
 fault = frame["fault_injection_state"]
 
-# Real-time state flags
 if fault != "NOMINAL":
     st.error(f"🚨 ACTIVE INJECTED FAULT propagation: {fault} | System response: {analytics['control_response']}")
 else:
@@ -79,7 +76,6 @@ st.title("🐕 Quadruped Convergence Telemetry Core")
 st.markdown(f"**Canonical Schema Model ID:** `{frame['contract_version']}` | **Current Framework Iteration ID:** `{frame['frame_idx']}`")
 st.markdown("---")
 
-# Main Metric Row Panels
 m1, m2, m3, m4 = st.columns(4)
 with m1:
     f_class = "fault-active" if fault != "NOMINAL" else "metric-card"
@@ -93,7 +89,6 @@ with m4:
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# Performance Plots Layer
 p1, p2 = st.columns(2)
 with p1:
     st.subheader("Dynamic Locomotion Stability Score History Tracking")
@@ -104,7 +99,6 @@ with p2:
     df_lat = pd.DataFrame(st.session_state.latency_hist, columns=["Observed Latency"], index=st.session_state.time_hist)
     st.area_chart(df_lat)
 
-# Detailed Status Monitoring Panel
 st.subheader("Authoritative Contract Observability Breakdown Matrix")
 d1, d2, d3 = st.columns(3)
 with d1:
@@ -120,6 +114,6 @@ with d3:
     st.info("⏱️ Honest Real-time Performance Tracking")
     st.write(f"**Observed Process Latency:** `{frame['observed_latency_ms']} ms`")
     st.write(f"**Accumulated Clock Deadlines Breached:** `{analytics['compliance_metrics']['total_violations']} frames`")
-    st.write(f"**Calculated Run Jitter ($\sigma$):** `{analytics['compliance_metrics']['running_mean_jitter_ms']} ms`")
+    st.write(f"**Calculated Run Jitter (StdDev):** `{analytics['compliance_metrics']['running_mean_jitter_ms']} ms`")
 
 st.rerun()
