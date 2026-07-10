@@ -37,7 +37,7 @@ def run_simulation_test():
             if tick > 10:
                 print(f"🟢 [NOMINAL] {timestamp} -> {metrics_log}")
             else:
-                print(f"⚪ [WARMING] {timestamp} -> Latency: {current_latency:.2f} ms (Buffering data...)")
+                print(f"⚪ [WARNING] {timestamp} -> Latency: {current_latency:.2f} ms (Buffering data...)")
                 
         time.sleep(0.05) # Emulate fast execution ticks
 
