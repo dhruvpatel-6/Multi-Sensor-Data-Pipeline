@@ -47,6 +47,8 @@ def run_analytics_worker(input_port=5555, output_port=5556):
             print("⏳ [ANALYTICS ENGINE] Polling for active HAL server instance...")
             time.sleep(2)
 
+
+
     dash_conn, dash_addr = out_server.accept()
     
     latency_history = []
