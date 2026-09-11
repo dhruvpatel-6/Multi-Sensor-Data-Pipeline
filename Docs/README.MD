@@ -1,6 +1,6 @@
 🤖 Multi-Sensor Robotic Data Pipeline 
 |
-Dhruv Patel | Robotics Systems – Test 1 
+Dhruv Patel | Robotics Systems 
 
 📌 Project Purpose :
 
@@ -55,7 +55,7 @@ The system processes data through a logical sequence to ensure "Clarity of Archi
 
 
 
-Quadruped Multi-Sensor Data Pipeline (Task-2)
+Quadruped Multi-Sensor Data Pipeline 
 
 🏗️ System Architecture 
 
@@ -71,7 +71,7 @@ The system is built as a modular, 4-layer stack designed for high-reliability ro
 
 🚀 Key Features 
 
- 1. Failure Intelligence(Phase 3 & 4)
+ 1. Failure Intelligence
 - **Trend Detection:** Uses a moving window to calculate IMU Z-axis variance, distinguishing between steady-state and dynamic movement.
 - **Robustness Layer:** Specifically designed to handle "Stale Data" (via 500ms timeouts) and "Missing Data" (via null-value guards).
 
@@ -80,5 +80,5 @@ The system is built as a modular, 4-layer stack designed for high-reliability ro
 - **Depth (2 Hz):** Medium-frequency terrain awareness to validate IMU trends.
 - **Validation Logic:** Logic-gate check (e.g., IMU Stable + Depth Change = Sensor Issue).
 
- 3. Structured Telemetry(Phase 5)
+ 3. Structured Telemetry
 - Standardized output using a formal `robot_state` dictionary with ISO-8601 timestamps for real-time monitoring and database compatibility.
