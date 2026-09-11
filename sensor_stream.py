@@ -3,7 +3,7 @@ import random
 import json 
 from datetime import datetime
 import numpy as np
-from Hardware.HardwareAbstractionLayer import EcosystemHALGateway
+from HardwareAbstractionLayer import EcosystemHALGateway
 
 # Seed reproducibility baseline mandated by sprint
 RANDOM_SEED = 42
