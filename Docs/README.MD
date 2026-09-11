@@ -2,7 +2,7 @@
 
 **A real-time, fault-aware telemetry backbone for a quadruped robotics prototype** — built to watch the robot's vitals, catch failures before they cascade, and give operators a live picture of what's actually happening on hardware.
 
-`Contract: v3.0.0-Truth` · `Status: Active Development — Phase 2 (Security & Integration Hardening)`
+`Contract: v3.0.0-Truth` 
 
 ---
 
