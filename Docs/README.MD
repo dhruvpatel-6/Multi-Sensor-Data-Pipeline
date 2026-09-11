@@ -168,14 +168,6 @@ pytest -v
 
 ---
 
-## 👥 Team
-
-Built as a cross-disciplinary robotics prototype effort spanning mechanical design, physical/subsystem layout, and the telemetry & observability pipeline documented here.
-
-*(Update this section with full names/roles as you'd like them credited — pulled placeholder attribution from internal docs, please verify before publishing.)*
-
----
-
 ## 📝 Assumptions
 
 - System clock is synchronized and timestamps move strictly forward.
