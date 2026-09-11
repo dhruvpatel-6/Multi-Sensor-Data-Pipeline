@@ -1,84 +1,183 @@
-🤖 Multi-Sensor Robotic Data Pipeline 
-|
-Dhruv Patel | Robotics Systems 
+# 🤖 Quadruped Multi-Sensor Telemetry & Failure Intelligence Pipeline
 
-📌 Project Purpose :
+**A real-time, fault-aware telemetry backbone for a quadruped robotics prototype** — built to watch the robot's vitals, catch failures before they cascade, and give operators a live picture of what's actually happening on hardware.
 
-This project defines a high-reliability system architecture for a multi-sensor data pipeline. It integrates an IMU, Distance sensor, and Contact sensors into a single, failure-aware, and time-synchronized prototype. The design is "integration-ready," meaning it is structured to plug directly into a real robotic platform in the future.
-
-🏗️ System Architecture & Sensor Stack :
-
-The architecture is built on a 10 Hz timing reference to ensure all data is perfectly aligned.
-
-• Primary Timing (IMU): Operating at 10 Hz, the Inertial Measurement Unit provides Acceleration and Orientation $[roll, pitch, yaw]$. It is the most critical sensor in the pipeline.
-
-• Terrain Awareness (Distance): This sensor provides range data in meters (Valid: 0.05m to 4.0m) at a 2 Hz frequency.
-
-🔄 The 4-Step Data Flow :
-
-The system processes data through a logical sequence to ensure "Clarity of Architecture":
-
-1. Ingestion: The system reads raw, unsynchronized CSV files from the IMU and Distance sensors.
-
-2. Synchronization: Using a Timestamp Handshake, the pipeline finds the "Closest Neighbor" in the 2 Hz data for every 10 Hz IMU reading to create a unified packet.
-
-3.  Validation: A Threshold Rule is applied (e.g., checking if Depth > 50m). Data is tagged as HEALTHY or CRITICAL based on this check.
-  
-4. isualization: The pipeline generates a Scatter Plot (Sensor vs. Time) where valid data is shown in Blue and failures are highlighted in Red.
-     
-🛠️ Failure Scenarios Handled :
-
-• Sensor Spikes: Anomalies like the 99.9m "Ghost Dive" are caught by the Threshold Filter.
-
-• Temporal Drift: Asynchronous sampling rates are resolved through Nearest-Neighbor Matching.
-
-• Data Loss: Out-of-phase hardware or packet loss triggers Status Tagging (CRITICAL) to engage fail-safe modes.
-
-📝 Assumptions
-
-• The system clock is synchronized, and timestamps always move forward.
-
-• Sensor sampling rates (10 Hz and 2 Hz) remain consistent without "jitter".
-
-• A 50m limit is a hard physical boundary for the current mission environment.
-
-📝 Limitations
-
-• Real-Time Transition: Moving from "Batch" processing of files to live data streaming.
-
-
-• Failure Redundancy: Improving logic so the system doesn't pair "stale" data if a sensor drops to 0 Hz.
-
-
-• Signal Smoothing: Implementing filters like a Kalman Filter or Moving Average to replace hard-coded thresholds.
-
-
-
-
-Quadruped Multi-Sensor Data Pipeline 
-
-🏗️ System Architecture 
-
-The system is built as a modular, 4-layer stack designed for high-reliability robotic platforms. It follows the **Separation of Concerns** principle by decoupling raw data acquisition from failure intelligence.
-
-📁 Modular Structure 
-
-- **Core/**: Contains `fid.py` (Failure Intelligence Discovery). This is the hardware-agnostic brain that processes variance and validates sensor states.
-- **Drivers/**: Contains `pipeline_sim.py` and `sensors.py`. This layer manages data generation and simulates raw hardware feeds.
-- **Logs/**: Stores JSON-formatted telemetry for post-mission audit and anomaly tracking.
+`Contract: v3.0.0-Truth` · `Status: Active Development — Phase 2 (Security & Integration Hardening)`
 
 ---
 
-🚀 Key Features 
+## 📌 What This Is
 
- 1. Failure Intelligence
-- **Trend Detection:** Uses a moving window to calculate IMU Z-axis variance, distinguishing between steady-state and dynamic movement.
-- **Robustness Layer:** Specifically designed to handle "Stale Data" (via 500ms timeouts) and "Missing Data" (via null-value guards).
+This isn't a robot controller — it's the robot's **black box and vital-signs monitor combined**. It collects data from every layer of the quadruped stack (locomotion, actuators, terrain, IMU), validates it against a strict schema, detects anomalies statistically, and streams the result to a live dashboard — while keeping a durable audit trail of everything, healthy or not.
 
- 2. Multi-Rate Sensor Logic
-- **IMU (10 Hz):** High-frequency processing for rapid stability detection.
-- **Depth (2 Hz):** Medium-frequency terrain awareness to validate IMU trends.
-- **Validation Logic:** Logic-gate check (e.g., IMU Stable + Depth Change = Sensor Issue).
+The project started as a batch-processed, two-sensor synchronization exercise (IMU + distance sensor, CSV-based) and has since grown into a real-time, socket-based, multi-layer pipeline feeding a physical prototype build.
 
- 3. Structured Telemetry
-- Standardized output using a formal `robot_state` dictionary with ISO-8601 timestamps for real-time monitoring and database compatibility.
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+graph TD
+    subgraph UI["Operator Interface"]
+        DASH["Streamlit Telemetry<br/>Dashboard (port 8501)"]
+    end
+
+    subgraph COMPUTE["Compute — Jetson Orin Nano"]
+        HAL["Hardware Abstraction Layer<br/>(HAL Gateway)"]
+        AW["analytics_worker.py<br/>Anomaly Detection + Schema Guard"]
+    end
+
+    subgraph RT["Real-Time Kernel"]
+        RTK["C++ RT-Preempt<br/>Deterministic Control Loop (5ms)"]
+    end
+
+    subgraph INTEL["Failure Intelligence"]
+        FID["Fault Propagation &<br/>State Machine Logic"]
+        SEC["Auth Gateway<br/>(HMAC handshake)"]
+    end
+
+    subgraph STORE["Storage & Audit"]
+        LOGS["JSONL Session Logs +<br/>Runtime Audit Trail"]
+        REPLAY["Deterministic Replay Engine"]
+    end
+
+    RTK -->|Joint/IMU/Torque Data| HAL
+    HAL -->|Authenticated TCP Stream| AW
+    AW --> FID
+    SEC -.->|Handshake Gate| HAL
+    SEC -.->|Handshake Gate| AW
+    AW -->|Enriched Frames| DASH
+    AW --> LOGS
+    LOGS --> REPLAY
+```
+
+The stack follows **separation of concerns**: raw acquisition, schema validation, failure reasoning, and presentation are all independent layers that can be developed, tested, and replaced on their own.
+
+| Layer | Responsibility |
+|---|---|
+| **Hardware Abstraction (`Hardware/`)** | Bridges physical/simulated sensors (joints, IMU, torque, contact) into the canonical schema; injects and models realistic fault modes (thermal evolution, actuator degradation, sensor noise). |
+| **Telemetry Core (`Telemetry/`)** | Orchestrates the control loop, runs the fault-intelligence state machine, and manages live vs. replay execution modes. |
+| **Analytics (`analytics/`, `analytics_worker.py`)** | Statistical anomaly detection (rolling z-score), schema contract enforcement, per-frame stability scoring. |
+| **Security (`security/`)** | HMAC shared-secret handshake gating every socket connection — no peer is trusted without authenticating first. |
+| **Observability (`metrics/`)** | Deterministic runtime monitoring, deadline-compliance tracking, structured JSONL audit logs. |
+| **Storage & Replay (`storage/`, `replay/`)** | Black-box session recording and deterministic replay for regression testing and post-mission audit. |
+| **Presentation (`visualization/`)** | Streamlit dashboard — live stability score, latency-vs-deadline charts, per-limb thermal/torque breakdown. |
+
+---
+
+## 🚀 Key Features
+
+### 1. Deterministic, Contract-Enforced Telemetry
+Every frame carries a `contract_version` (`v3.0.0-Truth`) and is checked against a formal JSON Schema (`schema/canonical_telemetry_v3.json`) before it's trusted anywhere downstream. Frames that fail — wrong version, missing fields, malformed structure — are rejected with a specific reason, logged, and skipped, **not** allowed to silently corrupt state.
+
+### 2. Failure Intelligence, Not Just Threshold Checks
+The pipeline reasons about *combinations* of signals rather than single-value thresholds:
+- IMU stable + terrain reading changing ⇒ flagged as a likely sensor fault, not a real terrain event.
+- `ACTUATOR_BUS_TIMEOUT` propagates automatically into `DEGRADED` health, a `SAFE_FALLBACK` control mode, and a throttled `CURRENT_LIMITED` actuation state — modeled explicitly in the fault propagation matrix.
+- A `GHOST_DIVE` (impossible sensor spike) triggers a full `EMERGENCY_STOP` with self-righting recovery — not a warning log buried in a terminal.
+
+### 3. Statistical Anomaly Detection
+A rolling-window z-score detector (`analytics/anomaly_detector.py`) flags latency and behavioral anomalies against *recent* history rather than a fixed cutoff, so it adapts as operating conditions shift (e.g. gait change, terrain change) without needing constant re-tuning.
+
+### 4. Authentication on Every Socket (Phase 2)
+Previously, any local process could attach to the telemetry sockets with zero verification. Every connection — edge → analytics, analytics → dashboard — now completes an **HMAC-SHA256 challenge-response handshake** before a single frame is exchanged. Unauthenticated or credential-mismatched peers are rejected and the server keeps serving, rather than trusting whoever connects first.
+
+### 5. Error Boundaries That Actually Hold
+A single malformed frame — bad JSON, a missing field, an unexpected type — no longer takes down the entire analytics worker. Each frame is validated and processed independently; failures are logged with the specific reason and the pipeline keeps running.
+
+### 6. Full Session Recording & Deterministic Replay
+Every live session can be replayed byte-for-byte from `quadruped_session_recording.jsonl` — the same frames, same order, same timing — which makes regression testing and fault-injection testing fully reproducible instead of "it happened once and I can't get it back."
+
+### 7. Long-Run Reliability, Verified
+A 350-frame continuous stress run (exceeding the 300-frame reliability baseline) showed:
+- Mean processing latency **4.22 ms** against a 4.00 ms target, max peak 5.82 ms
+- **+0.2 MB** net memory growth over the full run — no leak signature
+- **100%** structural frame ingestion validity
+- Three injected anomalies (dropped frame, actuator bus timeout, low-traction event) all correctly isolated without destabilizing playback
+
+### 8. Live Operator Dashboard
+A Streamlit cockpit (port 8501) shows system status, locomotion stability score history, latency-vs-deadline tracking, and a per-limb thermal/torque/gait breakdown — refreshed in real time from the authenticated telemetry stream.
+
+---
+
+## 🔄 Data Flow
+
+```
+Physical / Simulated Sensors
+        │
+        ▼
+Hardware Abstraction Layer  ──▶  [Auth Handshake]  ──▶  analytics_worker.py
+        │                                                       │
+        │                                          Schema Validation
+        │                                          Anomaly Detection
+        │                                          Fault Propagation Logic
+        │                                                       │
+        ▼                                                       ▼
+ quadruped_session_recording.jsonl                 [Auth Handshake] ──▶ Streamlit Dashboard
+        │
+        ▼
+Deterministic Replay Engine (regression / fault-injection testing)
+```
+
+---
+
+## 🛠️ Failure Scenarios Currently Handled
+
+| Fault | System Response |
+|---|---|
+| `ACTUATOR_BUS_TIMEOUT` | Health → `DEGRADED`, control → `SAFE_FALLBACK`, gait → `RECOVERY_PULSE`, bus → `TIMEOUT_CRITICAL` |
+| `GHOST_DIVE` (impossible sensor spike) | Health → `EMERGENCY_STOP`, velocity locked to zero, `SELF_RIGHTING` recovery, actuators forced to `THERMAL_FAULT` shutdown |
+| Sensor spikes / out-of-range readings | Caught by threshold + schema validation before reaching downstream logic |
+| Temporal drift (multi-rate sensors) | Resolved via nearest-neighbor timestamp matching (10 Hz IMU vs. 2 Hz terrain sensing) |
+| Malformed / corrupted frames | Dropped per-frame with logged reason; worker keeps running |
+| Unauthenticated connection attempts | Rejected at the handshake stage, before any frame is exchanged |
+| Stale / missing data | Flagged via timeout + null-value guards rather than treated as fresh |
+
+---
+
+## 📊 Current Status & Honest Limitations
+
+This project is under active development. In the interest of an accurate README rather than an aspirational one:
+
+- ✅ Schema validation, fault propagation modeling, anomaly detection, socket authentication, and per-frame error boundaries are implemented and covered by automated tests.
+- ✅ 350-frame long-run reliability test passed with no memory leak signature.
+- ⚠️ The socket authentication layer uses a shared secret (`TELEMETRY_SHARED_SECRET`), not per-node identity or TLS — sufficient for a single-operator prototype, not for a multi-service production deployment.
+- ⚠️ Telemetry is still plaintext on the wire after the handshake; add TLS before this ever leaves `127.0.0.1`.
+- ⚠️ Real-time streaming from the physical Jetson/RT-kernel stack is still being integrated alongside the existing simulated/replay data paths.
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] TLS/mTLS on top of the existing auth handshake, for anything beyond localhost
+- [ ] Full ROS 2 migration for the transport layer (native multi-subscriber support, automatic reconnection)
+- [ ] Gazebo-simulated sensor feeds (IMU, joint states, contact forces) as a drop-in replacement for synthetic data, once the pipeline itself is fully hardened
+- [ ] Historical trend dashboards backed by a time-series database
+- [ ] Alerting (Slack/webhook) on sustained `CRITICAL_FAULTS` or repeated anomalies
+- [ ] Hardware-in-the-loop validation once the physical prototype's sensor suite is fully wired
+
+---
+
+## 🧪 Running the Tests
+
+```bash
+pip install -r requirements.txt
+export TELEMETRY_SHARED_SECRET="your-shared-secret-here"   # required — the pipeline will not start without it
+pytest -v
+```
+
+---
+
+## 👥 Team
+
+Built as a cross-disciplinary robotics prototype effort spanning mechanical design, physical/subsystem layout, and the telemetry & observability pipeline documented here.
+
+*(Update this section with full names/roles as you'd like them credited — pulled placeholder attribution from internal docs, please verify before publishing.)*
+
+---
+
+## 📝 Assumptions
+
+- System clock is synchronized and timestamps move strictly forward.
+- Declared sensor sampling rates hold without uncontrolled jitter.
+- Physical/mission-environment thresholds (e.g. terrain distance limits) reflect the current test environment and will need revisiting for new deployments.
