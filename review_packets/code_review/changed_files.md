@@ -1,13 +1,12 @@
-    # 📝 Changed & Converged Files Summary
+# 📝 Source Code Implementation & Refactoring Commit Log
 
-## 🗑️ Deleted Legacy / Speculative Files
-* Removed `contracts/` directory (deprecated `v2` schema).
-* Removed `Layers/` directory (merged duplicate `anomaly_detector.py` into core `analytics/`).
-* Removed `Core/` directory (purged speculative `terrain_intelligence.py` algorithm).
-* Removed `Control/` directory (encapsulated `actuator_safety_interface.py` into unified HAL).
+## 🧹 Purged Legacy Directories
+* Purged `contracts/` directory to eliminate deprecated v2 payload structures.
+* Purged `Layers/` directory and merged duplicate `anomaly_detector.py` into core `analytics_worker.py`.
+* Purged `Core/` and `Control/` directories to prevent parallel or redundant execution loops.
 
-## 🔄 Refactored Core Runtime Files
-* **`HardwareAbstractionLayer.py`**: Unified hardware bridge interfacing actuators, IMU, and FSR sensors.
-* **`sensor_stream.py`**: Standardized live telemetry generator enforcing `v3.0.0-Truth` JSON schemas.
-* **`analytics_worker.py`**: Local socket consumer executing anomaly detection and health checks.
-* **`REVIEW_PACKET.md`**: Master convergence report covering architecture, BoM, BoQ, wiring, and contracts.
+## 🔄 Core Runtime Modules Consolidated at Root
+* **`HardwareAbstractionLayer.py`**: Interfacing physical actuators, 9-axis IMU, and FSR foot sensors[cite: 1].
+* **`sensor_stream.py`**: Handles continuous sensor telemetry collection and socket streaming[cite: 1].
+* **`analytics_worker.py`**: Background telemetry analysis, runtime threshold monitoring, and error alerts[cite: 1].
+* **`schema/canonical_telemetry_v3.json`**: Implements the canonical `v3.0.0-Truth` JSON schema[cite: 1].

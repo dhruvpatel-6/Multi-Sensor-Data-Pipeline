@@ -7,7 +7,7 @@
         "control_response": "MAINTAIN_GAIT_VELOCITY",
         "recommended_gait": "TROT",
         "energy_cost_estimate": 45.2,
-        "thermal_impact_c": 7103.86,
+        "thermal_impact_c": 9560.44,
         "recovery_success_rate_pct": 89.68
     }
 }

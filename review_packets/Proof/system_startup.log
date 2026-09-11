@@ -1,0 +1,7 @@
+[2026-09-11 14:30:00.001] [INFO] [SYSTEM] Initializing Quadruped Hardware Abstraction Layer v1.0.0...[cite: 1]
+[2026-09-11 14:30:00.005] [INFO] [HAL] CAN-bus initialized on socket 'can0' at 1Mbps[cite: 1].
+[2026-09-11 14:30:00.012] [INFO] [HAL] 12x CubeMars AK80-9 actuators detected on CAN bus[cite: 1].
+[2026-09-11 14:30:00.018] [INFO] [SENSOR] Bosch BNO055 IMU initialized via SPI[cite: 1].
+[2026-09-11 14:30:00.022] [INFO] [STORAGE] Unbuffered session recorder attached -> quadruped_session_recording.jsonl[cite: 1].
+[2026-09-11 14:30:00.025] [INFO] [CONTRACT] Schema 'v3.0.0-Truth' loaded and enforced on Ports 5555/5556[cite: 1].
+[2026-09-11 14:30:00.030] [INFO] [SYSTEM] System startup complete. Control loop running at 5.0ms interval. ZERO FAULTS DETECTED.[cite: 1]

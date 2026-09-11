@@ -1,4 +1,4 @@
-Clear-Host
+        Clear-Host
 Write-Host "==========================================================" -ForegroundColor Cyan
 Write-Host "STARTING QUADRUPED REALITY CONVERGENCE SYSTEM PIPELINE" -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan

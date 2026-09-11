@@ -1,8 +1,8 @@
-# 🏛️ Architecture Summary
+# 🏛️ Integration Contract & API Boundary Validation Report
 
-## Software & Hardware Integration Layer
-This system converges mechanical parameters, subsystem layouts, and observability pipelines into a single deterministic runtime.
+## 🔒 Contract Boundaries (`v3.0.0-Truth`)
+All local inter-process sockets operate through contract guards:
 
-1. **Hardware Abstraction Layer (HAL):** Exposes direct hardware registers to high-level controllers via standard APIs (`read_sensors()`, `dispatch_actuator_commands()`).
-2. **Schema Enforcement (`v3.0.0-Truth`):** Every telemetry packet is validated through `validate_contract()` before streaming over local ports `5555/5556`.
-3. **Decoupled Architecture:** Core loops execute independently of external networks. Future attachments (TANTRA, Replay, MDU, Testing) connect exclusively through Phase 7 attachment contracts.
+1. **Telemetry Publisher Port (`5555`)**: Streams live hardware state frames from `sensor_stream.py` to the observer network[cite: 1].
+2. **Analytics Ingress Port (`5556`)**: Ingests frames into `analytics_worker.py` for health checks[cite: 1].
+3. **Validation Invariant**: All payloads must pass `validate_contract()` before dispatch[cite: 1]. Out-of-spec frames raise an immediate `SchemaValidationError` and are safely dropped before reaching execution logic[cite: 2, 3].

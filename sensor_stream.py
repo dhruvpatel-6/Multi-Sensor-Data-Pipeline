@@ -85,7 +85,7 @@ def run_sensor_publisher():
                 
             gateway.transmit_frame(canonical_payload)
             time.sleep(0.15)
-            
+             
     except KeyboardInterrupt:
         print("🛑 Terminating HAL publisher pipeline node.")
     finally:

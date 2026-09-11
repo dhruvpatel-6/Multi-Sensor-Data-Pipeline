@@ -117,3 +117,8 @@ with d3:
     st.write(f"**Calculated Run Jitter (StdDev):** `{analytics['compliance_metrics']['running_mean_jitter_ms']} ms`")
 
 st.rerun()
+
+from security.auth_gateway import GatewayAuth
+sock.connect(('127.0.0.1', 5556))
+if not GatewayAuth.client_handshake(sock):
+    raise ConnectionRefusedError("Analytics worker rejected credentials")
