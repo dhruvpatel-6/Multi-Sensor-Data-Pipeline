@@ -111,14 +111,9 @@ with d2:
     st.write(f"**Max Actuator Peak Temp:** `{max(frame['sensor_matrices']['temperatures_c'])} °C`")
     st.write(f"**Active Torque Strain Index:** `{frame['sensor_matrices']['torques_nm']}`")
 with d3:
-    st.info("⏱️ Honest Real-time Performance Tracking")
-    st.write(f"**Observed Process Latency:** `{frame['observed_latency_ms']} ms`")
-    st.write(f"**Accumulated Clock Deadlines Breached:** `{analytics['compliance_metrics']['total_violations']} frames`")
-    st.write(f"**Calculated Run Jitter (StdDev):** `{analytics['compliance_metrics']['running_mean_jitter_ms']} ms`")
+            st.info("💣 Honest Real-time Performance Tracking")
+            st.write(f"**Observed Process Latency:** `{frame['observed_latency_ms']}` ms")
+            st.write(f"**Accumulated Clock Deadlines Breached:** `{analytics['compliance_metrics']['total_violations']}`")
+            st.write(f"**Calculated Run Jitter (StdDev):** `{analytics['compliance_metrics']['running_mean_jitter']}`")
 
 st.rerun()
-
-from security.auth_gateway import GatewayAuth
-sock.connect(('127.0.0.1', 5556))
-if not GatewayAuth.client_handshake(sock):
-    raise ConnectionRefusedError("Analytics worker rejected credentials")
